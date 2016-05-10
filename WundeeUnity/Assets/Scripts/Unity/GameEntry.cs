@@ -4,13 +4,15 @@ using Wundee;
 
 namespace WundeeUnity
 {
-	public class Main : MonoBehaviour
+	public class GameEntry : MonoBehaviour
 	{
 		public Game game;
 
 		protected void Awake()
 		{
-			this.game = new Game(this);
+			var gameParams = new GameParameters();
+
+			this.game = new Game(gameParams, this);
 		}
 
 		// Use this for initialization

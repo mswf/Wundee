@@ -1779,18 +1779,16 @@ namespace Wundee
             return new Vector4(R / 255.0f, G / 255.0f, B / 255.0f, A / 255.0f);
         }
 
-#pragma warning disable CS3021 // Type or member does not need a CLSCompliant attribute because the assembly does not have a CLSCompliant attribute
 		/// <summary>
 		/// Gets or sets packed value of this <see cref="Color"/>.
 		/// </summary>
-		[CLSCompliant(false)]
+// compiler warning
+//		[CLSCompliant(false)]
         public UInt32 PackedValue
         {
             get { return _packedValue; }
             set { _packedValue = value; }
         }
-#pragma warning restore CS3021 // Type or member does not need a CLSCompliant attribute because the assembly does not have a CLSCompliant attribute
-
 
 		internal string DebugDisplayString
         {

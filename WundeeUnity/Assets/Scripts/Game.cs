@@ -8,7 +8,13 @@ namespace Wundee
 
 		private bool _isPlaying = true;
 
-		private WundeeUnity.Main _mainMonoBehaviour;
+		private WundeeUnity.GameEntry _mainMonoBehaviour;
+
+		#endregion
+
+		#region Public Fields
+
+		public GameParameters parameters;
 
 		#endregion
 
@@ -23,14 +29,33 @@ namespace Wundee
 
 		#endregion
 
-		public Game(WundeeUnity.Main mainMonoBehaviour)
+		public Game(GameParameters parameters, WundeeUnity.GameEntry mainMonoBehaviour)
 		{
 			Game.instance = this;
 
+			this.parameters = parameters;
 			this._mainMonoBehaviour = mainMonoBehaviour;
 
 			Time.gameTime = 0d;
 			Time.realTime = 0d;
+		}
+
+		public void Initialize()
+		{
+			if (parameters.generateWorld)
+			{
+				// do world generation here
+			}
+
+			if (parameters.generateFactions)
+			{
+				// do faction generation here
+			}
+
+			if (parameters.generatePlayer)
+			{
+				// do player generation here
+			}
 		}
 
 		public void Update(float dt)
