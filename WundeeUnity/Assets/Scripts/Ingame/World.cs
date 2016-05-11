@@ -33,8 +33,10 @@ namespace Wundee
 		public void GenerateHabitats()
 		{
 			var distributedPoints = UniformPoissonDiskSampler.SampleRectangle(new Vector2(-GameParams.WORLD_WIDHT/2f, -GameParams.WORLD_HEIGHT/2f), new Vector2(GameParams.WORLD_WIDHT/2f, GameParams.WORLD_HEIGHT/2f),
-				50f).ToArray();
+				190f).ToArray();
 
+
+			// Cap the number of points we use in case something explodes
 			var numberOfSettlements = MathHelper.Min(distributedPoints.Length, 500);
 
 			for (int i = 0; i < numberOfSettlements; i++)

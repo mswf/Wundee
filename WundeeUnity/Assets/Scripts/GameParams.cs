@@ -14,8 +14,8 @@ namespace Wundee
 		}
 
 
-		public const float WORLD_WIDHT = 1600f/1.5f;
-		public const float WORLD_HEIGHT = 900f/1.5f;
+		public const float WORLD_WIDHT = 1600f/0.7f;
+		public const float WORLD_HEIGHT = 900f/0.7f;
 
 	}
 }

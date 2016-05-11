@@ -6,10 +6,10 @@ using System;
 
 namespace Wundee
 {
-    /// <summary>
-    /// Contains commonly used precalculated values and mathematical operations.
-    /// </summary>
-    public static class MathHelper
+	/// <summary>
+	/// Contains commonly used precalculated values and mathematical operations.
+	/// </summary>
+	public static class MathHelper
     {
     	/// <summary>
         /// Represents the mathematical constant e(2.71828175).
@@ -321,5 +321,297 @@ namespace Wundee
 	{
 	     return (value > 0) && ((value & (value - 1)) == 0);
 	}
-    }
+
+
+
+		// Steb Added
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the sine of angle f in radians.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Sin(float f)
+		{
+			return (float)Math.Sin((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the cosine of angle f in radians.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Cos(float f)
+		{
+			return (float)Math.Cos((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the tangent of angle f in radians.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Tan(float f)
+		{
+			return (float)Math.Tan((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the arc-sine of f - the angle in radians whose sine is f.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Asin(float f)
+		{
+			return (float)Math.Asin((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the arc-cosine of f - the angle in radians whose cosine is f.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Acos(float f)
+		{
+			return (float)Math.Acos((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the arc-tangent of f - the angle in radians whose tangent is f.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Atan(float f)
+		{
+			return (float)Math.Atan((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the angle in radians whose Tan is y/x.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="y"/><param name="x"/>
+		public static float Atan2(float y, float x)
+		{
+			return (float)Math.Atan2((double)y, (double)x);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns square root of f.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Sqrt(float f)
+		{
+			return (float)Math.Sqrt((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the absolute value of f.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Abs(float f)
+		{
+			return Math.Abs(f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the absolute value of value.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="value"/>
+		public static int Abs(int value)
+		{
+			return Math.Abs(value);
+		}
+
+
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns f raised to power p.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/><param name="p"/>
+		public static float Pow(float f, float p)
+		{
+			return (float)Math.Pow((double)f, (double)p);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns e raised to the specified power.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="power"/>
+		public static float Exp(float power)
+		{
+			return (float)Math.Exp((double)power);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the logarithm of a specified number in a specified base.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/><param name="p"/>
+		public static float Log(float f, float p)
+		{
+			return (float)Math.Log((double)f, (double)p);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the natural (base e) logarithm of a specified number.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Log(float f)
+		{
+			return (float)Math.Log((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the base 10 logarithm of a specified number.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Log10(float f)
+		{
+			return (float)Math.Log10((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the smallest integer greater to or equal to f.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Ceil(float f)
+		{
+			return (float)Math.Ceiling((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the largest integer smaller to or equal to f.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Floor(float f)
+		{
+			return (float)Math.Floor((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns f rounded to the nearest integer.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Round(float f)
+		{
+			return (float)Math.Round((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the smallest integer greater to or equal to f.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static int CeilToInt(float f)
+		{
+			return (int)Math.Ceiling((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the largest integer smaller to or equal to f.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static int FloorToInt(float f)
+		{
+			return (int)Math.Floor((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns f rounded to the nearest integer.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static int RoundToInt(float f)
+		{
+			return (int)Math.Round((double)f);
+		}
+
+		/// <summary>
+		/// 
+		/// <para>
+		/// Returns the sign of f.
+		/// </para>
+		/// 
+		/// </summary>
+		/// <param name="f"/>
+		public static float Sign(float f)
+		{
+			return (double)f >= 0.0 ? 1f : -1f;
+		}
+	}
 }

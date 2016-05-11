@@ -28,11 +28,11 @@ namespace WundeeUnity
 
 			game.Update(dt);
 
-			var habitatColor = UnityEngine.Color.white;
+			var habitatColor = UnityEngine.Color.black;
 
 			foreach (var habitat in game.world.habitats)
 			{
-				DebugExtension.DebugPoint(new UnityEngine.Vector3(habitat.position.X, 0, habitat.position.Y), habitatColor, 2f, dt);
+				DebugExtension.DebugPoint(new UnityEngine.Vector3(habitat.position.X, 0, habitat.position.Y), habitatColor, 5f, dt);
 			}
 
 
