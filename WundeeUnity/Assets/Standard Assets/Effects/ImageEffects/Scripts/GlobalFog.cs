@@ -26,6 +26,8 @@ namespace UnityStandardAssets.ImageEffects
         public Shader fogShader = null;
         private Material fogMaterial = null;
 
+	    public Color fogColor;
+
 
         public override bool CheckResources ()
 		{
@@ -107,6 +109,8 @@ namespace UnityStandardAssets.ImageEffects
             sceneParams.w = linear ? sceneEnd * invDiff : 0.0f;
             fogMaterial.SetVector ("_SceneFogParams", sceneParams);
 			fogMaterial.SetVector ("_SceneFogMode", new Vector4((int)sceneMode, useRadialDistance ? 1 : 0, 0, 0));
+
+	        fogMaterial.SetColor("_Overlay", fogColor);
 
             int pass = 0;
             if (distanceFog && heightFog)

@@ -1,6 +1,7 @@
 Shader "Hidden/GlobalFog" {
 Properties {
 	_MainTex ("Base (RGB)", 2D) = "black" {}
+	_Overlay("Color", 2D) = "grey" {}
 }
 
 CGINCLUDE
@@ -15,6 +16,7 @@ CGINCLUDE
 	// z = k (FdotC > 0.0)
 	// w = a/2
 	uniform float4 _HeightParams;
+	uniform float4 _Overlay;
 	
 	// x = start distance
 	uniform float4 _DistanceParams;
@@ -143,7 +145,7 @@ CGINCLUDE
 		
 		// Lerp between fog color & original scene color
 		// by fog amount
-		return lerp (unity_FogColor, sceneColor, fogFac);
+		return lerp (_Overlay, sceneColor, fogFac);
 	}
 
 ENDCG
