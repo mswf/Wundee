@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Wundee;
+using Quaternion = UnityEngine.Quaternion;
 
 namespace WundeeUnity
 {
 	public class GameEntry : MonoBehaviour
 	{
 		public Game game;
+
+		[Header("Temp Debug")] public GameObject dockObject;
 
 		protected void Awake()
 		{
@@ -19,7 +22,19 @@ namespace WundeeUnity
 		void Start()
 		{
 			game.Initialize();
+
+			foreach (var habitat in game.world.habitats)
+			{
+				var newDocks = GameObject.Instantiate(dockObject, new UnityEngine.Vector3(habitat.position.X, 0, habitat.position.Y), Quaternion.identity) as GameObject;
+
+
+				var rotation = Mathf.Round(Random.value*4f);
+
+				newDocks.transform.Rotate(UnityEngine.Vector3.up, rotation*90f);
+			}
 		}
+
+
 
 		// Update is called once per frame
 		protected void Update()

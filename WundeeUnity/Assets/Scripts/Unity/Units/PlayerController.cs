@@ -239,7 +239,16 @@ namespace WundeeUnity
 			currentMovementVelocity.x = currentMovementVelocity.x * (1f - dt * currentDrag.x);
 			currentMovementVelocity.z = currentMovementVelocity.z * (1f - dt * currentDrag.x);
 
-			_rigidBody.velocity = currentMovementVelocity / _rigidBody.mass;
+			if (IsGrounded() == false)
+			{
+				_rigidBody.velocity = currentMovementVelocity/_rigidBody.mass + Vector3.down*2f;
+
+			}
+			else
+			{
+				_rigidBody.velocity = currentMovementVelocity / _rigidBody.mass;
+			}
+
 		}
 
 		protected Vector3 AdjustDirectionForObstacles(Vector3 initialDirection, float maxRotation = 65f)
