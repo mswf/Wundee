@@ -30,3 +30,6 @@ sysinfo.txt
 *.unitypackage
 
 !Assets/**/*.dll
+
+Assets/Extensions/GradientMaker/Thumbs.db
+Assets/Extensions/GradientMaker/Thumbs.db.meta
