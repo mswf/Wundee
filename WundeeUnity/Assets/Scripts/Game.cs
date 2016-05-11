@@ -14,7 +14,8 @@ namespace Wundee
 
 		#region Public Fields
 
-		public GameParameters parameters;
+		public GameParams @params;
+		public World world;
 
 		#endregion
 
@@ -29,30 +30,35 @@ namespace Wundee
 
 		#endregion
 
-		public Game(GameParameters parameters, WundeeUnity.GameEntry mainMonoBehaviour)
+		public Game(GameParams @params, WundeeUnity.GameEntry mainMonoBehaviour)
 		{
 			Game.instance = this;
 
-			this.parameters = parameters;
+			this.@params = @params;
 			this._mainMonoBehaviour = mainMonoBehaviour;
 
 			Time.gameTime = 0d;
 			Time.realTime = 0d;
+
+			this.world = new World();
 		}
 
 		public void Initialize()
 		{
-			if (parameters.generateWorld)
+			if (@params.generateWorld)
 			{
-				// do world generation here
+				world.GenerateMap();
+
+				world.GenerateHabitats();
 			}
 
-			if (parameters.generateFactions)
+			if (@params.generateSettlements)
 			{
+				world.GenerateSettlements();
 				// do faction generation here
 			}
 
-			if (parameters.generatePlayer)
+			if (@params.generatePlayer)
 			{
 				// do player generation here
 			}

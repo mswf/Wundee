@@ -10,7 +10,7 @@ namespace WundeeUnity
 
 		protected void Awake()
 		{
-			var gameParams = new GameParameters();
+			var gameParams = new GameParams();
 
 			this.game = new Game(gameParams, this);
 		}
@@ -18,13 +18,30 @@ namespace WundeeUnity
 		// Use this for initialization
 		void Start()
 		{
-
+			game.Initialize();
 		}
 
 		// Update is called once per frame
 		protected void Update()
 		{
-			game.Update(UnityEngine.Time.deltaTime);
+			var dt = UnityEngine.Time.deltaTime;
+
+			game.Update(dt);
+
+			var habitatColor = UnityEngine.Color.white;
+
+			foreach (var habitat in game.world.habitats)
+			{
+				DebugExtension.DebugPoint(new UnityEngine.Vector3(habitat.position.X, 0, habitat.position.Y), habitatColor, 2f, dt);
+			}
+
+
+			var settlementColor = UnityEngine.Color.yellow;
+
+			foreach (var settlement in game.world.settlements)
+			{
+				DebugExtension.DebugCircle(new UnityEngine.Vector3(settlement.habitat.position.X, 0, settlement.habitat.position.Y), settlementColor, 4f, dt);
+			}
 		}
 
 		protected void FixedUpdate()
