@@ -4,6 +4,9 @@ namespace Wundee
 {
 	public class GameParams
 	{
+		public bool parseDefinitions = true;
+
+
 		public bool generateWorld = true;
 		public bool generateSettlements = true;
 		public bool generatePlayer = true;

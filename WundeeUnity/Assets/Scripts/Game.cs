@@ -10,6 +10,8 @@ namespace Wundee
 
 		private WundeeUnity.GameEntry _mainMonoBehaviour;
 
+		private DataLoader _dataLoader; 
+
 		#endregion
 
 		#region Public Fields
@@ -41,10 +43,20 @@ namespace Wundee
 			Time.realTime = 0d;
 
 			this.world = new World();
+
+			this._dataLoader = new DataLoader();
 		}
 
 		public void Initialize()
 		{
+			if (@params.parseDefinitions)
+			{
+				_dataLoader.AddDataPath(DefinitionTypes.STORY, "Stories");
+
+				var test = _dataLoader._loadedData;
+				test = _dataLoader._loadedData;
+			}
+
 			if (@params.generateWorld)
 			{
 				world.GenerateMap();
