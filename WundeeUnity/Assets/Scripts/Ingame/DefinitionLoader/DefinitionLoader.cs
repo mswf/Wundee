@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Wundee
 {
-	public class DefinitionLoader<DefinitionType> where DefinitionType : IDefinition, new()
+	public class DefinitionLoader<DefinitionType, ConcreteType> where DefinitionType : DefinitionBase<ConcreteType>, new()
 	{
 		private Dictionary<string, DefinitionType> _definitions;
 		private DataLoader _loader;

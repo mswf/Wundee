@@ -13,16 +13,16 @@ namespace Wundee
 {
 	public class DataLoader
 	{
-		public DefinitionLoader<StoryDefinition> storyDefinitions;
-		public DefinitionLoader<StoryNodeDefinition> storyNodeDefinitions;
+		public DefinitionLoader<StoryDefinition, Story> storyDefinitions;
+		public DefinitionLoader<StoryNodeDefinition, StoryNode> storyNodeDefinitions;
 
 		public Dictionary<System.Type, System.Object> definitionLoaderMapper; 
 		
 
 		public DataLoader()
 		{
-			storyDefinitions = new DefinitionLoader<StoryDefinition>(this);
-			storyNodeDefinitions = new DefinitionLoader<StoryNodeDefinition>(this);
+			storyDefinitions = new DefinitionLoader<StoryDefinition, Story>(this);
+			storyNodeDefinitions = new DefinitionLoader<StoryNodeDefinition, StoryNode>(this);
 
 			this.definitionLoaderMapper = new Dictionary<System.Type, object>();
 

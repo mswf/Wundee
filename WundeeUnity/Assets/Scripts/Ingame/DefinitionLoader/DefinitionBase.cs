@@ -4,15 +4,9 @@ using LitJson;
 
 namespace Wundee
 {
-	public abstract class DefinitionBase<ConcreteType> : IDefinition
+	public abstract class DefinitionBase<ConcreteType>
 	{
 		public abstract void ParseDefinition(string definitionKey, JsonData jsonData);
 		public abstract ConcreteType GetConcreteType();
-	}
-
-	public interface IDefinition
-	{
-		void ParseDefinition(string definitionKey, JsonData jsonData);
-
 	}
 }

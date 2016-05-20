@@ -45,7 +45,7 @@ namespace Wundee
 			else
 			{
 				// this global misuse = best global misuse
-				var newDefinition = (Game.instance.definitions.definitionLoaderMapper[typeof(DefinitionType)] as DefinitionLoader<DefinitionType>)[_definitionKey];
+				var newDefinition = (Game.instance.definitions.definitionLoaderMapper[typeof(DefinitionType)] as DefinitionLoader<DefinitionType, ConcreteType>)[_definitionKey];
 
 				_definition = newDefinition;
 
