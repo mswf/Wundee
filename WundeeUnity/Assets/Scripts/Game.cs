@@ -10,7 +10,7 @@ namespace Wundee
 
 		private WundeeUnity.GameEntry _mainMonoBehaviour;
 
-		private DataLoader _dataLoader; 
+		public DataLoader definitions; 
 
 		#endregion
 
@@ -44,17 +44,22 @@ namespace Wundee
 
 			this.world = new World();
 
-			this._dataLoader = new DataLoader();
+			this.definitions = new DataLoader();
 		}
 
 		public void Initialize()
 		{
 			if (@params.parseDefinitions)
 			{
-				_dataLoader.AddDataPath(DefinitionTypes.STORY, "Stories");
+				definitions.storyDefinitions.AddFolder("Story");
+				definitions.storyNodeDefinitions.AddFolder("StoryNode");
 
-				var test = _dataLoader._loadedData;
-				test = _dataLoader._loadedData;
+				var story_1 = definitions.storyDefinitions["STORY_TEST_1"].GetConcreteType();
+				UnityEngine.Debug.Log(story_1.startNode.testProperty);
+
+				var story_2 = definitions.storyDefinitions["STORY_TEST_2"].GetConcreteType();
+				UnityEngine.Debug.Log(story_2.startNode.testProperty);
+
 			}
 
 			if (@params.generateWorld)

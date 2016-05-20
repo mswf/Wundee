@@ -7,51 +7,47 @@ using System.IO;
 using UnityEngine;
 
 using LitJson;
-
-using JsonData = LitJson.JsonData;
-
+using Wundee.Stories;
 
 namespace Wundee
 {
 	public class DataLoader
 	{
-		public Dictionary<string, Dictionary<string, JsonData>> _loadedData;
+		public DefinitionLoader<StoryDefinition> storyDefinitions;
+		public DefinitionLoader<StoryNodeDefinition> storyNodeDefinitions;
+
+		public Dictionary<System.Type, System.Object> definitionLoaderMapper; 
+		
 
 		public DataLoader()
 		{
-			_loadedData = new Dictionary<string, Dictionary<string, JsonData>>();
+			storyDefinitions = new DefinitionLoader<StoryDefinition>(this);
+			storyNodeDefinitions = new DefinitionLoader<StoryNodeDefinition>(this);
+
+			this.definitionLoaderMapper = new Dictionary<System.Type, object>();
+
+			definitionLoaderMapper[typeof (StoryDefinition)] = storyDefinitions;
+			definitionLoaderMapper[typeof (StoryNodeDefinition)] = storyNodeDefinitions;
+
 		}
 
-		public void AddDataPath(string dataTypeKey, string relativePath)
+		public LitJson.JsonData GetJsonDataFromFile(string filePath)
+		{
+			var jsonString = File.ReadAllText(filePath);
+
+			var reader = new JsonReader(jsonString);
+			reader.AllowComments = true;
+
+			return JsonMapper.ToObject(reader);
+		}
+
+		public string[] GetAllJsonFilePaths(string relativePath)
 		{
 			var fullPath = Application.streamingAssetsPath + Path.DirectorySeparatorChar + "Definitions" +
-						   Path.DirectorySeparatorChar + relativePath;
-			var jsonFilePaths = Directory.GetFiles(fullPath, "*.json");
-
-			var dataDictionary = _loadedData.ContainsKey(dataTypeKey) ? 
-			_loadedData[dataTypeKey] : new Dictionary<string, JsonData>();
-
-			foreach (var filePath in jsonFilePaths)
-			{
-				var jsonString = File.ReadAllText(filePath);
-				var reader = JsonMapper.ToObject(jsonString);
-
-				foreach (var dataKey in reader.Keys)
-				{
-					dataDictionary[dataKey] = reader[dataKey];
-				}
-			}
-
-
-			_loadedData[dataTypeKey] = dataDictionary;
-			
+			   Path.DirectorySeparatorChar + relativePath;
+			return Directory.GetFiles(fullPath, "*.json");
 		}
+		
 
 	}
-
-	public class DefinitionTypes
-	{
-		public const string STORY = "STORY";
-	}
-
 }

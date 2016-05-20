@@ -6,6 +6,6 @@ namespace Wundee.Stories
 {
 	public class Story
 	{
-
+		public StoryNode startNode;
 	}
 }

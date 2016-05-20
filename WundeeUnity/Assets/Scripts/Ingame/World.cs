@@ -62,6 +62,12 @@ namespace Wundee
 					_settlements.Add(newSettlement);
 				}
 			}
+
+
+			//foreach (var settlement in _settlements)
+			{
+				
+			}
 		}
 	}
 }

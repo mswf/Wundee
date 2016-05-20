@@ -1,0 +1,48 @@
+{
+	"STORY_TEST_1":{
+		"storyName": "The epic story",
+
+		// Comments blabal
+
+		"startNode": "STORYNODE_TEST_1"
+
+	},
+
+	"STORY_TEST_2":{
+		"storyName": "The epic story",
+
+		// Comments blabal
+
+		"startNode": {
+			"property": "STORYNODE_TEST_2_PROP",
+
+
+			"onStartRewards":[
+
+			],
+
+			"onCompleteRewards":[
+
+			],
+
+			"effects": [
+				{
+					"isPower": "valueA"
+				}
+			],
+
+			"triggers":[
+				{
+					"conditions": [
+
+					],
+
+					"rewards": [
+
+					]
+				}
+			]
+		}
+
+	}
+}
