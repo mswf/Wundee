@@ -13,6 +13,8 @@ namespace Wundee
 
 		public readonly Habitat habitat;
 
+		public Dictionary<string, Need> needs; 
+
 		public Settlement(Habitat habitat)
 		{
 			this._worldSettlement = new WorldSettlement(this);
@@ -21,6 +23,15 @@ namespace Wundee
 			this._activeSettlement = null;
 
 			this.habitat = habitat;
+
+			this.needs = new Dictionary<string, Need>(GameData.Needs.BaseNeeds.Length);
+
+			for (int i = 0; i < GameData.Needs.BaseNeeds.Length; i++)
+			{
+				var newNeed = new Need(this, GameData.Needs.BaseNeeds[i]);
+
+				needs[GameData.Needs.BaseNeeds[i]] = newNeed;
+			}
 		}
 		
 		public void Tick()

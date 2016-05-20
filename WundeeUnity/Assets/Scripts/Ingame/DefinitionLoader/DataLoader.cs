@@ -16,6 +16,9 @@ namespace Wundee
 		public DefinitionLoader<StoryDefinition, Story> storyDefinitions;
 		public DefinitionLoader<StoryNodeDefinition, StoryNode> storyNodeDefinitions;
 
+		public DefinitionLoader<EffectDefinition, EffectBase> effectDefinitions;
+
+
 		public Dictionary<System.Type, System.Object> definitionLoaderMapper; 
 		
 
@@ -24,10 +27,14 @@ namespace Wundee
 			storyDefinitions = new DefinitionLoader<StoryDefinition, Story>(this);
 			storyNodeDefinitions = new DefinitionLoader<StoryNodeDefinition, StoryNode>(this);
 
+			effectDefinitions = new DefinitionLoader<EffectDefinition, EffectBase>(this);
+
 			this.definitionLoaderMapper = new Dictionary<System.Type, object>();
 
 			definitionLoaderMapper[typeof (StoryDefinition)] = storyDefinitions;
 			definitionLoaderMapper[typeof (StoryNodeDefinition)] = storyNodeDefinitions;
+
+			definitionLoaderMapper[typeof (EffectDefinition)] = effectDefinitions;
 
 		}
 
