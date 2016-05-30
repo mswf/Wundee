@@ -6,6 +6,7 @@ namespace Wundee.Stories
 {
 	public abstract class EffectBase
 	{
+		public StoryNode parent;
 		public abstract void Tick();
 	}
 
@@ -13,7 +14,7 @@ namespace Wundee.Stories
 	{
 		public override void Tick()
 		{
-			Logger.Log("running TestEffect");
+			//Logger.Print("running TestEffect");
 		}
 	}
 
@@ -22,7 +23,7 @@ namespace Wundee.Stories
 	{
 		public override void Tick()
 		{
-			Logger.Log("running TestEffect 2");
+			//Logger.Print("running TestEffect 2");
 		}
 	}
 	//*/

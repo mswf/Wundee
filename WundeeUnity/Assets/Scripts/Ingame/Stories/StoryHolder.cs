@@ -19,10 +19,10 @@ namespace Wundee.Stories
 
 		public void Tick()
 		{
-			foreach (var activeStory in activeStories)
+			for (int index = 0; index < activeStories.Count; index++)
 			{
-				activeStory.Tick();
-			}	
+				activeStories[index].Tick();
+			}
 		}
 
 		public void AddStory(string definitionKey)

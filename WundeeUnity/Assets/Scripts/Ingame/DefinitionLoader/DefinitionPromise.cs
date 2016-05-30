@@ -59,9 +59,9 @@ namespace Wundee
 			throw new System.NotImplementedException();
 		}
 
-		public override ConcreteType GetConcreteType(System.Object parent = null)
+		public override ConcreteType GetConcreteType(System.Object parent)
 		{
-			return GetDefinition().GetConcreteType();
+			return GetDefinition().GetConcreteType(parent);
 		}
 	}
 
