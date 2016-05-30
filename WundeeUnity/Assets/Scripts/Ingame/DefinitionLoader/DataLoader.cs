@@ -52,9 +52,34 @@ namespace Wundee
 		{
 			var fullPath = Application.streamingAssetsPath + Path.DirectorySeparatorChar + "Definitions" +
 			   Path.DirectorySeparatorChar + relativePath;
-			return Directory.GetFiles(fullPath, "*.json");
+
+
+
+			return GetAllJsonFilePathsRecursively(fullPath).ToArray();
 		}
-		
+
+		private List<string> GetAllJsonFilePathsRecursively(string absolutePath)
+		{
+			var subDirectories = Directory.GetDirectories(absolutePath);
+
+			var jsonFilePaths = new List<string>();
+
+			foreach (var directoryFilePath in subDirectories)
+			{
+				foreach (var jsonFilePath in GetAllJsonFilePathsRecursively(directoryFilePath))
+				{
+					jsonFilePaths.Add(jsonFilePath);
+				}
+			}
+
+
+			foreach (var jsonFilePath in Directory.GetFiles(absolutePath, "*.json"))
+			{
+				jsonFilePaths.Add(jsonFilePath);
+			}
+
+			return jsonFilePaths;
+		}
 
 	}
 }
