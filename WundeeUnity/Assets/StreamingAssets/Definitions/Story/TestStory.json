@@ -28,7 +28,7 @@
 			"effects": [
 				"EFFECT_TEST_1",
 				{
-					"type": "TestEffect2",
+					"type": "MoveEffect",
 
 					"params": "Ghllo"
 				}

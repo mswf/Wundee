@@ -35,6 +35,11 @@ namespace Wundee.Stories
 			newStory.definition = this;
 			newStory.currentNode = _startNode.GetConcreteType(newStory);
 
+
+			newStory.parentSettlement = parent as Settlement;
+			if (newStory.parentSettlement == null)
+				Logger.Log("[StoryDefinition] Invalid parent Settlement provided for new Story");
+
 			return newStory;
 		}
 	}

@@ -10,6 +10,7 @@ namespace Wundee.Stories
 
 		public StoryNode currentNode;
 
+		public Settlement parentSettlement;
 
 		public void Tick()
 		{

@@ -6,7 +6,7 @@ namespace Wundee.Stories
 {
 	public abstract class EffectBase
 	{
-		public StoryNode parent;
+		public StoryNode parentStoryNode;
 		public abstract void Tick();
 	}
 
@@ -27,5 +27,13 @@ namespace Wundee.Stories
 		}
 	}
 	//*/
+
+	public class MoveEffect : EffectBase
+	{
+		public override void Tick()
+		{
+			parentStoryNode.parent.parentSettlement.habitat.position.X += 0.075f;
+		}
+	}
 }
 

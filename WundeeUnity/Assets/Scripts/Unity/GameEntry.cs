@@ -22,10 +22,16 @@ namespace WundeeUnity
 		{
 			game.Initialize();
 
-			foreach (var habitat in game.world.habitats)
+			foreach (var settlement in game.world.settlements)
 			{
+				var habitat = settlement.habitat;
+
 				var newDocks = GameObject.Instantiate(dockObject, new UnityEngine.Vector3(habitat.position.X, 0, habitat.position.Y), UnityEngine.Quaternion.identity) as GameObject;
 
+				newDocks.SetActive(true);
+
+				var settlementComponent = newDocks.AddComponent<WundeeUnity.Settlement>();
+				settlementComponent.settlement = settlement;
 
 				var rotation = Mathf.Round(Random.value*4f);
 
@@ -54,7 +60,7 @@ namespace WundeeUnity
 
 			foreach (var settlement in game.world.settlements)
 			{
-				DebugExtension.DebugCircle(new UnityEngine.Vector3(settlement.habitat.position.X, 0, settlement.habitat.position.Y), settlementColor, 4f, dt);
+				DebugExtension.DebugCircle(new UnityEngine.Vector3(settlement.habitat.position.X, 0, settlement.habitat.position.Y), settlementColor, 14f, dt);
 			}
 		}
 

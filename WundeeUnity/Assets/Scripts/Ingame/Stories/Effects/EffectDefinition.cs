@@ -32,8 +32,8 @@ namespace Wundee.Stories
 		{
 			var newEffect = System.Activator.CreateInstance(type) as EffectBase;
 
-			newEffect.parent = parent as StoryNode;
-			if (newEffect.parent == null)
+			newEffect.parentStoryNode = parent as StoryNode;
+			if (newEffect.parentStoryNode == null)
 			{
 #if DEBUG_CONTENT
 				Logger.Log("[EffectDefinition] Invalid parent StoryNode provided for new Effect " + definitionKey);
