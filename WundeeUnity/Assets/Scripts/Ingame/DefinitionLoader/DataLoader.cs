@@ -64,17 +64,22 @@ namespace Wundee
 
 			var jsonFilePaths = new List<string>();
 
-			foreach (var directoryFilePath in subDirectories)
+			for (int i = 0; i < subDirectories.Length; i++)
 			{
-				foreach (var jsonFilePath in GetAllJsonFilePathsRecursively(directoryFilePath))
+				var directoryFilePath = subDirectories[i];
+
+				var filesFromSubdirectory = GetAllJsonFilePathsRecursively(directoryFilePath);
+				for (int j = 0; j < filesFromSubdirectory.Count; j++)
 				{
+					var jsonFilePath = filesFromSubdirectory[j];
 					jsonFilePaths.Add(jsonFilePath);
 				}
 			}
 
-
-			foreach (var jsonFilePath in Directory.GetFiles(absolutePath, "*.json"))
+			var files = Directory.GetFiles(absolutePath, "*.json");
+			for (int i = 0; i < files.Length; i++)
 			{
+				var jsonFilePath = files[i];
 				jsonFilePaths.Add(jsonFilePath);
 			}
 
