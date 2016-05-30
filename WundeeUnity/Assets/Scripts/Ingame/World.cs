@@ -25,6 +25,14 @@ namespace Wundee
 			this._settlements = new List<Settlement>();
 		}
 
+		public void Tick()
+		{
+			foreach (var settlement in _settlements)
+			{
+				settlement.Tick();
+			}
+		}
+		
 		public void GenerateMap()
 		{
 			//throw new System.NotImplementedException();
@@ -58,6 +66,11 @@ namespace Wundee
 				if (random.Next(0, 100) > 50)
 				{
 					var newSettlement = new Settlement(habitat);
+
+					// TESTCODE
+					newSettlement.storyHolder.AddStory("STORY_TEST_2");
+
+					//
 
 					_settlements.Add(newSettlement);
 				}

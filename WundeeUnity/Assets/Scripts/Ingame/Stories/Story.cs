@@ -6,6 +6,16 @@ namespace Wundee.Stories
 {
 	public class Story
 	{
-		public StoryNode startNode;
+		public StoryDefinition definition;
+
+		public StoryNode currentNode;
+
+
+		public void Tick()
+		{
+			var result = currentNode.Tick();
+
+			
+		}
 	}
 }

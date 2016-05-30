@@ -2,10 +2,7 @@
 	"EFFECT_TEST_1":{
 		"type": "TestEffect",
 
-		// Comments blabal
-
-		"startNode": "STORYNODE_TEST_1"
-
+		"params": "Ghllo"
 	}
 
 }

@@ -53,12 +53,16 @@ namespace Wundee
 			{
 				definitions.storyDefinitions.AddFolder("Story");
 				definitions.storyNodeDefinitions.AddFolder("StoryNode");
+				definitions.effectDefinitions.AddFolder("Effect");
 
+				/*
+				// Validate that some basic information got parsed
 				var story_1 = definitions.storyDefinitions["STORY_TEST_1"].GetConcreteType();
-				UnityEngine.Debug.Log(story_1.startNode.testProperty);
+				UnityEngine.Debug.Log(story_1.currentNode.testProperty);
 
 				var story_2 = definitions.storyDefinitions["STORY_TEST_2"].GetConcreteType();
-				UnityEngine.Debug.Log(story_2.startNode.testProperty);
+				UnityEngine.Debug.Log(story_2.currentNode.testProperty);
+				//*/
 
 			}
 
@@ -100,6 +104,8 @@ namespace Wundee
 			if (_isPlaying)
 			{
 				Time.fixedGameTime += fixedDT;
+
+				world.Tick();
 			}
 
 			Time.fixedRealTime += fixedDT;

@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using Wundee.Stories;
 
 namespace Wundee
 {
@@ -13,10 +14,13 @@ namespace Wundee
 
 		public readonly Habitat habitat;
 
-		public Dictionary<string, Need> needs; 
+		public Dictionary<string, Need> needs;
+
+		public readonly StoryHolder storyHolder;  
 
 		public Settlement(Habitat habitat)
 		{
+			this.storyHolder = new StoryHolder(this);
 			this._worldSettlement = new WorldSettlement(this);
 			
 			// The active settlement is only generated when needed	
@@ -37,6 +41,8 @@ namespace Wundee
 		public void Tick()
 		{
 			var deltaTime = Time.fixedGameTime - _timeOfPreviousUpdate;
+
+			storyHolder.Tick();
 
 			// Advance high level simulation
 			_worldSettlement.Tick(deltaTime);

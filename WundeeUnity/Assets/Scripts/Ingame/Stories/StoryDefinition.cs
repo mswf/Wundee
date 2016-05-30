@@ -7,7 +7,7 @@ namespace Wundee.Stories
 {
 	public class StoryDefinition : DefinitionBase<Story>
 	{
-		private static string D_START_NODE = "startNode";
+		private const string D_START_NODE = "startNode";
 
 		private DefinitionBase<StoryNode> _startNode;	
 
@@ -27,12 +27,13 @@ namespace Wundee.Stories
 			//throw new System.NotImplementedException();
 		}
 
-		public override Story GetConcreteType()
+		public override Story GetConcreteType(System.Object parent = null)
 		{
 
 			var newStory = new Story();
 
-			newStory.startNode = _startNode.GetConcreteType();
+			newStory.definition = this;
+			newStory.currentNode = _startNode.GetConcreteType(newStory);
 
 			return newStory;
 		}

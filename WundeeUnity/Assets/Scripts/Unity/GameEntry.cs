@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Wundee;
-using Quaternion = UnityEngine.Quaternion;
 
 namespace WundeeUnity
 {
@@ -25,7 +24,7 @@ namespace WundeeUnity
 
 			foreach (var habitat in game.world.habitats)
 			{
-				var newDocks = GameObject.Instantiate(dockObject, new UnityEngine.Vector3(habitat.position.X, 0, habitat.position.Y), Quaternion.identity) as GameObject;
+				var newDocks = GameObject.Instantiate(dockObject, new UnityEngine.Vector3(habitat.position.X, 0, habitat.position.Y), UnityEngine.Quaternion.identity) as GameObject;
 
 
 				var rotation = Mathf.Round(Random.value*4f);

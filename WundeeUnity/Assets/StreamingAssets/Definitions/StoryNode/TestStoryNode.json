@@ -10,12 +10,6 @@
 
 		],
 
-		"effects": [
-			{
-				"isPower": "valueA"
-			}
-		],
-
 		"triggers":[
 			{
 				"conditions": [

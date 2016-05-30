@@ -13,7 +13,7 @@ namespace Wundee
 			HoldsData	
 		}
 
-		private PromiseType _promiseType;
+		private readonly PromiseType _promiseType;
 
 		private DefinitionType _definition;
 		private string _definitionKey;
@@ -59,7 +59,7 @@ namespace Wundee
 			throw new System.NotImplementedException();
 		}
 
-		public override ConcreteType GetConcreteType()
+		public override ConcreteType GetConcreteType(System.Object parent = null)
 		{
 			return GetDefinition().GetConcreteType();
 		}
