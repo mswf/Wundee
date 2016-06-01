@@ -30,10 +30,12 @@ namespace WundeeUnity
 
 		protected void AttackCollider(HitCollider collider)
 		{
+			if (collider == null)
+				return;
+
 			if (_collidersHit.Contains(collider) == false)
 			{
 				_collidersHit.Add(collider);
-
 				collider.RegisterHit(this);
 			}
 		}
