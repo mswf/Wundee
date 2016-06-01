@@ -55,6 +55,9 @@ namespace Wundee
 				definitions.storyNodeDefinitions.AddFolder("StoryNode");
 				definitions.effectDefinitions.AddFolder("Effect");
 
+				definitions.conditionDefinitions.AddFolder("Condition");
+
+
 				/*
 				// Validate that some basic information got parsed
 				var story_1 = definitions.storyDefinitions["STORY_TEST_1"].GetConcreteType();

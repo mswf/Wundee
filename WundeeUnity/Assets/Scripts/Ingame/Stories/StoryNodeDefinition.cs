@@ -16,38 +16,11 @@ namespace Wundee.Stories
 		{
 			testProperty = jsonData["property"].ToString();
 
-			var tempEffectDefinitions = new List<DefinitionBase<EffectBase>>();
-
 			if (jsonData.Keys.Contains(D_EFFECTS))
-			{
-				var effects = jsonData[D_EFFECTS];
+				this.effectDefinitions = EffectDefinition.ParseDefinitions(definitionKey, jsonData[D_EFFECTS]);
+			else
+				this.effectDefinitions = new DefinitionBase<EffectBase>[0];
 
-				for (int i = 0; i < effects.Count; i++)
-				{
-					DefinitionBase<EffectBase> effectDefinition;
-					var effect = effects[i];
-					if (effect.IsString)
-					{
-						effectDefinition = new DefinitionPromise<EffectDefinition, EffectBase>(effect.ToString());
-					}
-					else
-					{
-						effectDefinition = new EffectDefinition();
-						effectDefinition.ParseDefinition(definitionKey + "_EFFECT_" + i, effects[i]);
-					}
-
-					tempEffectDefinitions.Add(effectDefinition);
-
-				}
-
-				this.effectDefinitions = tempEffectDefinitions.ToArray();
-
-			}
-
-
-
-
-			//throw new System.NotImplementedException();
 		}
 
 		public override StoryNode GetConcreteType(System.Object parent)

@@ -7,6 +7,8 @@ namespace Wundee.Stories
 {
 	public abstract class EffectBase
 	{
+		public StoryNode parentStoryNode;
+
 		public abstract void ParseParams(JsonData parameters);
 
 		public EffectBase GetClone()
@@ -14,7 +16,6 @@ namespace Wundee.Stories
 			return (EffectBase)MemberwiseClone();
 		}
 
-		public StoryNode parentStoryNode;
 		public abstract void Tick();
 	}
 

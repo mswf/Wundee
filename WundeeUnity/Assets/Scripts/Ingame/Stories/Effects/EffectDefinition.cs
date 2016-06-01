@@ -7,9 +7,6 @@ namespace Wundee.Stories
 {
 	public class EffectDefinition : DefinitionBase<EffectBase>
 	{
-		private const string D_TYPE = "type";
-		private const string D_PARAMS = "params";
-
 		private EffectBase masterCopy;
 
 #if DEBUG_CONTENT
@@ -55,7 +52,33 @@ namespace Wundee.Stories
 			return newEffect;
 		}
 
+		public static DefinitionBase<EffectBase>[] ParseDefinitions(string definitionKey, JsonData effectData)
+		{
+			var tempEffectDefinitions = new List<DefinitionBase<EffectBase>>();
+			
+			for (int i = 0; i < effectData.Count; i++)
+			{
+				DefinitionBase<EffectBase> effectDefinition;
+				var effect = effectData[i];
+				if (effect.IsString)
+				{
+					effectDefinition = new DefinitionPromise<EffectDefinition, EffectBase>(effect.ToString());
+				}
+				else
+				{
+					effectDefinition = new EffectDefinition();
+					effectDefinition.ParseDefinition(definitionKey + "_EFFECT_" + i, effectData[i]);
+				}
 
+				tempEffectDefinitions.Add(effectDefinition);
+
+			}
+			
+
+			return tempEffectDefinitions.ToArray();
+
+		}
+		
 		public static Dictionary<string, System.Type> stringToType
 		{
 			get

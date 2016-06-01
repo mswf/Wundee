@@ -1,0 +1,20 @@
+{
+	"CONDITION_AND":{
+		"type": "AndCondition",
+
+		"params": {}
+	},
+
+	"CONDITION_OR":{
+		"type": "OrCondition",
+
+		"params": {}
+	},
+
+	"CONDITION_NOT":{
+		"type": "NotCondition",
+
+		"params": {}
+	}
+
+}
