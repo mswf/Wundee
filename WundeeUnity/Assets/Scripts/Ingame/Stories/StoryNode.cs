@@ -17,13 +17,13 @@ namespace Wundee.Stories
 		public Story parentStory;
 
 		public string testProperty;
-		public EffectBase[] effects;
+		public BaseEffect[] baseEffects;
 
 		public State Tick()
 		{
-			for (var i = 0; i < effects.Length; i++)
+			for (var i = 0; i < baseEffects.Length; i++)
 			{
-				effects[i].Tick();
+				baseEffects[i].Tick();
 			}
 
 			return State.Running;

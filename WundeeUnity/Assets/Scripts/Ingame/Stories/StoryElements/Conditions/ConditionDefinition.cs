@@ -7,9 +7,9 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public class ConditionDefinition : DefinitionBase<ConditionBase>
+	public class ConditionDefinition : Definition<BaseCondition>
 	{
-		private ConditionBase masterCopy;
+		private BaseCondition masterCopy;
 
 #if DEBUG_CONTENT
 		public string definitionKey;
@@ -21,11 +21,11 @@ namespace Wundee.Stories
 			this.definitionKey = definitionKey;
 #endif
 
-			VerifyKey(jsonData, D.TYPE, definitionKey);
-			VerifyType(stringToType, jsonData[D.TYPE].ToString(), definitionKey);
+			DataLoader.VerifyKey(jsonData, D.TYPE, definitionKey);
+			DataLoader.VerifyType(stringToType, jsonData[D.TYPE].ToString(), definitionKey);
 
 			var type = stringToType[jsonData[D.TYPE].ToString()];
-			masterCopy = System.Activator.CreateInstance(type) as ConditionBase;
+			masterCopy = System.Activator.CreateInstance(type) as BaseCondition;
 
 			var paramsObject = jsonData[D.PARAMS];
 
@@ -37,7 +37,7 @@ namespace Wundee.Stories
 
 		}
 
-		public override ConditionBase GetConcreteType(object parent = null)
+		public override BaseCondition GetConcreteType(object parent = null)
 		{
 			var newCondition = masterCopy.GetClone();
 
@@ -54,17 +54,17 @@ namespace Wundee.Stories
 			return newCondition;
 		}
 
-		public static DefinitionBase<ConditionBase>[] ParseDefinitions(JsonData conditionData, string definitionKey = "C")
+		public static Definition<BaseCondition>[] ParseDefinitions(JsonData conditionData, string definitionKey = "C")
 		{
-			var tempConditionDefinitions = new List<DefinitionBase<ConditionBase>>();
+			var tempConditionDefinitions = new List<Definition<BaseCondition>>();
 
 			for (int i = 0; i < conditionData.Count; i++)
 			{
-				DefinitionBase<ConditionBase> conditionDefinition;
+				Definition<BaseCondition> conditionDefinition;
 				var condition = conditionData[i];
 				if (condition.IsString)
 				{
-					conditionDefinition = new DefinitionPromise<ConditionDefinition, ConditionBase>(condition.ToString());
+					conditionDefinition = new DefinitionPromise<ConditionDefinition, BaseCondition>(condition.ToString());
 				}
 				else
 				{
@@ -87,7 +87,7 @@ namespace Wundee.Stories
 				{
 					_stringToType = new Dictionary<string, Type>();
 
-					var effectTypes = Helper.ReflectiveEnumerator.GetEnumerableOfType<ConditionBase>();
+					var effectTypes = Helper.ReflectiveEnumerator.GetEnumerableOfType<BaseCondition>();
 
 					foreach (var effectType in effectTypes)
 					{

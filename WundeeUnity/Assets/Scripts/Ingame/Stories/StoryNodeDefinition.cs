@@ -4,22 +4,22 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public class StoryNodeDefinition : DefinitionBase<StoryNode>
+	public class StoryNodeDefinition : Definition<StoryNode>
 	{
 		private const string D_EFFECTS = "effects";
 
 		private string testProperty;
 
-		private DefinitionBase<EffectBase>[] effectDefinitions;
+		private Definition<BaseEffect>[] _effectDefinitions;
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{
 			testProperty = jsonData["property"].ToString();
 
 			if (jsonData.Keys.Contains(D_EFFECTS))
-				this.effectDefinitions = EffectDefinition.ParseDefinitions(jsonData[D_EFFECTS], definitionKey);
+				this._effectDefinitions = EffectDefinition.ParseDefinitions(jsonData[D_EFFECTS], definitionKey);
 			else
-				this.effectDefinitions = new DefinitionBase<EffectBase>[0];
+				this._effectDefinitions = new Definition<BaseEffect>[0];
 
 		}
 
@@ -36,18 +36,18 @@ namespace Wundee.Stories
 			newNode.testProperty = this.testProperty;
 
 
-			if (effectDefinitions != null)
+			if (_effectDefinitions != null)
 			{
-				newNode.effects = new EffectBase[effectDefinitions.Length];
+				newNode.baseEffects = new BaseEffect[_effectDefinitions.Length];
 
-				for (int i = 0; i < effectDefinitions.Length; i++)
+				for (int i = 0; i < _effectDefinitions.Length; i++)
 				{
-					newNode.effects[i] = effectDefinitions[i].GetConcreteType(newNode);
+					newNode.baseEffects[i] = _effectDefinitions[i].GetConcreteType(newNode);
 				}
 			}
 			else
 			{
-				newNode.effects = new EffectBase[0];
+				newNode.baseEffects = new BaseEffect[0];
 			}
 
 

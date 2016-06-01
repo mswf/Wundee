@@ -2,19 +2,27 @@
 	"CONDITION_AND":{
 		"type": "AndCondition",
 
-		"params": {}
+		"params": {
+			"conditions": {}
+		}
 	},
 
 	"CONDITION_OR":{
 		"type": "OrCondition",
 
-		"params": {}
+		"params": {
+			"conditions": {}
+
+		}
 	},
 
 	"CONDITION_NOT":{
 		"type": "NotCondition",
 
-		"params": {}
+		"params": {
+			"conditions": {}
+
+		}
 	}
 
 }

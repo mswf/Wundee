@@ -5,38 +5,38 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public abstract class EffectBase
+	public abstract class BaseEffect
 	{
 		public StoryNode parentStoryNode;
 
 		public abstract void ParseParams(JsonData parameters);
 
-		public EffectBase GetClone()
+		public BaseEffect GetClone()
 		{
-			return (EffectBase)MemberwiseClone();
+			return (BaseEffect)MemberwiseClone();
 		}
 
 		public abstract void Tick();
 	}
 
-	public abstract class CollectionEffect : EffectBase
+	public abstract class CollectionEffect : BaseEffect
 	{
-		protected EffectBase[] _childEffects;
+		protected BaseEffect[] childBaseEffects;
 
 		protected void _ParseChildConditions(JsonData parameters)
 		{
 			var effects = EffectDefinition.ParseDefinitions(parameters);
 
-			_childEffects = new EffectBase[effects.Length];
+			childBaseEffects = new BaseEffect[effects.Length];
 
 			for (int i = 0; i < effects.Length; i++)
 			{
-				_childEffects[i] = effects[i].GetConcreteType();
+				childBaseEffects[i] = effects[i].GetConcreteType();
 			}
 		}
 	}
 
-	public class TestEffect : EffectBase
+	public class TestEffect : BaseEffect
 	{
 		public override void ParseParams(JsonData parameters)
 		{
@@ -49,7 +49,7 @@ namespace Wundee.Stories
 		}
 	}
 
-	public class MoveEffect : EffectBase
+	public class MoveEffect : BaseEffect
 	{
 		private const string D_SPEED = "speed";
 

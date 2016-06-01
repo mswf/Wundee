@@ -5,11 +5,11 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public class StoryDefinition : DefinitionBase<Story>
+	public class StoryDefinition : Definition<Story>
 	{
 		private const string D_START_NODE = "startNode";
 
-		private DefinitionBase<StoryNode> _startNode;	
+		private Definition<StoryNode> _startNode;	
 
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)

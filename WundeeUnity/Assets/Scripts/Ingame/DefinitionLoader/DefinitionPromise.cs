@@ -5,7 +5,7 @@ using LitJson;
 
 namespace Wundee
 {
-	public class DefinitionPromise<DefinitionType, ConcreteType> : DefinitionBase<ConcreteType> where DefinitionType : DefinitionBase<ConcreteType>, new()
+	public class DefinitionPromise<DefinitionType, ConcreteType> : Definition<ConcreteType> where DefinitionType : Definition<ConcreteType>, new()
 	{
 		private enum PromiseType
 		{

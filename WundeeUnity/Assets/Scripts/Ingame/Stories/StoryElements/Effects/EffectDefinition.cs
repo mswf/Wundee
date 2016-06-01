@@ -5,9 +5,9 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public class EffectDefinition : DefinitionBase<EffectBase>
+	public class EffectDefinition : Definition<BaseEffect>
 	{
-		private EffectBase masterCopy;
+		private BaseEffect masterCopy;
 
 #if DEBUG_CONTENT
 		public string definitionKey;
@@ -19,11 +19,11 @@ namespace Wundee.Stories
 			this.definitionKey = definitionKey; 
 #endif
 
-			VerifyKey(jsonData, D.TYPE, definitionKey);
-			VerifyType(stringToType, jsonData[D.TYPE].ToString(), definitionKey);
+			DataLoader.VerifyKey(jsonData, D.TYPE, definitionKey);
+			DataLoader.VerifyType(stringToType, jsonData[D.TYPE].ToString(), definitionKey);
 
 			var type = stringToType[jsonData[D.TYPE].ToString()];
-			masterCopy = System.Activator.CreateInstance(type) as EffectBase;
+			masterCopy = System.Activator.CreateInstance(type) as BaseEffect;
 
 			var paramsObject = jsonData[D.PARAMS];
 
@@ -35,7 +35,7 @@ namespace Wundee.Stories
 
 		}
 
-		public override EffectBase GetConcreteType(System.Object parent = null)
+		public override BaseEffect GetConcreteType(System.Object parent = null)
 		{
 			var newEffect = masterCopy.GetClone();
 
@@ -52,17 +52,17 @@ namespace Wundee.Stories
 			return newEffect;
 		}
 
-		public static DefinitionBase<EffectBase>[] ParseDefinitions(JsonData effectData, string definitionKey = "E")
+		public static Definition<BaseEffect>[] ParseDefinitions(JsonData effectData, string definitionKey = "E")
 		{
-			var tempEffectDefinitions = new List<DefinitionBase<EffectBase>>();
+			var tempEffectDefinitions = new List<Definition<BaseEffect>>();
 			
 			for (int i = 0; i < effectData.Count; i++)
 			{
-				DefinitionBase<EffectBase> effectDefinition;
+				Definition<BaseEffect> effectDefinition;
 				var effect = effectData[i];
 				if (effect.IsString)
 				{
-					effectDefinition = new DefinitionPromise<EffectDefinition, EffectBase>(effect.ToString());
+					effectDefinition = new DefinitionPromise<EffectDefinition, BaseEffect>(effect.ToString());
 				}
 				else
 				{
@@ -87,7 +87,7 @@ namespace Wundee.Stories
 				{
 					_stringToType = new Dictionary<string, Type>();
 
-					var effectTypes = Helper.ReflectiveEnumerator.GetEnumerableOfType<EffectBase>();
+					var effectTypes = Helper.ReflectiveEnumerator.GetEnumerableOfType<BaseEffect>();
 
 					foreach (var effectType in effectTypes)
 					{
