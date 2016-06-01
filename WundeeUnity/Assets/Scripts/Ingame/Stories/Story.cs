@@ -1,20 +1,15 @@
-﻿
-
-namespace Wundee.Stories
+﻿namespace Wundee.Stories
 {
 	public class Story
 	{
-		public StoryDefinition definition;
-
 		public StoryNode currentNode;
+		public StoryDefinition definition;
 
 		public Settlement parentSettlement;
 
 		public void Tick()
 		{
 			var result = currentNode.Tick();
-
-			
 		}
 	}
 }

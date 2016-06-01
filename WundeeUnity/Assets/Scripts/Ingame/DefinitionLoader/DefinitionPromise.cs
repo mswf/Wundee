@@ -1,37 +1,29 @@
 ﻿using LitJson;
 
-
 namespace Wundee
 {
-	public class DefinitionPromise<DefinitionType, ConcreteType> : Definition<ConcreteType> where DefinitionType : Definition<ConcreteType>, new()
+	public class DefinitionPromise<DefinitionType, ConcreteType> : Definition<ConcreteType>
+		where DefinitionType : Definition<ConcreteType>, new()
 	{
-		private enum PromiseType
-		{
-			HoldsKey,
-			HoldsData	
-		}
-
 		private readonly PromiseType _promiseType;
 
 		private DefinitionType _definition;
 		private string _definitionKey;
-		
+
 
 		public DefinitionPromise(string definitionKey)
 		{
 			_promiseType = PromiseType.HoldsKey;
 
 			this._definitionKey = definitionKey;
-
 		}
 
 		public DefinitionPromise(JsonData definitionData)
 		{
 			_promiseType = PromiseType.HoldsData;
 
-			_definition =  new DefinitionType();
+			_definition = new DefinitionType();
 			_definition.ParseDefinition(definitionData["key"].ToString(), definitionData);
-
 		}
 
 		public DefinitionType GetDefinition()
@@ -43,13 +35,14 @@ namespace Wundee
 			else
 			{
 				// this global misuse = best global misuse
-				var newDefinition = (Game.instance.definitions.definitionLoaderMapper[typeof(DefinitionType)] as DefinitionLoader<DefinitionType, ConcreteType>)[_definitionKey];
+				var newDefinition =
+					(Game.instance.definitions.definitionLoaderMapper[typeof (DefinitionType)] as
+						DefinitionLoader<DefinitionType, ConcreteType>)[_definitionKey];
 
 				_definition = newDefinition;
 
 				return newDefinition;
 			}
-
 		}
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
@@ -61,6 +54,11 @@ namespace Wundee
 		{
 			return GetDefinition().GetConcreteType(parent);
 		}
-	}
 
+		private enum PromiseType
+		{
+			HoldsKey,
+			HoldsData
+		}
+	}
 }

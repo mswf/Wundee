@@ -1,11 +1,10 @@
-﻿
-namespace Wundee
+﻿namespace Wundee
 {
 	public class Need
 	{
 		public readonly Settlement owner;
 		public readonly string type;
-		
+
 
 		public double amount = 50d;
 
@@ -14,7 +13,5 @@ namespace Wundee
 			this.owner = owner;
 			this.type = type;
 		}
-
 	}
 }
-

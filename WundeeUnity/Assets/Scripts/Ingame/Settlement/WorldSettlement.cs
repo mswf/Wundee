@@ -1,8 +1,7 @@
-﻿
-namespace Wundee
+﻿namespace Wundee
 {
 	// High level simulation of settlement
-	
+
 
 	// Contains the current standing of the Settlement and potential Trends for a 
 	// ActiveSettlement to represent
@@ -17,7 +16,6 @@ namespace Wundee
 
 		public void Tick(double deltaTime)
 		{
-
 		}
 	}
 }

@@ -1,6 +1,4 @@
-﻿
-using LitJson;
-
+﻿using LitJson;
 
 namespace Wundee.Stories
 {
@@ -30,7 +28,6 @@ namespace Wundee.Stories
 	{
 		public override void ParseParams(JsonData parameters)
 		{
-
 		}
 
 		public override void Tick()
@@ -46,21 +43,19 @@ namespace Wundee.Stories
 		private float movementSpeed = 1f;
 
 
-
 		public override void ParseParams(JsonData parameters)
 		{
 			var speed = parameters[D_SPEED];
 
 			if (speed != null)
 			{
-				movementSpeed = (float)(double) speed;
+				movementSpeed = (float) (double) speed;
 			}
 		}
 
 		public override void Tick()
 		{
-			parentStoryNode.parentStory.parentSettlement.habitat.position.X += 0.075f * movementSpeed;
+			parentStoryNode.parentStory.parentSettlement.habitat.position.X += 0.075f*movementSpeed;
 		}
 	}
 }
-
