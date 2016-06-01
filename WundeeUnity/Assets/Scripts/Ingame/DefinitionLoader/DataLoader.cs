@@ -16,20 +16,15 @@ namespace Wundee
 	{
 		public DefinitionLoader<StoryDefinition, Story> storyDefinitions;
 		public DefinitionLoader<StoryNodeDefinition, StoryNode> storyNodeDefinitions;
-
 		public DefinitionLoader<EffectDefinition, BaseEffect> effectDefinitions;
 		public DefinitionLoader<ConditionDefinition, BaseCondition> conditionDefinitions;
 
-
-
-		public Dictionary<Type, object> definitionLoaderMapper; 
-		
+		public Dictionary<Type, object> definitionLoaderMapper; 		
 
 		public DataLoader()
 		{
 			storyDefinitions = new DefinitionLoader<StoryDefinition, Story>(this);
 			storyNodeDefinitions = new DefinitionLoader<StoryNodeDefinition, StoryNode>(this);
-
 			effectDefinitions = new DefinitionLoader<EffectDefinition, BaseEffect>(this);
 			conditionDefinitions = new DefinitionLoader<ConditionDefinition, BaseCondition>(this);
 
@@ -37,19 +32,18 @@ namespace Wundee
 
 			definitionLoaderMapper[typeof (StoryDefinition)] = storyDefinitions;
 			definitionLoaderMapper[typeof (StoryNodeDefinition)] = storyNodeDefinitions;
-
 			definitionLoaderMapper[typeof (EffectDefinition)] = effectDefinitions;
 			definitionLoaderMapper[typeof(ConditionDefinition)] = conditionDefinitions;
-
-
 		}
 
 		public JsonData GetJsonDataFromFile(string filePath)
 		{
 			var jsonString = File.ReadAllText(filePath);
 
-			var reader = new JsonReader(jsonString);
-			reader.AllowComments = true;
+			var reader = new JsonReader(jsonString)
+			{
+				AllowComments = true
+			};
 
 			return JsonMapper.ToObject(reader);
 		}
@@ -59,12 +53,10 @@ namespace Wundee
 			var fullPath = Application.streamingAssetsPath + Path.DirectorySeparatorChar + "Definitions" +
 			   Path.DirectorySeparatorChar + relativePath;
 
-
-
 			return GetAllJsonFilePathsRecursively(fullPath).ToArray();
 		}
 
-		private List<string> GetAllJsonFilePathsRecursively(string absolutePath)
+		private static List<string> GetAllJsonFilePathsRecursively(string absolutePath)
 		{
 			var subDirectories = Directory.GetDirectories(absolutePath);
 

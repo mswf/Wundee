@@ -1,6 +1,4 @@
 ﻿
-
-
 using System;
 using System.Collections.Generic;
 using LitJson;
@@ -29,14 +27,10 @@ namespace Wundee.Stories
 			masterCopy = System.Activator.CreateInstance(type) as ConcreteType;
 
 			var paramsObject = jsonData[D.PARAMS];
-
 			if (paramsObject != null)
-			{
 				masterCopy.ParseParams(paramsObject);
-			}
 
 		}
-
 
 		public override ConcreteType GetConcreteType(System.Object parent = null)
 		{
@@ -54,9 +48,6 @@ namespace Wundee.Stories
 
 			return newConcreteType;
 		}
-
-
-
 
 		public static Dictionary<string, System.Type> stringToType
 		{
@@ -80,9 +71,6 @@ namespace Wundee.Stories
 		}
 
 		private static Dictionary<string, System.Type> _stringToType;
-
-
-
 	}
 
 }

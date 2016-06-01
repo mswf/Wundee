@@ -9,7 +9,7 @@
 
 	"CONDITION_OR":{
 		"type": "OrCondition",
-
+		
 		"params": {
 			"conditions": {}
 
