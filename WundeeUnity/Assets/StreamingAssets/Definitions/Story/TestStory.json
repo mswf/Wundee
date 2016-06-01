@@ -26,11 +26,12 @@
 			],
 
 			"effects": [
-				"EFFECT_TEST_1",
 				{
 					"type": "MoveEffect",
 
-					"params": "Ghllo"
+					"params": {
+						"speed": 10.0
+					}
 				}
 			],
 

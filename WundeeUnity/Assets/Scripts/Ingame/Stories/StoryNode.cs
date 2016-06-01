@@ -14,7 +14,7 @@ namespace Wundee.Stories
 		}
 
 		public StoryNodeDefinition definition;
-		public Story parent;
+		public Story parentStory;
 
 		public string testProperty;
 		public EffectBase[] effects;

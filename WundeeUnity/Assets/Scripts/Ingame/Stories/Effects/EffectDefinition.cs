@@ -10,7 +10,7 @@ namespace Wundee.Stories
 		private const string D_TYPE = "type";
 		private const string D_PARAMS = "params";
 
-		private Type type;
+		private EffectBase masterCopy;
 
 #if DEBUG_CONTENT
 		public string definitionKey;
@@ -25,12 +25,22 @@ namespace Wundee.Stories
 			VerifyKey(jsonData, D_TYPE, definitionKey);
 			VerifyType(stringToType, jsonData[D_TYPE].ToString(), definitionKey);
 
-			type = stringToType[jsonData[D_TYPE].ToString()];
+			var type = stringToType[jsonData[D_TYPE].ToString()];
+			masterCopy = System.Activator.CreateInstance(type) as EffectBase;
+
+			var paramsObject = jsonData[D_PARAMS];
+
+			if (paramsObject != null)
+			{
+				masterCopy.ParseParams(paramsObject);
+			}
+
+
 		}
 
 		public override EffectBase GetConcreteType(System.Object parent = null)
 		{
-			var newEffect = System.Activator.CreateInstance(type) as EffectBase;
+			var newEffect = masterCopy.GetClone();
 
 			newEffect.parentStoryNode = parent as StoryNode;
 			if (newEffect.parentStoryNode == null)
@@ -42,12 +52,11 @@ namespace Wundee.Stories
 #endif
 			}
 
-
 			return newEffect;
 		}
 
 
-		public static Dictionary<string, Type> stringToType
+		public static Dictionary<string, System.Type> stringToType
 		{
 			get
 			{

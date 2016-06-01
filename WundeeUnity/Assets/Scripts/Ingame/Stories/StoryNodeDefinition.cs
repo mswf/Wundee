@@ -56,8 +56,8 @@ namespace Wundee.Stories
 
 			newNode.definition = this;
 
-			newNode.parent = parent as Story;
-			if (newNode.parent == null)
+			newNode.parentStory = parent as Story;
+			if (newNode.parentStory == null)
 				Logger.Log("[StoryNodeDefinition] Invalid parent Story provided for new StoryNode");
 
 			newNode.testProperty = this.testProperty;

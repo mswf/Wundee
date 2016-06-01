@@ -1,38 +1,57 @@
 ﻿
 using System.Collections;
+using LitJson;
 
 
 namespace Wundee.Stories
 {
 	public abstract class EffectBase
 	{
+		public abstract void ParseParams(JsonData parameters);
+
+		public EffectBase GetClone()
+		{
+			return (EffectBase)MemberwiseClone();
+		}
+
 		public StoryNode parentStoryNode;
 		public abstract void Tick();
 	}
 
 	public class TestEffect : EffectBase
 	{
+		public override void ParseParams(JsonData parameters)
+		{
+
+		}
+
 		public override void Tick()
 		{
 			//Logger.Print("running TestEffect");
 		}
 	}
 
-	///*
-	public class TestEffect2 : EffectBase
-	{
-		public override void Tick()
-		{
-			//Logger.Print("running TestEffect 2");
-		}
-	}
-	//*/
-
 	public class MoveEffect : EffectBase
 	{
+		private const string D_SPEED = "speed";
+
+		private float movementSpeed = 1f;
+
+
+
+		public override void ParseParams(JsonData parameters)
+		{
+			var speed = parameters[D_SPEED];
+
+			if (speed != null)
+			{
+				movementSpeed = (float)(double) speed;
+			}
+		}
+
 		public override void Tick()
 		{
-			parentStoryNode.parent.parentSettlement.habitat.position.X += 0.075f;
+			parentStoryNode.parentStory.parentSettlement.habitat.position.X += 0.075f * movementSpeed;
 		}
 	}
 }
