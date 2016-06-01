@@ -5,17 +5,8 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public abstract class BaseEffect
+	public abstract class BaseEffect : StoryElement<BaseEffect>
 	{
-		public StoryNode parentStoryNode;
-
-		public abstract void ParseParams(JsonData parameters);
-
-		public BaseEffect GetClone()
-		{
-			return (BaseEffect)MemberwiseClone();
-		}
-
 		public abstract void Tick();
 	}
 

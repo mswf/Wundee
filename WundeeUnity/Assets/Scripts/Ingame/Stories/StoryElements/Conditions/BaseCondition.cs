@@ -4,18 +4,8 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public abstract class BaseCondition : StoryElement
+	public abstract class BaseCondition : StoryElement<BaseCondition>
 	{
-		public StoryNode parentStoryNode;
-
-		public abstract void ParseParams(JsonData parameters);
-
-		public BaseCondition GetClone()
-		{
-			return (BaseCondition)MemberwiseClone();
-		}
-
-
 		public abstract bool IsValid();
 	}
 
