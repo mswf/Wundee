@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Deployment.Internal;
-using UnityEditorInternal;
 using UnityEngine.SceneManagement;
 
 namespace WundeeUnity
