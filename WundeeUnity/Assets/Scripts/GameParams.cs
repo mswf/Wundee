@@ -21,4 +21,13 @@ namespace Wundee
 		public const float WORLD_HEIGHT = 900f/0.7f;
 
 	}
+
+	public static class D
+	{
+		public const string EFFECTS = "effects";
+		public const string CONDITIONS = "conditions";
+
+		public const string TYPE = "type";
+		public const string PARAMS = "params";
+	}
 }

@@ -7,10 +7,6 @@ namespace Wundee
 {
 	public abstract class DefinitionBase<ConcreteType>
 	{
-		protected const string D_TYPE = "type";
-		protected const string D_PARAMS = "params";
-
-
 		public abstract void ParseDefinition(string definitionKey, JsonData jsonData);
 		public abstract ConcreteType GetConcreteType(System.Object parent = null);
 

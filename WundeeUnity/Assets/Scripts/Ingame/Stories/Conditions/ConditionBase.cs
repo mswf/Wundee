@@ -6,8 +6,6 @@ namespace Wundee.Stories
 {
 	public abstract class ConditionBase
 	{
-		protected const string D_CONDITIONS = "conditions";
-
 		public StoryNode parentStoryNode;
 
 		public abstract void ParseParams(JsonData parameters);
@@ -27,7 +25,14 @@ namespace Wundee.Stories
 
 		protected void _ParseChildConditions(JsonData parameters)
 		{
-			
+			var conditions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
+
+			_childConditions = new ConditionBase[conditions.Length];
+
+			for (int i = 0; i < conditions.Length; i++)
+			{
+				_childConditions[i] = conditions[i].GetConcreteType();
+			}
 		}
 	}
 
@@ -37,7 +42,9 @@ namespace Wundee.Stories
 
 		protected void _ParseChildCondition(JsonData parameters)
 		{
+			var conditions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
 
+			_childCondition = conditions[0].GetConcreteType();
 		}
 	}
 

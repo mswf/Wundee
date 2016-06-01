@@ -19,6 +19,23 @@ namespace Wundee.Stories
 		public abstract void Tick();
 	}
 
+	public abstract class CollectionEffect : EffectBase
+	{
+		protected EffectBase[] _childEffects;
+
+		protected void _ParseChildConditions(JsonData parameters)
+		{
+			var effects = EffectDefinition.ParseDefinitions(parameters);
+
+			_childEffects = new EffectBase[effects.Length];
+
+			for (int i = 0; i < effects.Length; i++)
+			{
+				_childEffects[i] = effects[i].GetConcreteType();
+			}
+		}
+	}
+
 	public class TestEffect : EffectBase
 	{
 		public override void ParseParams(JsonData parameters)

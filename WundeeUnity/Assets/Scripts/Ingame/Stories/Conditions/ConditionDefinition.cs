@@ -21,13 +21,13 @@ namespace Wundee.Stories
 			this.definitionKey = definitionKey;
 #endif
 
-			VerifyKey(jsonData, D_TYPE, definitionKey);
-			VerifyType(stringToType, jsonData[D_TYPE].ToString(), definitionKey);
+			VerifyKey(jsonData, D.TYPE, definitionKey);
+			VerifyType(stringToType, jsonData[D.TYPE].ToString(), definitionKey);
 
-			var type = stringToType[jsonData[D_TYPE].ToString()];
+			var type = stringToType[jsonData[D.TYPE].ToString()];
 			masterCopy = System.Activator.CreateInstance(type) as ConditionBase;
 
-			var paramsObject = jsonData[D_PARAMS];
+			var paramsObject = jsonData[D.PARAMS];
 
 			if (paramsObject != null)
 			{
@@ -52,6 +52,31 @@ namespace Wundee.Stories
 			}
 
 			return newCondition;
+		}
+
+		public static DefinitionBase<ConditionBase>[] ParseDefinitions(JsonData conditionData, string definitionKey = "C")
+		{
+			var tempConditionDefinitions = new List<DefinitionBase<ConditionBase>>();
+
+			for (int i = 0; i < conditionData.Count; i++)
+			{
+				DefinitionBase<ConditionBase> conditionDefinition;
+				var condition = conditionData[i];
+				if (condition.IsString)
+				{
+					conditionDefinition = new DefinitionPromise<ConditionDefinition, ConditionBase>(condition.ToString());
+				}
+				else
+				{
+					conditionDefinition = new ConditionDefinition();
+					conditionDefinition.ParseDefinition(definitionKey + "_CONDITION_" + i, conditionData[i]);
+				}
+
+				tempConditionDefinitions.Add(conditionDefinition);
+			}
+
+			return tempConditionDefinitions.ToArray();
+
 		}
 
 		public static Dictionary<string, System.Type> stringToType

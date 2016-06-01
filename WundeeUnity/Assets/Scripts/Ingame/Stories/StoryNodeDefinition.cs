@@ -17,7 +17,7 @@ namespace Wundee.Stories
 			testProperty = jsonData["property"].ToString();
 
 			if (jsonData.Keys.Contains(D_EFFECTS))
-				this.effectDefinitions = EffectDefinition.ParseDefinitions(definitionKey, jsonData[D_EFFECTS]);
+				this.effectDefinitions = EffectDefinition.ParseDefinitions(jsonData[D_EFFECTS], definitionKey);
 			else
 				this.effectDefinitions = new DefinitionBase<EffectBase>[0];
 

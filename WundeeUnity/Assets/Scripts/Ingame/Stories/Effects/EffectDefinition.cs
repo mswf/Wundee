@@ -19,13 +19,13 @@ namespace Wundee.Stories
 			this.definitionKey = definitionKey; 
 #endif
 
-			VerifyKey(jsonData, D_TYPE, definitionKey);
-			VerifyType(stringToType, jsonData[D_TYPE].ToString(), definitionKey);
+			VerifyKey(jsonData, D.TYPE, definitionKey);
+			VerifyType(stringToType, jsonData[D.TYPE].ToString(), definitionKey);
 
-			var type = stringToType[jsonData[D_TYPE].ToString()];
+			var type = stringToType[jsonData[D.TYPE].ToString()];
 			masterCopy = System.Activator.CreateInstance(type) as EffectBase;
 
-			var paramsObject = jsonData[D_PARAMS];
+			var paramsObject = jsonData[D.PARAMS];
 
 			if (paramsObject != null)
 			{
@@ -52,7 +52,7 @@ namespace Wundee.Stories
 			return newEffect;
 		}
 
-		public static DefinitionBase<EffectBase>[] ParseDefinitions(string definitionKey, JsonData effectData)
+		public static DefinitionBase<EffectBase>[] ParseDefinitions(JsonData effectData, string definitionKey = "E")
 		{
 			var tempEffectDefinitions = new List<DefinitionBase<EffectBase>>();
 			
