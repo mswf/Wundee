@@ -35,6 +35,8 @@ namespace Wundee.Stories
 		public override ConcreteType GetConcreteType(System.Object parent = null)
 		{
 			var newConcreteType = masterCopy.GetClone();
+			
+			newConcreteType.definition = this;
 
 			newConcreteType.parentStoryNode = parent as StoryNode;
 			if (newConcreteType.parentStoryNode == null)

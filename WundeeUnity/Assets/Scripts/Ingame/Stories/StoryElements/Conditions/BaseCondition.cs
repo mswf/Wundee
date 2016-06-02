@@ -32,10 +32,10 @@ namespace Wundee.Stories
 
 		protected void _ParseChildCondition(JsonData parameters)
 		{
-			DataLoader.VerifyKey(parameters, D.CONDITIONS, "NOPE");
+			DataLoader.VerifyKey(parameters, D.CONDITIONS, definition.definitionKey);
 			var conditions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
 
-			DataLoader.VerifyMaxArrayLength(conditions, 1, "NOPE");
+			DataLoader.VerifyMaxArrayLength(conditions, 1, definition.definitionKey);
 			if (conditions.Length == 1)
 				childBaseCondition = conditions[0].GetConcreteType();
 			else
