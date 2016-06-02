@@ -44,8 +44,6 @@ namespace Wundee.Stories
 
 		protected void _ParseChildCondition(JsonData parameters)
 		{
-			parameters = parameters;
-
 			DataLoader.VerifyKey(parameters, D.CONDITIONS, definition.definitionKey);
 			var conditions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
 
