@@ -36,10 +36,9 @@ namespace Wundee.Stories
 
 		public override ConcreteType GetConcreteType(System.Object parent = null)
 		{
-			var newConcreteType = masterCopy.GetClone();
-			
-			newConcreteType.parentStoryNode = parent as StoryNode;
-			if (newConcreteType.parentStoryNode == null)
+			var storyNodeParent = parent as StoryNode;
+
+			if (storyNodeParent == null)
 			{
 #if DEBUG_CONTENT
 				Logger.Log("[StoryElementDefinition] Invalid parent StoryNode provided for new storyElement " + definitionKey);
@@ -47,6 +46,8 @@ namespace Wundee.Stories
 				Logger.Log("[StoryElementDefinition] Invalid parent StoryNode provided for new storyElement with type " + this.type.ToString());
 #endif
 			}
+
+			var newConcreteType = masterCopy.GetClone(storyNodeParent);
 
 			return newConcreteType;
 		}

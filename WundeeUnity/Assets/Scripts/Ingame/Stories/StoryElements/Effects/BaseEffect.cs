@@ -11,16 +11,27 @@ namespace Wundee.Stories
 	{
 		protected BaseEffect[] childBaseEffects;
 
+		private Definition<BaseEffect>[] _effectDefinitions;
+
 		protected void _ParseChildConditions(JsonData parameters)
 		{
-			var effects = EffectDefinition.ParseDefinitions(parameters);
+			_effectDefinitions = EffectDefinition.ParseDefinitions(parameters);
 
-			childBaseEffects = new BaseEffect[effects.Length];
 
-			for (int i = 0; i < effects.Length; i++)
+		}
+
+		public override BaseEffect GetClone(StoryNode parent)
+		{
+			var retValue = base.GetClone(parent) as CollectionEffect;
+
+			retValue.childBaseEffects = new BaseEffect[_effectDefinitions.Length];
+
+			for (int i = 0; i < _effectDefinitions.Length; i++)
 			{
-				childBaseEffects[i] = effects[i].GetConcreteType();
+				retValue.childBaseEffects[i] = _effectDefinitions[i].GetConcreteType(parent);
 			}
+
+			return retValue;
 		}
 	}
 

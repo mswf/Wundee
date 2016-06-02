@@ -12,8 +12,9 @@ namespace Wundee.Stories
 
 		public abstract void ParseParams(JsonData parameters);
 
-		public ChildType GetClone()
+		public virtual ChildType GetClone(StoryNode parent)
 		{
+			this.parentStoryNode = parent;
 			return (ChildType) MemberwiseClone();
 		}
 		

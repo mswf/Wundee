@@ -13,22 +13,33 @@ namespace Wundee.Stories
 	{
 		protected BaseCondition[] childBaseConditions;
 
+		private Definition<BaseCondition>[] _childBaseConditionDefinitions;
+
 		protected void _ParseChildConditions(JsonData parameters)
 		{
-			var conditions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
+			_childBaseConditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
+		}
 
-			childBaseConditions = new BaseCondition[conditions.Length];
+		public override BaseCondition GetClone(StoryNode parent)
+		{
+			var retValue = base.GetClone(parent) as CollectionCondition;
 
-			for (int i = 0; i < conditions.Length; i++)
+			retValue.childBaseConditions = new BaseCondition[_childBaseConditionDefinitions.Length];
+
+			for (int i = 0; i < _childBaseConditionDefinitions.Length; i++)
 			{
-				childBaseConditions[i] = conditions[i].GetConcreteType();
+				retValue.childBaseConditions[i] = _childBaseConditionDefinitions[i].GetConcreteType(parent);
 			}
+
+			return retValue;
 		}
 	}
 
 	public abstract class DecoratorCondition : BaseCondition
 	{
 		protected BaseCondition childBaseCondition;
+
+		private Definition<BaseCondition> _childBaseConditionDefinition;
 
 		protected void _ParseChildCondition(JsonData parameters)
 		{
@@ -37,9 +48,19 @@ namespace Wundee.Stories
 
 			DataLoader.VerifyMaxArrayLength(conditions, 1, definition.definitionKey);
 			if (conditions.Length == 1)
-				childBaseCondition = conditions[0].GetConcreteType();
+				_childBaseConditionDefinition = conditions[0];
+		}
+
+		public override BaseCondition GetClone(StoryNode parent)
+		{
+			var retValue = base.GetClone(parent) as DecoratorCondition;
+
+			if (_childBaseConditionDefinition != null)
+				retValue.childBaseCondition = _childBaseConditionDefinition.GetConcreteType(parent);
 			else
-				childBaseCondition = new TrueCondition();
+				retValue.childBaseCondition = new TrueCondition();
+
+			return retValue;
 		}
 	}
 
