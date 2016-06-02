@@ -18,9 +18,10 @@ namespace Wundee
 		public DefinitionLoader<StoryNodeDefinition, StoryNode> storyNodeDefinitions;
 		public DefinitionLoader<StoryTriggerDefinition, StoryTrigger> storyTriggerDefinitions;
 
-
 		public DefinitionLoader<EffectDefinition, BaseEffect> effectDefinitions;
 		public DefinitionLoader<ConditionDefinition, BaseCondition> conditionDefinitions;
+		public DefinitionLoader<RewardDefinition, BaseReward> rewardDefinitions;
+
 
 		public Dictionary<Type, object> definitionLoaderMapper; 		
 
@@ -32,6 +33,7 @@ namespace Wundee
 
 			effectDefinitions = new DefinitionLoader<EffectDefinition, BaseEffect>(this);
 			conditionDefinitions = new DefinitionLoader<ConditionDefinition, BaseCondition>(this);
+			rewardDefinitions = new DefinitionLoader<RewardDefinition, BaseReward>(this);
 
 			this.definitionLoaderMapper = new Dictionary<Type, object>();
 
@@ -41,6 +43,7 @@ namespace Wundee
 
 			definitionLoaderMapper[typeof (EffectDefinition)] = effectDefinitions;
 			definitionLoaderMapper[typeof(ConditionDefinition)] = conditionDefinitions;
+			definitionLoaderMapper[typeof(RewardDefinition)] = rewardDefinitions;
 		}
 
 		public JsonData GetJsonDataFromFile(string filePath)

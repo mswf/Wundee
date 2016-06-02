@@ -57,6 +57,8 @@ namespace Wundee
 
 				definitions.effectDefinitions.AddFolder("Effect");
 				definitions.conditionDefinitions.AddFolder("Condition");
+				definitions.rewardDefinitions.AddFolder("Reward");
+
 
 
 				/*

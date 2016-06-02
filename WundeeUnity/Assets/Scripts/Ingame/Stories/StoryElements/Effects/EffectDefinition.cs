@@ -26,7 +26,7 @@ namespace Wundee.Stories
 				else
 				{
 					effectDefinition = new EffectDefinition();
-					effectDefinition.ParseDefinition(definitionKey + "_EFFECT_" + i, effectData[i]);
+					effectDefinition.ParseDefinition(definitionKey + "_EFFECT_" + i, effect);
 				}
 
 				tempEffectDefinitions.Add(effectDefinition);
@@ -35,7 +35,6 @@ namespace Wundee.Stories
 			
 
 			return tempEffectDefinitions.ToArray();
-
 		}
 		
 	}

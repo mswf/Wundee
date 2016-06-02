@@ -24,9 +24,11 @@ namespace Wundee
 
 	public static class D
 	{
+		public const string STORYTRIGGERS = "storyTriggers";
+
 		public const string EFFECTS = "effects";
 		public const string CONDITIONS = "conditions";
-		public const string STORYTRIGGERS = "storyTriggers";
+		public const string REWARDS = "rewards";
 
 
 		public const string TYPE = "type";

@@ -8,11 +8,12 @@ namespace Wundee.Stories
 	public class StoryTriggerDefinition : Definition<StoryTrigger>
 	{
 		private Definition<BaseCondition>[] _conditionDefinitions;
-		// private RewardDefinition[] _rewards;
-		
+		private Definition<BaseReward>[] _rewardDefinitions;
+
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{
 			_conditionDefinitions = ConditionDefinition.ParseDefinitions(jsonData[D.CONDITIONS], definitionKey);
+			_rewardDefinitions = RewardDefinition.ParseDefinitions(jsonData[D.REWARDS], definitionKey);
 		}
 
 		public override StoryTrigger GetConcreteType(object parent = null)
@@ -30,7 +31,11 @@ namespace Wundee.Stories
 			newStoryTrigger.conditions = new BaseCondition[_conditionDefinitions.Length];
 			for (int i = 0; i < _conditionDefinitions.Length; i++)
 				newStoryTrigger.conditions[i] = _conditionDefinitions[i].GetConcreteType(newStoryTrigger.parentStoryNode);
-			
+
+			newStoryTrigger.rewards = new BaseReward[_rewardDefinitions.Length];
+			for (int i = 0; i < _rewardDefinitions.Length; i++)
+				newStoryTrigger.rewards[i] = _rewardDefinitions[i].GetConcreteType(newStoryTrigger.parentStoryNode);
+
 			return newStoryTrigger;
 		}
 

@@ -7,7 +7,7 @@ namespace Wundee.Stories
 
 		public BaseCondition[] conditions;
 		public StoryNode parentStoryNode;
-		//public BaseReward[] rewards;
+		public BaseReward[] rewards;
 
 
 		public bool IsTriggered()
@@ -20,13 +20,12 @@ namespace Wundee.Stories
 				}
 			}
 
-			/*
+			
 			for (int i = 0; i < rewards.Length; i++)
 			{
 				rewards[i].Execute();
 			}
-			*/
-
+			
 			return true;
 		}
 	}
