@@ -30,6 +30,8 @@ namespace Wundee
 		public const string CONDITIONS = "conditions";
 		public const string REWARDS = "rewards";
 
+		public const string REWARDS_ON_START = "onStartRewards";
+		public const string REWARDS_ON_COMPLETE = "onCompleteRewards";
 
 		public const string TYPE = "type";
 		public const string PARAMS = "params";

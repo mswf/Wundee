@@ -12,23 +12,25 @@ namespace Wundee.Stories
 
 		public StoryNodeDefinition definition;
 		public Story parentStory;
+		
+		public BaseEffect[] effects;
 
-		public string testProperty;
-		public BaseEffect[] baseEffects;
+		public BaseReward[] onStartRewards;
+		public BaseReward[] onCompleteRewards;
 
 		public StoryTrigger[] storyTriggers;
 
 		public StoryNodeState Tick()
 		{
-			for (var i = 0; i < baseEffects.Length; i++)
+			for (var i = 0; i < effects.Length; i++)
 			{
-				baseEffects[i].Tick();
+				effects[i].Tick();
 			}
 
 			for (int i = 0; i < storyTriggers.Length; i++)
 			{
 				if (storyTriggers[i].IsTriggered())
-				{ 
+				{
 					return StoryNodeState.Finished;	
 				}
 			}
@@ -36,9 +38,16 @@ namespace Wundee.Stories
 			return StoryNodeState.Running;
 		}
 
+		public void OnStart()
+		{
+			for (int i = 0; i < onStartRewards.Length; i++)
+				onStartRewards[i].Execute();
+		}
+
 		public void OnComplete()
 		{
-			
+			for (int i = 0; i < onCompleteRewards.Length; i++)
+				onCompleteRewards[i].Execute();
 		}
 	}
 }

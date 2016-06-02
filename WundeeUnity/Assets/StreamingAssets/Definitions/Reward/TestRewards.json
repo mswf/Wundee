@@ -2,6 +2,13 @@
 	"REWARD_TEST_1":{
 		"type": "TestReward",
 		"params": {}
+	},
+
+	"REWARD_PRINT_1":{
+		"type": "PrintReward",
+		"params": "Printing"
 	}
+
+
 
 }

@@ -27,9 +27,11 @@ namespace Wundee
 
 		public void Tick()
 		{
-			foreach (var settlement in _settlements)
+			var numSettlements = _settlements.Count;
+
+			for (int i = 0; i < numSettlements; i++)
 			{
-				settlement.Tick();
+				settlements[i].Tick();
 			}
 		}
 		

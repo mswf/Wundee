@@ -9,17 +9,17 @@ namespace Wundee.Stories
 	{
 		private Settlement owner;
 
-		private List<Story> activeStories; 
+		private Story[] activeStories; 
 
 		public StoryHolder(Settlement owner)
 		{
 			this.owner = owner;
-			activeStories = new List<Story>();
+			activeStories = new Story[0];
 		}
 
 		public void Tick()
 		{
-			for (int index = 0; index < activeStories.Count; index++)
+			for (int index = 0; index < activeStories.Length; index++)
 			{
 				activeStories[index].Tick();
 			}
@@ -29,10 +29,14 @@ namespace Wundee.Stories
 		{
 			var storyDefinition = Game.instance.definitions.storyDefinitions[definitionKey];
 
-			var newStory = storyDefinition.GetConcreteType(owner);
 
-			activeStories.Add(newStory);
+			var newStories = new Story[activeStories.Length + 1];
 
+
+			activeStories.CopyTo(newStories, 0);
+			newStories[activeStories.Length] = storyDefinition.GetConcreteType(owner);
+
+			activeStories = newStories;
 		}
 	}
 

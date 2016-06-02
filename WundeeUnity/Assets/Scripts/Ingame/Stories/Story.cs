@@ -16,10 +16,21 @@
 
 				if (result == StoryNode.StoryNodeState.Finished)
 				{
-					currentNode = null;
+					SetCurrentStoryNode(null);
 				}
 			}
 
+		}
+
+		public void SetCurrentStoryNode(StoryNode storyNode)
+		{
+			if (currentNode != null)
+				currentNode.OnComplete();
+
+			currentNode = storyNode;
+
+			if (currentNode != null)
+				currentNode.OnStart();
 		}
 	}
 }

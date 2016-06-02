@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using Wundee;
+using Random = UnityEngine.Random;
 
 namespace WundeeUnity
 {
