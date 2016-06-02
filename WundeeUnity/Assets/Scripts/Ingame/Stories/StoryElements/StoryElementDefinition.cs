@@ -26,6 +26,8 @@ namespace Wundee.Stories
 			var type = stringToType[jsonData[D.TYPE].ToString()];
 			masterCopy = System.Activator.CreateInstance(type) as ConcreteType;
 
+			masterCopy.definition = this;
+
 			var paramsObject = jsonData[D.PARAMS];
 			if (paramsObject != null)
 				masterCopy.ParseParams(paramsObject);
@@ -36,8 +38,6 @@ namespace Wundee.Stories
 		{
 			var newConcreteType = masterCopy.GetClone();
 			
-			newConcreteType.definition = this;
-
 			newConcreteType.parentStoryNode = parent as StoryNode;
 			if (newConcreteType.parentStoryNode == null)
 			{
