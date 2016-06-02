@@ -1,24 +1,32 @@
-﻿using LitJson;
+﻿
+using System.Collections.Generic;
+using LitJson;
 
 
 namespace Wundee.Stories
 {
 	public class StoryNodeDefinition : Definition<StoryNode>
 	{
-		private const string D_EFFECTS = "effects";
-
 		private string testProperty;
 
 		private Definition<BaseEffect>[] _effectDefinitions;
+
+		private Definition<StoryTrigger>[] _storyTriggerDefinitions;
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{
 			testProperty = jsonData["property"].ToString();
 
-			if (jsonData.Keys.Contains(D_EFFECTS))
-				this._effectDefinitions = EffectDefinition.ParseDefinitions(jsonData[D_EFFECTS], definitionKey);
+			if (jsonData.Keys.Contains(D.EFFECTS))
+				this._effectDefinitions = EffectDefinition.ParseDefinitions(jsonData[D.EFFECTS], definitionKey);
 			else
 				this._effectDefinitions = new Definition<BaseEffect>[0];
+
+
+			if (jsonData.Keys.Contains(D.STORYTRIGGERS))
+				this._storyTriggerDefinitions = StoryTriggerDefinition.ParseDefinitions(jsonData[D.STORYTRIGGERS], definitionKey);
+			else
+				this._storyTriggerDefinitions = new Definition<StoryTrigger>[0];
 
 		}
 
@@ -49,6 +57,20 @@ namespace Wundee.Stories
 				newNode.baseEffects = new BaseEffect[0];
 			}
 
+
+			if (_storyTriggerDefinitions != null)
+			{
+				newNode.storyTriggers = new StoryTrigger[_storyTriggerDefinitions.Length];
+
+				for (int i = 0; i < _storyTriggerDefinitions.Length; i++)
+				{
+					newNode.storyTriggers[i] = _storyTriggerDefinitions[i].GetConcreteType(newNode);
+				}
+			}
+			else
+			{
+				newNode.storyTriggers = new StoryTrigger[0];
+			}
 
 			return newNode;
 		}

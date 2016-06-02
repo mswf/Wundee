@@ -53,8 +53,9 @@ namespace Wundee
 			{
 				definitions.storyDefinitions.AddFolder("Story");
 				definitions.storyNodeDefinitions.AddFolder("StoryNode");
-				definitions.effectDefinitions.AddFolder("Effect");
+				definitions.storyTriggerDefinitions.AddFolder("StoryTrigger");
 
+				definitions.effectDefinitions.AddFolder("Effect");
 				definitions.conditionDefinitions.AddFolder("Condition");
 
 

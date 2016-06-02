@@ -26,6 +26,8 @@ namespace Wundee
 	{
 		public const string EFFECTS = "effects";
 		public const string CONDITIONS = "conditions";
+		public const string STORYTRIGGERS = "storyTriggers";
+
 
 		public const string TYPE = "type";
 		public const string PARAMS = "params";

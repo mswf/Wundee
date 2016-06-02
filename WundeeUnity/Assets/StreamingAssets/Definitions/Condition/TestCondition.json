@@ -3,15 +3,15 @@
 		"type": "AndCondition",
 
 		"params": {
-			"conditions": {}
+			"conditions": []
 		}
 	},
 
 	"CONDITION_OR":{
 		"type": "OrCondition",
-		
+
 		"params": {
-			"conditions": {}
+			"conditions": []
 
 		}
 	},
@@ -20,7 +20,7 @@
 		"type": "NotCondition",
 
 		"params": {
-			"conditions": {}
+			"conditions": []
 
 		}
 	}

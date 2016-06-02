@@ -9,7 +9,17 @@
 
 		public void Tick()
 		{
-			var result = currentNode.Tick();
+
+			if (currentNode != null)
+			{
+				var result = currentNode.Tick();
+
+				if (result == StoryNode.StoryNodeState.Finished)
+				{
+					currentNode = null;
+				}
+			}
+
 		}
 	}
 }

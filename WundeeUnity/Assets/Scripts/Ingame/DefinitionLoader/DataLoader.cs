@@ -16,6 +16,9 @@ namespace Wundee
 	{
 		public DefinitionLoader<StoryDefinition, Story> storyDefinitions;
 		public DefinitionLoader<StoryNodeDefinition, StoryNode> storyNodeDefinitions;
+		public DefinitionLoader<StoryTriggerDefinition, StoryTrigger> storyTriggerDefinitions;
+
+
 		public DefinitionLoader<EffectDefinition, BaseEffect> effectDefinitions;
 		public DefinitionLoader<ConditionDefinition, BaseCondition> conditionDefinitions;
 
@@ -25,6 +28,8 @@ namespace Wundee
 		{
 			storyDefinitions = new DefinitionLoader<StoryDefinition, Story>(this);
 			storyNodeDefinitions = new DefinitionLoader<StoryNodeDefinition, StoryNode>(this);
+			storyTriggerDefinitions = new DefinitionLoader<StoryTriggerDefinition, StoryTrigger>(this);
+
 			effectDefinitions = new DefinitionLoader<EffectDefinition, BaseEffect>(this);
 			conditionDefinitions = new DefinitionLoader<ConditionDefinition, BaseCondition>(this);
 
@@ -32,6 +37,8 @@ namespace Wundee
 
 			definitionLoaderMapper[typeof (StoryDefinition)] = storyDefinitions;
 			definitionLoaderMapper[typeof (StoryNodeDefinition)] = storyNodeDefinitions;
+			definitionLoaderMapper[typeof (StoryTriggerDefinition)] = storyTriggerDefinitions;
+
 			definitionLoaderMapper[typeof (EffectDefinition)] = effectDefinitions;
 			definitionLoaderMapper[typeof(ConditionDefinition)] = conditionDefinitions;
 		}

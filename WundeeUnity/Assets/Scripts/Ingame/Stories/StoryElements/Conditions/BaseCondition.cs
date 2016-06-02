@@ -1,5 +1,6 @@
 ﻿
 using LitJson;
+using UnityEngine;
 
 
 namespace Wundee.Stories
@@ -43,6 +44,8 @@ namespace Wundee.Stories
 
 		protected void _ParseChildCondition(JsonData parameters)
 		{
+			parameters = parameters;
+
 			DataLoader.VerifyKey(parameters, D.CONDITIONS, definition.definitionKey);
 			var conditions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
 
@@ -124,6 +127,20 @@ namespace Wundee.Stories
 		public override bool IsValid()
 		{
 			return true;
+		}
+	}
+
+	public class KeyHeldCondition : BaseCondition
+	{
+		public override void ParseParams(JsonData parameters)
+		{
+		}
+
+		public override bool IsValid()
+		{
+			if (UnityEngine.Input.GetKey(KeyCode.A))
+				return true;
+			return false;
 		}
 	}
 }

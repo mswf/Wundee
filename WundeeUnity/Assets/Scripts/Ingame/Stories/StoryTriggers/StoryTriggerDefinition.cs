@@ -12,7 +12,7 @@ namespace Wundee.Stories
 		
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{
-			_conditionDefinitions = ConditionDefinition.ParseDefinitions(jsonData, definitionKey);
+			_conditionDefinitions = ConditionDefinition.ParseDefinitions(jsonData[D.CONDITIONS], definitionKey);
 		}
 
 		public override StoryTrigger GetConcreteType(object parent = null)
@@ -27,12 +27,37 @@ namespace Wundee.Stories
 
 			var conditions = new List<BaseCondition>();
 
+			newStoryTrigger.conditions = new BaseCondition[_conditionDefinitions.Length];
 			for (int i = 0; i < _conditionDefinitions.Length; i++)
-			{
-				conditions.Add(_conditionDefinitions[i].GetConcreteType(newStoryTrigger.parentStoryNode));
-			}
+				newStoryTrigger.conditions[i] = _conditionDefinitions[i].GetConcreteType(newStoryTrigger.parentStoryNode);
 			
 			return newStoryTrigger;
+		}
+
+		public static Definition<StoryTrigger>[] ParseDefinitions(JsonData effectData, string definitionKey = "ST")
+		{
+			var tempEffectDefinitions = new List<Definition<StoryTrigger>>();
+
+			for (int i = 0; i < effectData.Count; i++)
+			{
+				Definition<StoryTrigger> storyDefinition;
+				var effect = effectData[i];
+				if (effect.IsString)
+				{
+					storyDefinition = new DefinitionPromise<StoryTriggerDefinition, StoryTrigger>(effect.ToString());
+				}
+				else
+				{
+					storyDefinition = new StoryTriggerDefinition();
+					storyDefinition.ParseDefinition(definitionKey + "_STORYTRIGGER_" + i, effectData[i]);
+				}
+
+				tempEffectDefinitions.Add(storyDefinition);
+			}
+
+
+			return tempEffectDefinitions.ToArray();
+
 		}
 	}
 }

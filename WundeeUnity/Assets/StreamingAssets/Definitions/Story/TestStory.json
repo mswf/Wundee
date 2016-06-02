@@ -38,7 +38,7 @@
 			"storyTriggers":[
 				{
 					"conditions": [
-
+							{"type": "KeyHeldCondition", "params":{} }
 					],
 
 					"rewards": [
