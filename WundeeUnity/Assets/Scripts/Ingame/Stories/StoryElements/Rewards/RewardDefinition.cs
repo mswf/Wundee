@@ -1,6 +1,6 @@
 ﻿
-using System.Collections.Generic;
 using LitJson;
+
 
 namespace Wundee.Stories
 {
@@ -8,28 +8,15 @@ namespace Wundee.Stories
 	{
 		public static Definition<BaseReward>[] ParseDefinitions(JsonData rewardData, string definitionKey = "R")
 		{
-			var tempEffectDefinitions = new List<Definition<BaseReward>>();
+			var tempRewardDefinitions = new Definition<BaseReward>[rewardData.Count];
 
 			for (int i = 0; i < rewardData.Count; i++)
 			{
-				Definition<BaseReward> rewardDefinition;
-				var reward = rewardData[i];
-				if (reward.IsString)
-				{
-					rewardDefinition = new DefinitionPromise<RewardDefinition, BaseReward>(reward.ToString());
-				}
-				else
-				{
-					rewardDefinition = new RewardDefinition();
-					rewardDefinition.ParseDefinition(definitionKey + "_REWARD_" + i, reward);
-				}
-
-				tempEffectDefinitions.Add(rewardDefinition);
-
+				tempRewardDefinitions[i] = WundeeHelper.GetDefinition<RewardDefinition, BaseReward>(rewardData[i],
+					definitionKey, KEYS.REWARD, i);
 			}
 
-
-			return tempEffectDefinitions.ToArray();
+			return tempRewardDefinitions;
 		}
 	}
 }

@@ -13,28 +13,15 @@ namespace Wundee.Stories
 		
 		public static Definition<BaseEffect>[] ParseDefinitions(JsonData effectData, string definitionKey = "E")
 		{
-			var tempEffectDefinitions = new List<Definition<BaseEffect>>();
+			var tempEffectDefinitions = new Definition<BaseEffect>[effectData.Count];
 			
 			for (int i = 0; i < effectData.Count; i++)
 			{
-				Definition<BaseEffect> effectDefinition;
-				var effect = effectData[i];
-				if (effect.IsString)
-				{
-					effectDefinition = new DefinitionPromise<EffectDefinition, BaseEffect>(effect.ToString());
-				}
-				else
-				{
-					effectDefinition = new EffectDefinition();
-					effectDefinition.ParseDefinition(definitionKey + "_EFFECT_" + i, effect);
-				}
-
-				tempEffectDefinitions.Add(effectDefinition);
-
+				tempEffectDefinitions[i] = WundeeHelper.GetDefinition<EffectDefinition, BaseEffect>(effectData[i],
+					definitionKey, KEYS.EFFECT, i);
 			}
 			
-
-			return tempEffectDefinitions.ToArray();
+			return tempEffectDefinitions;
 		}
 		
 	}

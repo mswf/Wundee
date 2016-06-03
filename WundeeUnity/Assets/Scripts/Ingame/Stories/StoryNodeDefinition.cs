@@ -45,21 +45,10 @@ namespace Wundee.Stories
 			if (newStoryNode.parentStory == null)
 				Logger.Log("[StoryNodeDefinition] Invalid parent Story provided for new StoryNode");
 
-			newStoryNode.effects = new BaseEffect[_effectDefinitions.Length];
-			for (int i = 0; i < _effectDefinitions.Length; i++)
-				newStoryNode.effects[i] = _effectDefinitions[i].GetConcreteType(newStoryNode);
-			
-			newStoryNode.storyTriggers = new StoryTrigger[_storyTriggerDefinitions.Length];
-			for (int i = 0; i < _storyTriggerDefinitions.Length; i++)
-				newStoryNode.storyTriggers[i] = _storyTriggerDefinitions[i].GetConcreteType(newStoryNode);
-
-			newStoryNode.onStartRewards = new BaseReward[_onStartRewardDefinitions.Length];
-			for (int i = 0; i < _onStartRewardDefinitions.Length; i++)
-				newStoryNode.onStartRewards[i] = _onStartRewardDefinitions[i].GetConcreteType(newStoryNode);
-
-			newStoryNode.onCompleteRewards = new BaseReward[_onCompleteRewardDefinitions.Length];
-			for (int i = 0; i < _onCompleteRewardDefinitions.Length; i++)
-				newStoryNode.onCompleteRewards[i] = _onCompleteRewardDefinitions[i].GetConcreteType(newStoryNode);
+			newStoryNode.effects = _effectDefinitions.GetConcreteTypes(newStoryNode);
+			newStoryNode.storyTriggers = _storyTriggerDefinitions.GetConcreteTypes(newStoryNode);
+			newStoryNode.onStartRewards = _onStartRewardDefinitions.GetConcreteTypes(newStoryNode);
+			newStoryNode.onCompleteRewards = _onCompleteRewardDefinitions.GetConcreteTypes(newStoryNode);
 
 			return newStoryNode;
 		}

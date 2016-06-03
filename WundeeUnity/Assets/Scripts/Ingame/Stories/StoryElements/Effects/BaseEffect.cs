@@ -58,14 +58,12 @@ namespace Wundee.Stories
 
 	public class MoveEffect : BaseEffect
 	{
-		private const string D_SPEED = "speed";
-
 		private float movementSpeed = 1f;
 
 
 		public override void ParseParams(JsonData parameters)
 		{
-			var speed = parameters[D_SPEED];
+			var speed = parameters[D.SPEED];
 
 			if (speed != null)
 			{

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using LitJson;
 
 public class WeakReferenceT<T> where T : class
 {
@@ -109,6 +110,19 @@ namespace Wundee
 {
 	public static class WundeeHelper
 	{
+
+		public static Definition<ConcreteType> GetDefinition<DefinitionType, ConcreteType>(JsonData definitionData, string definitionKey, string definitionKeyExtension, int definitionCount = 0) where DefinitionType : Definition<ConcreteType>, new()
+		{
+			if (definitionData.IsString)
+				return new DefinitionPromise<DefinitionType, ConcreteType>(definitionData.ToString());
+			else
+			{
+				var definition = new DefinitionType();
+				definition.ParseDefinition(definitionKey + definitionKeyExtension + definitionCount, definitionData);
+
+				return definition;
+			}
+		}
 
 		public static void ExecuteRewards<T>(this T[] rewards) where T : Stories.BaseReward
 		{

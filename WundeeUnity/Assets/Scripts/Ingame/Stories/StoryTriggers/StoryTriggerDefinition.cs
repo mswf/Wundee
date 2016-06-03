@@ -26,42 +26,23 @@ namespace Wundee.Stories
 			if (newStoryTrigger.parentStoryNode == null)
 				Logger.Log("[StoryTriggerDefinition] Invalid parent StoryNode provided for new StoryTrigger");
 
-			var conditions = new List<BaseCondition>();
-
-			newStoryTrigger.conditions = new BaseCondition[_conditionDefinitions.Length];
-			for (int i = 0; i < _conditionDefinitions.Length; i++)
-				newStoryTrigger.conditions[i] = _conditionDefinitions[i].GetConcreteType(newStoryTrigger.parentStoryNode);
-
-			newStoryTrigger.rewards = new BaseReward[_rewardDefinitions.Length];
-			for (int i = 0; i < _rewardDefinitions.Length; i++)
-				newStoryTrigger.rewards[i] = _rewardDefinitions[i].GetConcreteType(newStoryTrigger.parentStoryNode);
+			newStoryTrigger.conditions = _conditionDefinitions.GetConcreteTypes(newStoryTrigger.parentStoryNode);
+			newStoryTrigger.rewards = _rewardDefinitions.GetConcreteTypes(newStoryTrigger.parentStoryNode);
 
 			return newStoryTrigger;
 		}
 
-		public static Definition<StoryTrigger>[] ParseDefinitions(JsonData effectData, string definitionKey = "ST")
+		public static Definition<StoryTrigger>[] ParseDefinitions(JsonData storyTriggerData, string definitionKey = "ST")
 		{
-			var tempEffectDefinitions = new List<Definition<StoryTrigger>>();
+			var tempStoryTriggerDefinitions = new Definition<StoryTrigger>[storyTriggerData.Count];
 
-			for (int i = 0; i < effectData.Count; i++)
+			for (int i = 0; i < storyTriggerData.Count; i++)
 			{
-				Definition<StoryTrigger> storyDefinition;
-				var effect = effectData[i];
-				if (effect.IsString)
-				{
-					storyDefinition = new DefinitionPromise<StoryTriggerDefinition, StoryTrigger>(effect.ToString());
-				}
-				else
-				{
-					storyDefinition = new StoryTriggerDefinition();
-					storyDefinition.ParseDefinition(definitionKey + "_STORYTRIGGER_" + i, effectData[i]);
-				}
-
-				tempEffectDefinitions.Add(storyDefinition);
+				tempStoryTriggerDefinitions[i] = WundeeHelper.GetDefinition<StoryTriggerDefinition, StoryTrigger>(storyTriggerData[i],
+					definitionKey, KEYS.STORYTRIGGER, i);
 			}
 
-
-			return tempEffectDefinitions.ToArray();
+			return tempStoryTriggerDefinitions;
 
 		}
 	}
