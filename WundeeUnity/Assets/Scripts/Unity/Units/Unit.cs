@@ -16,7 +16,7 @@ namespace WundeeUnity
 
 		public double health;
 
-		private float _distanceToGround;
+		//private float _distanceToGround;
 
 
 		[Header("Physics")]
@@ -57,7 +57,7 @@ namespace WundeeUnity
 
 			_rigidBody = GetComponent<Rigidbody>();
 
-			_distanceToGround = _characterCollider.bounds.extents.y;
+			//_distanceToGround = _characterCollider.bounds.extents.y;
 			_transform = GetComponent<Transform>();
 		}
 

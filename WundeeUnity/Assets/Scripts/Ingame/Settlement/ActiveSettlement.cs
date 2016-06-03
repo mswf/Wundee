@@ -4,8 +4,9 @@ namespace Wundee
 {
 	public class ActiveSettlement
 	{
-		private List<Person> _persons;
 		private Settlement _settlement;
+
+		private List<Person> _persons;
 
 		public ActiveSettlement(Settlement settlement)
 		{
