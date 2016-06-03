@@ -5,17 +5,17 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public abstract class StoryElement<ChildType> where ChildType : StoryElement<ChildType>
+	public abstract class StoryElement<TChild> where TChild : StoryElement<TChild>
 	{
-		public StoryElementDefinition<ChildType> definition;
+		public StoryElementDefinition<TChild> definition;
 		public StoryNode parentStoryNode;
 
 		public abstract void ParseParams(JsonData parameters);
 
-		public virtual ChildType GetClone(StoryNode parent)
+		public virtual TChild GetClone(StoryNode parent)
 		{
 			this.parentStoryNode = parent;
-			return (ChildType) MemberwiseClone();
+			return (TChild) MemberwiseClone();
 		}
 		
 	}

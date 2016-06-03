@@ -12,26 +12,26 @@ namespace Wundee
 {
 	public static class ContentHelper
 	{
-		public static Definition<ConcreteType> GetDefinition<DefinitionType, ConcreteType>(JsonData definitionData, string definitionKey, string definitionKeyExtension, int definitionCount = 0) where DefinitionType : Definition<ConcreteType>, new()
+		public static Definition<TConcrete> GetDefinition<TDefinition, TConcrete>(JsonData definitionData, string definitionKey, string definitionKeyExtension, int definitionCount = 0) where TDefinition : Definition<TConcrete>, new()
 		{
 			if (definitionData.IsString)
-				return new DefinitionPromise<DefinitionType, ConcreteType>(definitionData.ToString());
+				return new DefinitionPromise<TDefinition, TConcrete>(definitionData.ToString());
 			else
 			{
-				var definition = new DefinitionType();
+				var definition = new TDefinition();
 				definition.ParseDefinition(definitionKey + definitionKeyExtension + definitionCount, definitionData);
 
 				return definition;
 			}
 		}
 
-		public static Definition<ConcreteType>[] GetDefinitions<DefinitionType, ConcreteType>(JsonData definitionData, string definitionKey, string definitionKeyExtension) where DefinitionType : Definition<ConcreteType>, new()
+		public static Definition<TConcrete>[] GetDefinitions<TDefinition, TConcrete>(JsonData definitionData, string definitionKey, string definitionKeyExtension) where TDefinition : Definition<TConcrete>, new()
 		{
-			var returnValue = new Definition<ConcreteType>[definitionData.Count];
+			var returnValue = new Definition<TConcrete>[definitionData.Count];
 
 			for (int i = 0; i < definitionData.Count; i++)
 			{
-				returnValue[i] = GetDefinition<DefinitionType, ConcreteType>(
+				returnValue[i] = GetDefinition<TDefinition, TConcrete>(
 					definitionData[i], definitionKey, definitionKeyExtension, i
 				);
 			}

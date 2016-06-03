@@ -2,12 +2,12 @@
 
 namespace Wundee
 {
-	public class DefinitionPromise<DefinitionType, ConcreteType> : Definition<ConcreteType>
-		where DefinitionType : Definition<ConcreteType>, new()
+	public class DefinitionPromise<TDefinition, TConcrete> : Definition<TConcrete>
+		where TDefinition : Definition<TConcrete>, new()
 	{
 		private readonly PromiseType _promiseType;
 
-		private DefinitionType _definition;
+		private TDefinition _definition;
 
 		public DefinitionPromise(string definitionKey)
 		{
@@ -16,15 +16,7 @@ namespace Wundee
 			this.definitionKey = definitionKey;
 		}
 
-		public DefinitionPromise(JsonData definitionData)
-		{
-			_promiseType = PromiseType.HoldsData;
-
-			_definition = new DefinitionType();
-			_definition.ParseDefinition(definitionData["key"].ToString(), definitionData);
-		}
-
-		public DefinitionType GetDefinition()
+		public TDefinition GetDefinition()
 		{
 			if (_promiseType == PromiseType.HoldsData || _definition != null)
 			{
@@ -34,8 +26,8 @@ namespace Wundee
 			{
 				// this global misuse = best global misuse
 				var newDefinition =
-					(Game.instance.definitions.definitionLoaderMapper[typeof (DefinitionType)] as
-						DefinitionLoader<DefinitionType, ConcreteType>)[definitionKey];
+					(Game.instance.definitions.definitionLoaderMapper[typeof (TDefinition)] as
+						DefinitionLoader<TDefinition, TConcrete>)[definitionKey];
 
 				_definition = newDefinition;
 
@@ -48,7 +40,7 @@ namespace Wundee
 			throw new System.NotImplementedException();
 		}
 
-		public override ConcreteType GetConcreteType(System.Object parent)
+		public override TConcrete GetConcreteType(System.Object parent)
 		{
 			return GetDefinition().GetConcreteType(parent);
 		}

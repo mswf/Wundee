@@ -3,12 +3,11 @@ using LitJson;
 
 namespace Wundee
 {
-//	public abstract class Definition<ConcreteType, ChildDefinitionType> where ChildDefinitionType : Definition<ConcreteType, ChildDefinitionType>
-	public abstract class Definition<ConcreteType>
+	public abstract class Definition<TConcrete>
 	{
 		public string definitionKey;
 
 		public abstract void ParseDefinition(string definitionKey, JsonData jsonData);
-		public abstract ConcreteType GetConcreteType(System.Object parent = null);
+		public abstract TConcrete GetConcreteType(System.Object parent = null);
 	}
 }

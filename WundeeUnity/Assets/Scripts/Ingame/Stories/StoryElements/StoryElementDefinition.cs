@@ -6,9 +6,9 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public abstract class StoryElementDefinition<ConcreteType> : Definition<ConcreteType> where ConcreteType : StoryElement<ConcreteType>
+	public abstract class StoryElementDefinition<TConcrete> : Definition<TConcrete> where TConcrete : StoryElement<TConcrete>
 	{
-		protected ConcreteType masterCopy;
+		protected TConcrete masterCopy;
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{
@@ -18,7 +18,7 @@ namespace Wundee.Stories
 			ContentHelper.VerifyType(stringToType, jsonData[D.TYPE].ToString(), definitionKey);
 
 			var type = stringToType[jsonData[D.TYPE].ToString()];
-			masterCopy = System.Activator.CreateInstance(type) as ConcreteType;
+			masterCopy = System.Activator.CreateInstance(type) as TConcrete;
 
 			masterCopy.definition = this;
 
@@ -28,7 +28,7 @@ namespace Wundee.Stories
 
 		}
 
-		public override ConcreteType GetConcreteType(System.Object parent = null)
+		public override TConcrete GetConcreteType(System.Object parent = null)
 		{
 			var storyNodeParent = parent as StoryNode;
 
@@ -41,7 +41,7 @@ namespace Wundee.Stories
 
 			return newConcreteType;
 		}
-
+		
 		public static Dictionary<string, System.Type> stringToType
 		{
 			get
@@ -50,7 +50,7 @@ namespace Wundee.Stories
 				{
 					_stringToType = new Dictionary<string, Type>();
 
-					var effectTypes = Helper.ReflectiveEnumerator.GetEnumerableOfType<ConcreteType>();
+					var effectTypes = Helper.ReflectiveEnumerator.GetEnumerableOfType<TConcrete>();
 
 					foreach (var effectType in effectTypes)
 					{
