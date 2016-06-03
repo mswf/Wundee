@@ -9,30 +9,8 @@ namespace Wundee.Stories
 
 	public abstract class CollectionEffect : BaseEffect
 	{
-		protected BaseEffect[] childBaseEffects;
-
-		private Definition<BaseEffect>[] _effectDefinitions;
-
-		protected void _ParseChildConditions(JsonData parameters)
-		{
-			_effectDefinitions = EffectDefinition.ParseDefinitions(parameters);
-
-
-		}
-
-		public override BaseEffect GetClone(StoryNode parent)
-		{
-			var retValue = base.GetClone(parent) as CollectionEffect;
-
-			retValue.childBaseEffects = new BaseEffect[_effectDefinitions.Length];
-
-			for (int i = 0; i < _effectDefinitions.Length; i++)
-			{
-				retValue.childBaseEffects[i] = _effectDefinitions[i].GetConcreteType(parent);
-			}
-
-			return retValue;
-		}
+		protected Definition<BaseEffect>[] _effectDefinitions;
+		protected BaseEffect[] effects;
 	}
 
 	public class TestEffect : BaseEffect
@@ -44,6 +22,37 @@ namespace Wundee.Stories
 		public override void Tick()
 		{
 			//Logger.Print("running TestEffect");
+		}
+	}
+
+	public class ConditionalEffect : CollectionEffect
+	{
+		protected BaseCondition[] conditions;
+
+		private Definition<BaseCondition>[] _conditionDefinitions;
+
+		public override void ParseParams(JsonData parameters)
+		{
+			_effectDefinitions = EffectDefinition.ParseDefinitions(parameters[D.EFFECTS]);
+			_conditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
+		}
+
+		public override BaseEffect GetClone(StoryNode parent)
+		{
+			var retValue = base.GetClone(parent) as ConditionalEffect;
+
+			retValue.conditions = _conditionDefinitions.GetConcreteTypes(parent);
+			retValue.effects = _effectDefinitions.GetConcreteTypes(parent);
+
+			return retValue;
+		}
+
+		public override void Tick()
+		{
+			if (conditions.CheckConditions())
+			{
+				effects.TickEffects();
+			}
 		}
 	}
 

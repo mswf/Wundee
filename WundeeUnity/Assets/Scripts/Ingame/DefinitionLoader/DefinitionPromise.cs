@@ -8,14 +8,12 @@ namespace Wundee
 		private readonly PromiseType _promiseType;
 
 		private DefinitionType _definition;
-		private string _definitionKey;
-
 
 		public DefinitionPromise(string definitionKey)
 		{
 			_promiseType = PromiseType.HoldsKey;
 
-			this._definitionKey = definitionKey;
+			this.definitionKey = definitionKey;
 		}
 
 		public DefinitionPromise(JsonData definitionData)
@@ -37,7 +35,7 @@ namespace Wundee
 				// this global misuse = best global misuse
 				var newDefinition =
 					(Game.instance.definitions.definitionLoaderMapper[typeof (DefinitionType)] as
-						DefinitionLoader<DefinitionType, ConcreteType>)[_definitionKey];
+						DefinitionLoader<DefinitionType, ConcreteType>)[definitionKey];
 
 				_definition = newDefinition;
 

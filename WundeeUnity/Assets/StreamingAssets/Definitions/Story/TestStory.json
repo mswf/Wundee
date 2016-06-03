@@ -27,18 +27,36 @@
 
 			"effects": [
 				{
-					"type": "MoveEffect",
-
+					"type": "ConditionalEffect",
 					"params": {
-						"speed": 10.0
+						"effects":[
+							{
+								"type": "MoveEffect",
+
+								"params": {
+									"speed": 10.0
+								}
+							}
+						],
+						"conditions":[
+							{"type": "NotCondition", "params":{
+								"conditions":[
+									{"type": "KeyHeldCondition", "params":{} }
+								]
+							}}
+						]
 					}
 				}
+
 			],
 
 			"storyTriggers":[
 				{
 					"conditions": [
-							{"type": "KeyHeldCondition", "params":{} }
+						{"type": "NotCondition", "params":{
+							"conditions": [{"type": "TrueCondition", "params":{}}]
+							} }
+
 					],
 
 					"rewards": [

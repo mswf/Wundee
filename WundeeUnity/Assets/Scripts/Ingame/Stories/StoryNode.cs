@@ -22,32 +22,27 @@ namespace Wundee.Stories
 
 		public StoryNodeState Tick()
 		{
-			for (var i = 0; i < effects.Length; i++)
-			{
-				effects[i].Tick();
-			}
-
 			for (int i = 0; i < storyTriggers.Length; i++)
 			{
-				if (storyTriggers[i].IsTriggered())
+				if (storyTriggers[i].CheckTrigger())
 				{
-					return StoryNodeState.Finished;	
+					return StoryNodeState.Finished;
 				}
 			}
 
+			effects.TickEffects();
+			
 			return StoryNodeState.Running;
 		}
 
 		public void OnStart()
 		{
-			for (int i = 0; i < onStartRewards.Length; i++)
-				onStartRewards[i].Execute();
+			onStartRewards.ExecuteRewards();
 		}
 
 		public void OnComplete()
 		{
-			for (int i = 0; i < onCompleteRewards.Length; i++)
-				onCompleteRewards[i].Execute();
+			onCompleteRewards.ExecuteRewards();
 		}
 	}
 }

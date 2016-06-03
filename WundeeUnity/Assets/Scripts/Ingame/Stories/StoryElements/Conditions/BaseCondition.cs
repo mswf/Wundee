@@ -7,40 +7,19 @@ namespace Wundee.Stories
 {
 	public abstract class BaseCondition : StoryElement<BaseCondition>
 	{
-		public abstract bool IsValid();
+		public abstract bool Check();
 	}
 
 	public abstract class CollectionCondition : BaseCondition
 	{
-		protected BaseCondition[] childBaseConditions;
-
-		private Definition<BaseCondition>[] _childBaseConditionDefinitions;
-
-		protected void _ParseChildConditions(JsonData parameters)
-		{
-			_childBaseConditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
-		}
-
-		public override BaseCondition GetClone(StoryNode parent)
-		{
-			var retValue = base.GetClone(parent) as CollectionCondition;
-
-			retValue.childBaseConditions = new BaseCondition[_childBaseConditionDefinitions.Length];
-
-			for (int i = 0; i < _childBaseConditionDefinitions.Length; i++)
-			{
-				retValue.childBaseConditions[i] = _childBaseConditionDefinitions[i].GetConcreteType(parent);
-			}
-
-			return retValue;
-		}
+		protected Definition<BaseCondition>[] _childConditionDefinitions;
+		protected BaseCondition[] childConditions;
 	}
 
 	public abstract class DecoratorCondition : BaseCondition
 	{
-		protected BaseCondition childBaseCondition;
-
-		private Definition<BaseCondition> _childBaseConditionDefinition;
+		private Definition<BaseCondition> _childConditionDefinition;
+		protected BaseCondition childCondition;
 
 		protected void _ParseChildCondition(JsonData parameters)
 		{
@@ -49,17 +28,17 @@ namespace Wundee.Stories
 
 			DataLoader.VerifyMaxArrayLength(conditions, 1, definition.definitionKey);
 			if (conditions.Length == 1)
-				_childBaseConditionDefinition = conditions[0];
+				_childConditionDefinition = conditions[0];
 		}
 
 		public override BaseCondition GetClone(StoryNode parent)
 		{
 			var retValue = base.GetClone(parent) as DecoratorCondition;
 
-			if (_childBaseConditionDefinition != null)
-				retValue.childBaseCondition = _childBaseConditionDefinition.GetConcreteType(parent);
+			if (_childConditionDefinition != null)
+				retValue.childCondition = _childConditionDefinition.GetConcreteType(parent);
 			else
-				retValue.childBaseCondition = new TrueCondition();
+				retValue.childCondition = new TrueCondition();
 
 			return retValue;
 		}
@@ -69,18 +48,21 @@ namespace Wundee.Stories
 	{
 		public override void ParseParams(JsonData parameters)
 		{
-			_ParseChildConditions(parameters);
+			_childConditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
 		}
 
-		public override bool IsValid()
+		public override BaseCondition GetClone(StoryNode parent)
 		{
-			for (int i = 0; i < childBaseConditions.Length; i++)
-			{
-				if (childBaseConditions[i].IsValid() == false)
-					return false;
-			}
+			var retValue = base.GetClone(parent) as AndCondition;
 
-			return true;
+			retValue.childConditions = _childConditionDefinitions.GetConcreteTypes(parent);
+
+			return retValue;
+		}
+
+		public override bool Check()
+		{
+			return childConditions.CheckConditions();
 		}
 	}
 
@@ -88,18 +70,21 @@ namespace Wundee.Stories
 	{
 		public override void ParseParams(JsonData parameters)
 		{
-			_ParseChildConditions(parameters);
+			_childConditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
 		}
 
-		public override bool IsValid()
+		public override BaseCondition GetClone(StoryNode parent)
 		{
-			for (int i = 0; i < childBaseConditions.Length; i++)
-			{
-				if (childBaseConditions[i].IsValid() == true)
-					return true;
-			}
+			var retValue = base.GetClone(parent) as OrCondition;
 
-			return false;
+			retValue.childConditions = _childConditionDefinitions.GetConcreteTypes(parent);
+
+			return retValue;
+		}
+
+		public override bool Check()
+		{
+			return childConditions.CheckOrConditions();
 		}
 	}
 
@@ -110,9 +95,9 @@ namespace Wundee.Stories
 			_ParseChildCondition(parameters);
 		}
 
-		public override bool IsValid()
+		public override bool Check()
 		{
-			return !childBaseCondition.IsValid();
+			return !childCondition.Check();
 		}
 	}
 
@@ -122,7 +107,7 @@ namespace Wundee.Stories
 		public override void ParseParams(JsonData parameters)
 		{}
 
-		public override bool IsValid()
+		public override bool Check()
 		{
 			return true;
 		}
@@ -131,12 +116,11 @@ namespace Wundee.Stories
 	public class KeyHeldCondition : BaseCondition
 	{
 		public override void ParseParams(JsonData parameters)
-		{
-		}
+		{}
 
-		public override bool IsValid()
+		public override bool Check()
 		{
-			if (UnityEngine.Input.GetKey(KeyCode.A))
+			if (UnityEngine.Input.GetKey(KeyCode.Q))
 				return true;
 			return false;
 		}

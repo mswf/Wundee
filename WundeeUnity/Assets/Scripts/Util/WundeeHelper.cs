@@ -73,6 +73,18 @@ public static class Helper
 
 	}
 
+	public static T[] RemoveAt<T>(this T[] source, int index)
+	{
+		T[] dest = new T[source.Length - 1];
+		if (index > 0)
+			Array.Copy(source, 0, dest, 0, index);
+
+		if (index < source.Length - 1)
+			Array.Copy(source, index + 1, dest, index, source.Length - index - 1);
+
+		return dest;
+	}
+
 	//http://stackoverflow.com/questions/5411694/get-all-inherited-classes-of-an-abstract-class
 	public static class ReflectiveEnumerator
 	{
@@ -97,6 +109,56 @@ namespace Wundee
 {
 	public static class WundeeHelper
 	{
+
+		public static void ExecuteRewards<T>(this T[] rewards) where T : Stories.BaseReward
+		{
+			for (int i = 0; i < rewards.Length; i++)
+			{
+				rewards[i].Execute();
+			}
+		}
+
+		public static void TickEffects<T>(this T[] effects) where T : Stories.BaseEffect
+		{
+			for (int i = 0; i < effects.Length; i++)
+			{
+				effects[i].Tick();
+			}
+		}
+
+		public static bool CheckConditions<T>(this T[] conditions) where T : Stories.BaseCondition
+		{
+			for (int i = 0; i < conditions.Length; i++)
+			{
+				if (conditions[i].Check() == false)
+					return false;
+			}
+
+			return true;
+		}
+
+		public static bool CheckOrConditions<T>(this T[] conditions) where T : Stories.BaseCondition
+		{
+			for (int i = 0; i < conditions.Length; i++)
+			{
+				if (conditions[i].Check() == true)
+					return true;
+			}
+
+			return false;
+		}
+
+		public static T[] GetConcreteTypes<T>(this Definition<T>[] definitions, System.Object parent)
+		{
+			var concreteTypes = new T[definitions.Length];
+
+			for (int i = 0; i < definitions.Length; i++)
+			{
+				concreteTypes[i] = definitions[i].GetConcreteType(parent);
+			}
+
+			return concreteTypes;
+		}
 
 		// source: http://theinstructionlimit.com/squaring-the-thumbsticks
 		public static Vector2 CircleToSquare(Vector2 point, float innerRoundness = 0f)

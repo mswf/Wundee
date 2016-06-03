@@ -9,23 +9,20 @@ namespace Wundee.Stories
 		public StoryNode parentStoryNode;
 		public BaseReward[] rewards;
 
+		private bool _hasBeenTriggeredBefore = false;
 
-		public bool IsTriggered()
+		public bool CheckTrigger()
 		{
-			for (int i = 0; i < conditions.Length; i++)
-			{
-				if (conditions[i].IsValid() == false)
-				{
-					return false;
-				}
-			}
+			if (_hasBeenTriggeredBefore)
+				return false;
 
+			if (conditions.CheckConditions() == false)
+				return false;
+
+			rewards.ExecuteRewards();
 			
-			for (int i = 0; i < rewards.Length; i++)
-			{
-				rewards[i].Execute();
-			}
-			
+			_hasBeenTriggeredBefore = true;
+
 			return true;
 		}
 	}

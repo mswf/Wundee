@@ -8,11 +8,12 @@ namespace Wundee.Stories
 	{
 		private const string D_START_NODE = "startNode";
 
-		private Definition<StoryNode> _startNode;	
-
+		private Definition<StoryNode> _startNode;
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{
+			this.definitionKey = definitionKey;
+
 			var startNode = jsonData[D_START_NODE];
 			if (startNode.IsString)
 				this._startNode = new DefinitionPromise<StoryNodeDefinition, StoryNode>(startNode.ToString());

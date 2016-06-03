@@ -29,7 +29,6 @@ namespace Wundee.Stories
 		{
 			var storyDefinition = Game.instance.definitions.storyDefinitions[definitionKey];
 
-
 			var newStories = new Story[activeStories.Length + 1];
 
 
@@ -37,6 +36,23 @@ namespace Wundee.Stories
 			newStories[activeStories.Length] = storyDefinition.GetConcreteType(owner);
 
 			activeStories = newStories;
+		}
+
+		public void RemoveStory(string definitionKey)
+		{
+			for (int i = 0; i < activeStories.Length; i++)
+			{
+				if (activeStories[i].definition.definitionKey == definitionKey)
+				{
+					RemoveStory(i);
+					return;
+				}
+			}
+		}
+
+		public void RemoveStory(int index)
+		{
+			activeStories = activeStories.RemoveAt(index);
 		}
 	}
 

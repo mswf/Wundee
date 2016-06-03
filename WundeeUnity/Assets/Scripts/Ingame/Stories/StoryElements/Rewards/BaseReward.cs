@@ -1,4 +1,5 @@
 ﻿
+using System;
 using LitJson;
 
 namespace Wundee.Stories
@@ -6,8 +7,6 @@ namespace Wundee.Stories
 	public abstract class BaseReward : StoryElement<BaseReward>
 	{
 		public abstract void Execute();
-
-
 	}
 
 	public class PrintReward : BaseReward
