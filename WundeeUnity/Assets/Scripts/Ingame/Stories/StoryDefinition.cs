@@ -12,7 +12,7 @@ namespace Wundee.Stories
 		{
 			this.definitionKey = definitionKey;
 
-			this._startNode = WundeeHelper.GetDefinition<StoryNodeDefinition, StoryNode>(jsonData[D.START_NODE], 
+			this._startNode = ContentHelper.GetDefinition<StoryNodeDefinition, StoryNode>(jsonData[D.START_NODE], 
 				definitionKey, KEYS.STORYNODE);
 		}
 

@@ -93,44 +93,5 @@ namespace Wundee
 
 			return jsonFilePaths;
 		}
-
-		[Conditional("DEBUG_CONTENT")]
-		public static void VerifyKey(JsonData jsonData, string key, string ownerKey)
-		{
-			if (!jsonData.Keys.Contains(key))
-			{
-				Logger.Error("Missing key <b>" + key + "</b> in jsonData with key <b>" + ownerKey + "</b>", 1);
-			}
-		}
-
-		[Conditional("DEBUG_CONTENT")]
-		public static void VerifyArrayLength(System.Object[] array, int length, string ownerKey)
-		{
-			if (array.Length != length)
-			{
-				Logger.Error("Invalid length <b>" + length + "</b> in jsonData with key <b>" + ownerKey + "</b>", 1);
-			}
-		}
-
-		[Conditional("DEBUG_CONTENT")]
-		public static void VerifyMaxArrayLength(System.Object[] array, int length, string ownerKey)
-		{
-			if (array.Length > length)
-			{
-				Logger.Error("Invalid length <b>" + length + "</b> in jsonData with key <b>" + ownerKey + "</b>", 1);
-			}
-		}
-
-
-		[Conditional("DEBUG_CONTENT")]
-		public static void VerifyType(Dictionary<string, System.Type> typeDictionary, string type, string ownerKey)
-		{
-			if (!typeDictionary.ContainsKey(type))
-			{
-				Logger.Error("Invalid type <b>" + type + "</b> for effect with key <b>" + ownerKey + "</b>", 1);
-			}
-		}
-
-
 	}
 }

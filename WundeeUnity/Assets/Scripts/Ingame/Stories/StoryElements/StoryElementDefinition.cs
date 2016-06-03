@@ -14,8 +14,8 @@ namespace Wundee.Stories
 		{
 			this.definitionKey = definitionKey;
 
-			DataLoader.VerifyKey(jsonData, D.TYPE, definitionKey);
-			DataLoader.VerifyType(stringToType, jsonData[D.TYPE].ToString(), definitionKey);
+			ContentHelper.VerifyKey(jsonData, D.TYPE, definitionKey);
+			ContentHelper.VerifyType(stringToType, jsonData[D.TYPE].ToString(), definitionKey);
 
 			var type = stringToType[jsonData[D.TYPE].ToString()];
 			masterCopy = System.Activator.CreateInstance(type) as ConcreteType;

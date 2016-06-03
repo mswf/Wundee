@@ -34,16 +34,8 @@ namespace Wundee.Stories
 
 		public static Definition<StoryTrigger>[] ParseDefinitions(JsonData storyTriggerData, string definitionKey = "ST")
 		{
-			var tempStoryTriggerDefinitions = new Definition<StoryTrigger>[storyTriggerData.Count];
-
-			for (int i = 0; i < storyTriggerData.Count; i++)
-			{
-				tempStoryTriggerDefinitions[i] = WundeeHelper.GetDefinition<StoryTriggerDefinition, StoryTrigger>(storyTriggerData[i],
-					definitionKey, KEYS.STORYTRIGGER, i);
-			}
-
-			return tempStoryTriggerDefinitions;
-
+			return ContentHelper.GetDefinitions<StoryTriggerDefinition, StoryTrigger>
+				(storyTriggerData, definitionKey, KEYS.STORYTRIGGER);
 		}
 	}
 }

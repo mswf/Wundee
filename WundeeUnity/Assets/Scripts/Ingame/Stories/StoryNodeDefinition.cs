@@ -15,22 +15,24 @@ namespace Wundee.Stories
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{
-			if (jsonData.Keys.Contains(D.EFFECTS))
+			var keys = jsonData.Keys;
+
+			if (keys.Contains(D.EFFECTS))
 				this._effectDefinitions = EffectDefinition.ParseDefinitions(jsonData[D.EFFECTS], definitionKey);
 			else
 				this._effectDefinitions = new Definition<BaseEffect>[0];
 
-			if (jsonData.Keys.Contains(D.STORYTRIGGERS))
+			if (keys.Contains(D.STORYTRIGGERS))
 				this._storyTriggerDefinitions = StoryTriggerDefinition.ParseDefinitions(jsonData[D.STORYTRIGGERS], definitionKey);
 			else
 				this._storyTriggerDefinitions = new Definition<StoryTrigger>[0];
 
-			if (jsonData.Keys.Contains(D.REWARDS_ON_START))
+			if (keys.Contains(D.REWARDS_ON_START))
 				this._onStartRewardDefinitions = RewardDefinition.ParseDefinitions(jsonData[D.REWARDS_ON_START], definitionKey);
 			else
 				this._onStartRewardDefinitions = new Definition<BaseReward>[0];
 
-			if (jsonData.Keys.Contains(D.REWARDS_ON_COMPLETE))
+			if (keys.Contains(D.REWARDS_ON_COMPLETE))
 				this._onCompleteRewardDefinitions = RewardDefinition.ParseDefinitions(jsonData[D.REWARDS_ON_COMPLETE], definitionKey);
 			else
 				this._onCompleteRewardDefinitions = new Definition<BaseReward>[0];

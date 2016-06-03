@@ -23,10 +23,10 @@ namespace Wundee.Stories
 
 		protected void _ParseChildCondition(JsonData parameters)
 		{
-			DataLoader.VerifyKey(parameters, D.CONDITIONS, definition.definitionKey);
+			ContentHelper.VerifyKey(parameters, D.CONDITIONS, definition.definitionKey);
 			var conditions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
 
-			DataLoader.VerifyMaxArrayLength(conditions, 1, definition.definitionKey);
+			ContentHelper.VerifyMaxArrayLength(conditions, 1, definition.definitionKey);
 			if (conditions.Length == 1)
 				_childConditionDefinition = conditions[0];
 		}

@@ -8,15 +8,8 @@ namespace Wundee.Stories
 	{
 		public static Definition<BaseCondition>[] ParseDefinitions(JsonData conditionData, string definitionKey = "C")
 		{
-			var tempConditionDefinitions = new Definition<BaseCondition>[conditionData.Count];
-
-			for (int i = 0; i < conditionData.Count; i++)
-			{
-				tempConditionDefinitions[i] = WundeeHelper.GetDefinition<ConditionDefinition, BaseCondition>(conditionData[i],
-					definitionKey, KEYS.CONDITION, i);
-			}
-
-			return tempConditionDefinitions;
+			return ContentHelper.GetDefinitions<ConditionDefinition, BaseCondition>
+				(conditionData, definitionKey, KEYS.CONDITION);
 		}
 	}
 }
