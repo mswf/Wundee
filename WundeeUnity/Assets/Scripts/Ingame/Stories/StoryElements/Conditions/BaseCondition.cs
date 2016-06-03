@@ -1,6 +1,5 @@
 ﻿
 using LitJson;
-using UnityEngine;
 
 
 namespace Wundee.Stories
@@ -24,7 +23,7 @@ namespace Wundee.Stories
 		protected void _ParseChildCondition(JsonData parameters)
 		{
 			ContentHelper.VerifyKey(parameters, D.CONDITIONS, definition.definitionKey);
-			var conditions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
+			var conditions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS], definition.definitionKey);
 
 			ContentHelper.VerifyMaxArrayLength(conditions, 1, definition.definitionKey);
 			if (conditions.Length == 1)
@@ -48,7 +47,7 @@ namespace Wundee.Stories
 	{
 		public override void ParseParams(JsonData parameters)
 		{
-			_childConditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
+			_childConditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS], definition.definitionKey);
 		}
 
 		public override BaseCondition GetClone(StoryNode parent)
@@ -70,7 +69,7 @@ namespace Wundee.Stories
 	{
 		public override void ParseParams(JsonData parameters)
 		{
-			_childConditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
+			_childConditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS], definition.definitionKey);
 		}
 
 		public override BaseCondition GetClone(StoryNode parent)
@@ -120,7 +119,7 @@ namespace Wundee.Stories
 
 		public override bool Check()
 		{
-			if (UnityEngine.Input.GetKey(KeyCode.Q))
+			if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.Q))
 				return true;
 			return false;
 		}

@@ -33,8 +33,8 @@ namespace Wundee.Stories
 
 		public override void ParseParams(JsonData parameters)
 		{
-			_effectDefinitions = EffectDefinition.ParseDefinitions(parameters[D.EFFECTS]);
-			_conditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS]);
+			_effectDefinitions = EffectDefinition.ParseDefinitions(parameters[D.EFFECTS], definition.definitionKey);
+			_conditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS], definition.definitionKey);
 		}
 
 		public override BaseEffect GetClone(StoryNode parent)

@@ -11,7 +11,7 @@ namespace Wundee.Stories
 			base.ParseDefinition(definitionKey, jsonData);
 		}
 		
-		public static Definition<BaseEffect>[] ParseDefinitions(JsonData effectData, string definitionKey = "E")
+		public static Definition<BaseEffect>[] ParseDefinitions(JsonData effectData, string definitionKey)
 		{
 			return ContentHelper.GetDefinitions<EffectDefinition, BaseEffect>
 				(effectData, definitionKey, KEYS.EFFECT);

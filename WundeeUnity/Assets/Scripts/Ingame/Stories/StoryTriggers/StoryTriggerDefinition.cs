@@ -32,7 +32,7 @@ namespace Wundee.Stories
 			return newStoryTrigger;
 		}
 
-		public static Definition<StoryTrigger>[] ParseDefinitions(JsonData storyTriggerData, string definitionKey = "ST")
+		public static Definition<StoryTrigger>[] ParseDefinitions(JsonData storyTriggerData, string definitionKey)
 		{
 			return ContentHelper.GetDefinitions<StoryTriggerDefinition, StoryTrigger>
 				(storyTriggerData, definitionKey, KEYS.STORYTRIGGER);

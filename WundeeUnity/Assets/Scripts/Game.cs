@@ -58,18 +58,6 @@ namespace Wundee
 				definitions.effectDefinitions.AddFolder("Effect");
 				definitions.conditionDefinitions.AddFolder("Condition");
 				definitions.rewardDefinitions.AddFolder("Reward");
-
-
-
-				/*
-				// Validate that some basic information got parsed
-				var story_1 = definitions.storyDefinitions["STORY_TEST_1"].GetConcreteType();
-				UnityEngine.Debug.Log(story_1.currentNode.testProperty);
-
-				var story_2 = definitions.storyDefinitions["STORY_TEST_2"].GetConcreteType();
-				UnityEngine.Debug.Log(story_2.currentNode.testProperty);
-				//*/
-
 			}
 
 			if (@params.generateWorld)
