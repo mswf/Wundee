@@ -4,7 +4,7 @@ namespace Wundee.Stories
 {
 	public abstract class BaseEffect : StoryElement<BaseEffect>
 	{
-		public abstract void Tick();
+		public abstract void ExecuteEffect();
 	}
 
 	public abstract class CollectionEffect : BaseEffect
@@ -19,7 +19,7 @@ namespace Wundee.Stories
 		{
 		}
 
-		public override void Tick()
+		public override void ExecuteEffect()
 		{
 			//Logger.Print("running TestEffect");
 		}
@@ -47,12 +47,36 @@ namespace Wundee.Stories
 			return retValue;
 		}
 
-		public override void Tick()
+		public override void ExecuteEffect()
 		{
 			if (conditions.CheckConditions())
 			{
 				effects.TickEffects();
 			}
+		}
+	}
+
+	public class RandomEffect : CollectionEffect
+	{
+		public override void ParseParams(JsonData parameters)
+		{
+			_effectDefinitions= EffectDefinition.ParseDefinitions(parameters[D.EFFECTS], definition.definitionKey);
+
+		}
+
+		public override BaseEffect GetClone(StoryNode parent)
+		{
+			var retValue = base.GetClone(parent) as RandomEffect;
+
+			retValue.effects = _effectDefinitions.GetConcreteTypes(parent);
+
+			return retValue;
+		}
+
+		public override void ExecuteEffect()
+		{
+			var randomNumber = R.generator.Next(effects.Length);
+			effects[randomNumber].ExecuteEffect();
 		}
 	}
 
@@ -71,7 +95,7 @@ namespace Wundee.Stories
 			}
 		}
 
-		public override void Tick()
+		public override void ExecuteEffect()
 		{
 			parentStoryNode.parentStory.parentSettlement
 				.habitat.position.X += 0.075f*movementSpeed;

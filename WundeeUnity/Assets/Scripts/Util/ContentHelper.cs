@@ -51,7 +51,7 @@ namespace Wundee
 		{
 			for (int i = 0; i < effects.Length; i++)
 			{
-				effects[i].Tick();
+				effects[i].ExecuteEffect();
 			}
 		}
 

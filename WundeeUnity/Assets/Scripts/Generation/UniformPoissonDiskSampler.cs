@@ -164,7 +164,7 @@ namespace Wundee.Generation
     
     public static class RandomHelper
     {
-        public static readonly Random Random = new Random();
+        public static readonly System.Random Random = new System.Random();
 	}
 	
 	/*

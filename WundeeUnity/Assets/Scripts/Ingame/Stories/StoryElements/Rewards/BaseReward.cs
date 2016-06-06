@@ -9,6 +9,12 @@ namespace Wundee.Stories
 		public abstract void Execute();
 	}
 
+	public abstract class CollectionReward : BaseReward
+	{
+		protected Definition<BaseReward>[] _rewardDefinitions;
+		protected BaseReward[] rewards;
+	}
+
 	public class PrintReward : BaseReward
 	{
 		public string messageToPrint;
@@ -21,6 +27,30 @@ namespace Wundee.Stories
 		public override void Execute()
 		{
 			Logger.Print(messageToPrint);
+		}
+	}
+
+	public class RandomReward : CollectionReward
+	{
+		public override void ParseParams(JsonData parameters)
+		{
+			_rewardDefinitions = RewardDefinition.ParseDefinitions(parameters[D.REWARDS], definition.definitionKey);
+
+		}
+
+		public override BaseReward GetClone(StoryNode parent)
+		{
+			var retValue = base.GetClone(parent) as RandomReward;
+
+			retValue.rewards = _rewardDefinitions.GetConcreteTypes(parent);
+
+			return retValue;
+		}
+
+		public override void Execute()
+		{
+			var randomNumber = R.generator.Next(rewards.Length);
+			rewards[randomNumber].Execute();
 		}
 	}
 
