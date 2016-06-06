@@ -18,11 +18,11 @@
 
 
 			"onStartRewards":[
-				{"type": "PrintReward", "params": "OnStart"}
+				{"type": "PrintEffect", "params": "OnStart"}
 			],
 
 			"onCompleteRewards":[
-				{"type": "PrintReward", "params": "OnComplete"}
+				{"type": "PrintEffect", "params": "OnComplete"}
 			],
 
 			"effects": [

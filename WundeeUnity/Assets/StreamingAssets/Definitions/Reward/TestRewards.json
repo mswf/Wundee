@@ -1,11 +1,11 @@
 {
 	"REWARD_TEST_1":{
-		"type": "TestReward",
+		"type": "TestEffect",
 		"params": {}
 	},
 
 	"REWARD_PRINT_1":{
-		"type": "PrintReward",
+		"type": "PrintEffect",
 		"params": "Printing"
 	}
 

@@ -39,15 +39,7 @@ namespace Wundee
 			return returnValue;
 		}
 
-		public static void ExecuteRewards<T>(this T[] rewards) where T : BaseReward
-		{
-			for (int i = 0; i < rewards.Length; i++)
-			{
-				rewards[i].Execute();
-			}
-		}
-
-		public static void TickEffects<T>(this T[] effects) where T : BaseEffect
+		public static void ExecuteEffects<T>(this T[] effects) where T : BaseEffect
 		{
 			for (int i = 0; i < effects.Length; i++)
 			{

@@ -8,12 +8,12 @@ namespace Wundee.Stories
 	public class StoryTriggerDefinition : Definition<StoryTrigger>
 	{
 		private Definition<BaseCondition>[] _conditionDefinitions;
-		private Definition<BaseReward>[] _rewardDefinitions;
+		private Definition<BaseEffect>[] _rewardDefinitions;
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{
 			_conditionDefinitions = ConditionDefinition.ParseDefinitions(jsonData[D.CONDITIONS], definitionKey);
-			_rewardDefinitions = RewardDefinition.ParseDefinitions(jsonData[D.REWARDS], definitionKey);
+			_rewardDefinitions = EffectDefinition.ParseDefinitions(jsonData[D.REWARDS], definitionKey);
 		}
 
 		public override StoryTrigger GetConcreteType(object parent = null)

@@ -7,7 +7,7 @@ namespace Wundee.Stories
 
 		public BaseCondition[] conditions;
 		public StoryNode parentStoryNode;
-		public BaseReward[] rewards;
+		public BaseEffect[] rewards;
 
 		private bool _hasBeenTriggeredBefore = false;
 
@@ -19,7 +19,7 @@ namespace Wundee.Stories
 			if (conditions.CheckConditions() == false)
 				return false;
 
-			rewards.ExecuteRewards();
+			rewards.ExecuteEffects();
 			
 			_hasBeenTriggeredBefore = true;
 

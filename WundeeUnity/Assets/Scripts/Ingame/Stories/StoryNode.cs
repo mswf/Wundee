@@ -15,8 +15,8 @@ namespace Wundee.Stories
 		
 		public BaseEffect[] effects;
 
-		public BaseReward[] onStartRewards;
-		public BaseReward[] onCompleteRewards;
+		public BaseEffect[] onStartRewards;
+		public BaseEffect[] onCompleteRewards;
 
 		public StoryTrigger[] storyTriggers;
 
@@ -30,19 +30,19 @@ namespace Wundee.Stories
 				}
 			}
 
-			effects.TickEffects();
+			effects.ExecuteEffects();
 			
 			return StoryNodeState.Running;
 		}
 
 		public void OnStart()
 		{
-			onStartRewards.ExecuteRewards();
+			onStartRewards.ExecuteEffects();
 		}
 
 		public void OnComplete()
 		{
-			onCompleteRewards.ExecuteRewards();
+			onCompleteRewards.ExecuteEffects();
 		}
 	}
 }

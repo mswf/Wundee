@@ -56,8 +56,9 @@ namespace Wundee
 				definitions.storyTriggerDefinitions.AddFolder("StoryTrigger");
 
 				definitions.effectDefinitions.AddFolder("Effect");
+				definitions.effectDefinitions.AddFolder("Reward");
+
 				definitions.conditionDefinitions.AddFolder("Condition");
-				definitions.rewardDefinitions.AddFolder("Reward");
 			}
 
 			if (@params.generateWorld)

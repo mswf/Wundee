@@ -10,8 +10,8 @@ namespace Wundee.Stories
 		private Definition<BaseEffect>[] _effectDefinitions;
 		private Definition<StoryTrigger>[] _storyTriggerDefinitions;
 
-		private Definition<BaseReward>[] _onStartRewardDefinitions;
-		private Definition<BaseReward>[] _onCompleteRewardDefinitions;
+		private Definition<BaseEffect>[] _onStartRewardDefinitions;
+		private Definition<BaseEffect>[] _onCompleteRewardDefinitions;
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{
@@ -28,14 +28,14 @@ namespace Wundee.Stories
 				this._storyTriggerDefinitions = new Definition<StoryTrigger>[0];
 
 			if (keys.Contains(D.REWARDS_ON_START))
-				this._onStartRewardDefinitions = RewardDefinition.ParseDefinitions(jsonData[D.REWARDS_ON_START], definitionKey);
+				this._onStartRewardDefinitions = EffectDefinition.ParseDefinitions(jsonData[D.REWARDS_ON_START], definitionKey);
 			else
-				this._onStartRewardDefinitions = new Definition<BaseReward>[0];
+				this._onStartRewardDefinitions = new Definition<BaseEffect>[0];
 
 			if (keys.Contains(D.REWARDS_ON_COMPLETE))
-				this._onCompleteRewardDefinitions = RewardDefinition.ParseDefinitions(jsonData[D.REWARDS_ON_COMPLETE], definitionKey);
+				this._onCompleteRewardDefinitions = EffectDefinition.ParseDefinitions(jsonData[D.REWARDS_ON_COMPLETE], definitionKey);
 			else
-				this._onCompleteRewardDefinitions = new Definition<BaseReward>[0];
+				this._onCompleteRewardDefinitions = new Definition<BaseEffect>[0];
 		}
 
 		public override StoryNode GetConcreteType(System.Object parent)

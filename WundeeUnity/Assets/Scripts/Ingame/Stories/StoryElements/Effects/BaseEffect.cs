@@ -51,7 +51,7 @@ namespace Wundee.Stories
 		{
 			if (conditions.CheckConditions())
 			{
-				effects.TickEffects();
+				effects.ExecuteEffects();
 			}
 		}
 	}
@@ -77,6 +77,21 @@ namespace Wundee.Stories
 		{
 			var randomNumber = R.generator.Next(effects.Length);
 			effects[randomNumber].ExecuteEffect();
+		}
+	}
+
+	public class PrintEffect : BaseEffect
+	{
+		public string messageToPrint;
+
+		public override void ParseParams(JsonData parameters)
+		{
+			messageToPrint = parameters.ToString();
+		}
+
+		public override void ExecuteEffect()
+		{
+			Logger.Print(messageToPrint);
 		}
 	}
 
