@@ -27,11 +27,18 @@
 
 			"effects": [
 				{
+					"type": "NeedRateEffect",
+					"params": {
+						"need": "P_Craftsmen",
+						"rate": 0.1
+					}
+				},
+				{
 					"type": "ConditionalEffect",
 					"params": {
 						"effects":[
 							{
-								"type": "MoveEffect",
+								"type": "MoveEffect2",
 
 								"params": {
 									"speed": 10.0
@@ -53,10 +60,10 @@
 			"storyTriggers":[
 				{
 					"conditions": [
-						{"type": "NotCondition", "params":{
-							"conditions": [{"type": "TrueCondition", "params":{}}]
-							} }
-
+						{
+							"type": "NeedCondition",
+							"params": {"need": "P_Craftsmen", "operator": "Greater", "amount": 60}
+						}
 					],
 
 					"rewards": [

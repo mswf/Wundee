@@ -18,6 +18,7 @@ namespace Wundee
 	// Definition keys, for lookup in Json files
 	public static class D
 	{
+		// Stories
 		public const string START_NODE = "startNode";
 		public const string STORYTRIGGERS = "storyTriggers";
 
@@ -28,12 +29,22 @@ namespace Wundee
 		public const string REWARDS_ON_START = "onStartRewards";
 		public const string REWARDS_ON_COMPLETE = "onCompleteRewards";
 
+		// StoryElements
 		public const string TYPE = "type";
 		public const string PARAMS = "params";
 
+		public const string OPERATOR = "operator";
+		public const string AMOUNT = "amount";
+
+		public const string RATE = "rate";
 
 		// Effects
 		public const string SPEED = "speed";
+
+		public const string NEED = "need";
+
+		// StoryEffects
+		public const string STORY_KEY = "storyKey";
 	}
 
 	// Strings that are used to extend the definitionKey for definitions that are declared within its parent

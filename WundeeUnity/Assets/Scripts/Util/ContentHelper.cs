@@ -1,11 +1,11 @@
 ﻿
-
 using System;
 using System.Collections.Generic;
 using LitJson;
 using Wundee.Stories;
 
 using System.Diagnostics;
+using System.Linq;
 
 
 namespace Wundee
@@ -81,6 +81,40 @@ namespace Wundee
 			return concreteTypes;
 		}
 
+		public static double ParseDouble(JsonData jsonData, string key, double defaultValue)
+		{
+			if (jsonData.Keys.Contains(key))
+			{
+				var value = jsonData[key];
+				if (value.IsDouble)
+					return (double) value;
+				else
+					return (int) value;
+			}
+
+			return defaultValue;
+		}
+
+		public static int ParseNeedIndex(JsonData jsonData, string key)
+		{
+			if (jsonData.Keys.Contains(key))
+			{
+				var need = jsonData[key].ToString();
+
+				for (int i = 0; i < GameData.Needs.BaseNeeds.Length; i++)
+				{
+					if (GameData.Needs.BaseNeeds[i] == need)
+						return i;
+				}
+			}
+
+			return -1;
+		}
+
+		public static Operator ParseOperator(JsonData jsonData, string key = D.OPERATOR)
+		{
+			return OperatorExtensions.stringToOperator[jsonData[key].ToString()];
+		}
 
 		[Conditional("DEBUG_CONTENT")]
 		public static void VerifyKey(JsonData jsonData, string key, string ownerKey)
@@ -116,6 +150,32 @@ namespace Wundee
 			if (!typeDictionary.ContainsKey(type))
 			{
 				Logger.Error("Invalid type <b>" + type + "</b> for effect with key <b>" + ownerKey + "</b>", 1);
+			}
+		}
+
+		[Conditional("DEBUG_CONTENT")]
+		public static void VerifyOperator(JsonData jsonData, string key, string ownerKey)
+		{
+			VerifyKey(jsonData, key, ownerKey);
+
+			var enumValue = jsonData[key].ToString();
+
+			if (!OperatorExtensions.stringToOperator.Keys.Contains(enumValue))
+			{
+				Logger.Error("Invalid operator <b>" + enumValue + "</b> in jsonData with key <b>" + ownerKey + "</b>", 1);
+			}
+		}
+
+		[Conditional("DEBUG_CONTENT")]
+		public static void VerifyDouble(JsonData jsonData, string key, string ownerKey)
+		{
+			VerifyKey(jsonData, key, ownerKey);
+
+			var doubleValue = jsonData[key];
+
+			if (!doubleValue.IsDouble && !doubleValue.IsInt)
+			{
+				Logger.Error("Invalid double <b>" + key + "</b>, " + doubleValue.ToString() + " in jsonData with key <b>" + ownerKey + "</b>", 1);
 			}
 		}
 	}

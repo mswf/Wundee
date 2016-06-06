@@ -4,7 +4,7 @@ namespace Wundee
 {
 	public class GameData
 	{
-		public class Needs
+		public static class Needs
 		{
 			public static string[] BaseNeeds = new string[]
 			{

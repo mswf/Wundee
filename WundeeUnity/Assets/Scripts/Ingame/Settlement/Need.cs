@@ -1,5 +1,6 @@
 ﻿namespace Wundee
 {
+	[System.Serializable]
 	public class Need
 	{
 		public readonly Settlement owner;

@@ -116,4 +116,26 @@ namespace Wundee.Stories
 				.habitat.position.X += 0.075f*movementSpeed;
 		}
 	}
+
+	public class MoveEffect2 : BaseEffect
+	{
+		private float movementSpeed = 1f;
+
+
+		public override void ParseParams(JsonData parameters)
+		{
+			var speed = parameters[D.SPEED];
+
+			if (speed != null)
+			{
+				movementSpeed = (float)(double)speed;
+			}
+		}
+
+		public override void ExecuteEffect()
+		{
+			parentStoryNode.parentStory.parentSettlement
+				.habitat.position.X += 0.075f * movementSpeed;
+		}
+	}
 }

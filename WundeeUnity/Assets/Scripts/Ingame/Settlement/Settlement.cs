@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using UnityEngine.Networking.Match;
 using Wundee.Stories;
 
 namespace Wundee
@@ -14,7 +15,8 @@ namespace Wundee
 
 		public readonly Habitat habitat;
 
-		public Dictionary<string, Need> needs;
+		public Need[] needs;
+		public Dictionary<string, Need> needsDictionary; 
 
 		public readonly StoryHolder storyHolder;  
 
@@ -28,13 +30,14 @@ namespace Wundee
 
 			this.habitat = habitat;
 
-			this.needs = new Dictionary<string, Need>(GameData.Needs.BaseNeeds.Length);
+			this.needs = new Need[GameData.Needs.BaseNeeds.Length];
+			this.needsDictionary = new Dictionary<string, Need>(GameData.Needs.BaseNeeds.Length);
 
 			for (int i = 0; i < GameData.Needs.BaseNeeds.Length; i++)
 			{
-				var newNeed = new Need(this, GameData.Needs.BaseNeeds[i]);
+				needs[i] = new Need(this, GameData.Needs.BaseNeeds[i]);
+				needsDictionary[GameData.Needs.BaseNeeds[i]] = needs[i];
 
-				needs[GameData.Needs.BaseNeeds[i]] = newNeed;
 			}
 		}
 		
