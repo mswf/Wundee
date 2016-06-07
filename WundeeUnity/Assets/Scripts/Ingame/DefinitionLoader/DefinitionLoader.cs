@@ -5,20 +5,35 @@ namespace Wundee
 {
 	public class DefinitionLoader<TDefinition, TConcrete> where TDefinition : Definition<TConcrete>, new()
 	{
-		private Dictionary<string, TDefinition> _definitions;
-		private DataLoader _loader;
-
-
+		private readonly Dictionary<string, TDefinition> _definitions;
+		private readonly DataLoader _loader;
+		
 		public DefinitionLoader(DataLoader loader)
 		{
 			this._loader = loader;
-			_definitions = new Dictionary<string, TDefinition>();
+			this._definitions = new Dictionary<string, TDefinition>();
 		}
 
 		public void AddFolder(string relativePath)
 		{
-			foreach (var filePath in _loader.GetAllJsonFilePaths(relativePath))
+			var yamlFilePaths = _loader.GetAllContentFilePaths(relativePath, "yaml");
+			for (var index = 0; index < yamlFilePaths.Length; index++)
 			{
+				var filePath = yamlFilePaths[index];
+				var jsonData = _loader.GetJsonDataFromYamlFile(filePath);
+
+				foreach (var dataKey in jsonData.Keys)
+				{
+					var newDefinition = new TDefinition();
+					newDefinition.ParseDefinition(dataKey, jsonData[dataKey]);
+					_definitions[dataKey] = newDefinition;
+				}
+			}
+
+			var jsonFilePaths = _loader.GetAllContentFilePaths(relativePath, "json");
+			for (int index = 0; index < jsonFilePaths.Length; index++)
+			{
+				var filePath = jsonFilePaths[index];
 				var jsonData = _loader.GetJsonDataFromFile(filePath);
 
 				foreach (var dataKey in jsonData.Keys)
@@ -41,4 +56,5 @@ namespace Wundee
 
 
 	}
+
 }

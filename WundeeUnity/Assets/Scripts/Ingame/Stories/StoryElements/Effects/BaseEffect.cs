@@ -128,7 +128,7 @@ namespace Wundee.Stories
 
 			if (speed != null)
 			{
-				movementSpeed = (float)(double)speed;
+				movementSpeed = (float)ContentHelper.ParseDouble(parameters, D.SPEED, 1f);
 			}
 		}
 

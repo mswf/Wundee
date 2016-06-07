@@ -1,0 +1,12 @@
+---
+  REWARD_COMPLETE_STORYNODE:
+    type: "CompleteStoryNode"
+    params: {}
+
+  REWARD_TEST_1:
+    
+    type: "TestEffect"
+    params: {}
+  REWARD_PRINT_1:
+    type: "PrintEffect"
+    params: "Printing"

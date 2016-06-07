@@ -1,0 +1,4 @@
+---
+  EFFECT_TEST_1:
+    type: "TestEffect"
+    params: "Ghllo"
