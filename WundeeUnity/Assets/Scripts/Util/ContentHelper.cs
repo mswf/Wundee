@@ -6,7 +6,7 @@ using Wundee.Stories;
 
 using System.Diagnostics;
 using System.Linq;
-
+using NCalc;
 
 namespace Wundee
 {
@@ -88,8 +88,41 @@ namespace Wundee
 				var value = jsonData[key];
 				if (value.IsDouble)
 					return (double) value;
-				else
+				else if (value.IsInt)
 					return (int) value;
+				else
+				{
+					// TODO: lookup string in dictionary of defined constants
+
+					var expression = new Expression(value.ToString());
+					return (double) expression.Evaluate();
+				}
+
+			}
+
+			return defaultValue;
+		}
+
+		public static int ParseInt(JsonData jsonData, string key, int defaultValue)
+		{
+			if (jsonData.Keys.Contains(key))
+			{
+				var value = jsonData[key];
+				if (value.IsInt)
+					return (int)value;
+				else if (value.IsDouble)
+				{
+					Logger.Error("Tried parsing double as an int with key " + key + " and defaultvalue " + defaultValue);
+					return (int)(double)value;
+				}
+				else
+				{
+					// TODO: lookup string in dictionary of defined constants
+
+					var expression = new Expression(value.ToString());
+					return (int)expression.Evaluate();
+				}
+
 			}
 
 			return defaultValue;
