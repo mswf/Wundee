@@ -1,0 +1,31 @@
+---
+  "default":
+    worldWidth: 1600/0.7
+    worldHeight: 900/0.7
+
+    generateWorld: true
+    generateSettlements: true
+    generatePlayer: true
+
+    needParams:
+        - 
+          needs:
+            - Population
+            - P_Craftsmen
+            - P_Healthiness
+            - P_Willpower
+
+            - G_LivingSpaces
+            - G_Weapons
+            - G_Food
+            - G_BuildingMaterial
+
+            - D_Defense
+            - D_Dominance
+            - D_Territory
+
+            - S_Faith
+            - S_Prosperity
+            - S_History
+    
+

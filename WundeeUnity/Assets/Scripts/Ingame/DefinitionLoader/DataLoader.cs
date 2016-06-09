@@ -88,10 +88,15 @@ namespace Wundee
 			return GetJsonDataFromString(jsonString);
 		}
 
+		public static string GetContentFilePath()
+		{
+			return Application.streamingAssetsPath + Path.DirectorySeparatorChar 
+				+ "Definitions" + Path.DirectorySeparatorChar;
+		}
+
 		public string[] GetAllContentFilePaths(string relativePath, string extension)
 		{
-			var fullPath = Application.streamingAssetsPath + Path.DirectorySeparatorChar + "Definitions" +
-			   Path.DirectorySeparatorChar + relativePath;
+			var fullPath = GetContentFilePath() + relativePath;
 
 			return GetAllFilePathsRecursively(fullPath, "*." + extension).ToArray();
 		}

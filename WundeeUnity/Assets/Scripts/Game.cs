@@ -1,5 +1,7 @@
 ﻿
 
+using UnityEngine;
+
 namespace Wundee
 {
 	public class Game
@@ -32,11 +34,19 @@ namespace Wundee
 
 		#endregion
 
-		public Game(GameParams @params, WundeeUnity.GameEntry mainMonoBehaviour)
+		public Game(string gameParamsKey, WundeeUnity.GameEntry mainMonoBehaviour)
 		{
 			Game.instance = this;
+			
+			this.definitions = new DataLoader();
 
-			this.@params = @params;
+			var gameParams = new GameParams();
+
+			var gameParamsData = definitions.GetJsonDataFromYamlFile(DataLoader.GetContentFilePath() + "GameParams.yaml");
+			ContentHelper.VerifyKey(gameParamsData, gameParamsKey, "PARAMS_READER");
+			gameParams.InitializeFromData(gameParamsData[gameParamsKey]);
+
+			this.@params = gameParams;
 			this._mainMonoBehaviour = mainMonoBehaviour;
 
 			Time.gameTime = 0d;
@@ -44,7 +54,6 @@ namespace Wundee
 
 			this.world = new World();
 
-			this.definitions = new DataLoader();
 		}
 
 		public void Initialize()

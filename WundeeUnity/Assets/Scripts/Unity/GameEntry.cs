@@ -9,14 +9,15 @@ namespace WundeeUnity
 	public class GameEntry : MonoBehaviour
 	{
 		public Game game;
+		public string gameParamsKey = "default";
 
 		[Header("Temp Debug")] public GameObject dockObject;
 
 		protected void Awake()
 		{
-			var gameParams = new GameParams();
+			//var gameParams = new GameParams();
 
-			this.game = new Game(gameParams, this);
+			this.game = new Game(gameParamsKey, this);
 		}
 
 		// Use this for initialization

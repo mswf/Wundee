@@ -1,9 +1,9 @@
 ---
-  STORY_TEST_1:
+  "STORY_TEST_1":
     storyName: "The epic story"
     startNode: "STORYNODE_TEST_1"
 
-  STORY_TEST_2:
+  "STORY_TEST_2":
     storyName: "The epic story"
     startNode:
       property: "STORYNODE_TEST_2_PROP"
@@ -14,21 +14,22 @@
 
       onCompleteRewards:
         -
-          type: "PrintEffect"
-          params: "OnComplete"
- 
+          { type: "PrintEffect", params: "OnComplete" }
+
       effects:
-        -
-          type: "NeedRateEffect"
-          params: { need: "P_Craftsmen", rate: 0.1}
+        - 
+         { 
+          type: "NeedRateEffect", params: 
+           { need: 
+            "P_Craftsmen", rate: 0.1
+           }
+         }
         -
           type: "ConditionalEffect"
           params:
             effects:
-              -
-                { type: "MoveEffect2", params: {
-                  speed: 10.0 } 
-                }
+              - 
+                { type: "MoveEffect2", params: { speed: 10.0 } }
             conditions:
               -
                 type: "NotCondition"
@@ -38,10 +39,8 @@
                       { type: "KeyHeldCondition", params: {} }
 
       storyTriggers:
-        -
-          conditions:
-            -
-              type: "NeedCondition"
+        - conditions:
+            - type: "NeedCondition"
               params:
                 need: "P_Craftsmen"
                 operator: "Greater"

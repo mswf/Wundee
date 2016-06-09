@@ -1,6 +1,8 @@
 ﻿// ReSharper disable InconsistentNaming
 
 
+using LitJson;
+
 namespace Wundee
 {
 	public class GameParams
@@ -11,8 +13,28 @@ namespace Wundee
 		public bool generateSettlements = true;
 		public bool generatePlayer = true;
 
-		public const float WORLD_WIDHT = 1600f/0.7f;
-		public const float WORLD_HEIGHT = 900f/0.7f;
+		public float worldWidth = 1600f/0.7f;
+		public float worldHeight = 900f/0.7f;
+
+		public NeedParams needParams = new NeedParams();
+		
+		public void InitializeFromData(JsonData gameParamData)
+		{
+			worldWidth = ContentHelper.ParseFloat(gameParamData, "worldWidth", this.worldWidth);
+			worldHeight = ContentHelper.ParseFloat(gameParamData, "worldHeight", this.worldHeight);
+
+			Logger.Log(gameParamData.ToJson());
+
+			generateWorld		= ContentHelper.ParseBool(gameParamData, "generateWorld", this.generateWorld);
+			generateSettlements = ContentHelper.ParseBool(gameParamData, "generateSettlements", this.generateSettlements);
+			generatePlayer		= ContentHelper.ParseBool(gameParamData, "generatePlayer", this.generatePlayer);
+
+		}
+	}
+
+	public class NeedParams
+	{
+		
 	}
 
 	// Definition keys, for lookup in Json files

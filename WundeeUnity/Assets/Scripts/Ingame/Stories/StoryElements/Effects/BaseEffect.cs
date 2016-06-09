@@ -119,17 +119,12 @@ namespace Wundee.Stories
 
 	public class MoveEffect2 : BaseEffect
 	{
-		private float movementSpeed = 1f;
-
+		private float movementSpeed;
 
 		public override void ParseParams(JsonData parameters)
 		{
-			var speed = parameters[D.SPEED];
-
-			if (speed != null)
-			{
-				movementSpeed = (float)ContentHelper.ParseDouble(parameters, D.SPEED, 1f);
-			}
+			ContentHelper.VerifyKey(parameters, D.SPEED, definition.definitionKey);
+			movementSpeed = (float)ContentHelper.ParseDouble(parameters, D.SPEED, 1f);
 		}
 
 		public override void ExecuteEffect()
