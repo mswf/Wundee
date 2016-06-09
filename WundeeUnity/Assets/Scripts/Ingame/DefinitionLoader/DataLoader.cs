@@ -133,18 +133,29 @@ namespace Wundee
 		private Regex isIntRegex = new Regex(@"^-?(0|[1-9][0-9]*)$", RegexOptions.IgnorePatternWhitespace);
 		private Regex isDoubleRegex = new Regex(@"^-?(0|[1-9][0-9]*)(\.[0-9]*)?([eE][-+]?[0-9]+)?$", RegexOptions.IgnorePatternWhitespace);
 
+		private const string falseString = "false";
+		private const string trueString = "true";
+
 		public bool Resolve(NodeEvent nodeEvent, ref System.Type currentType)
 		{
 			var scalar = nodeEvent as Scalar;
 			if ((scalar != null) && (scalar.Style == ScalarStyle.Plain))
 			{
-				if (isIntRegex.IsMatch(scalar.Value))
+				var value = scalar.Value;
+
+				if (value == falseString || value == trueString)
+				{
+					currentType = typeof(bool);
+					return true;
+				}
+
+				if (isIntRegex.IsMatch(value))
 				{
 					currentType = typeof(int);
 					return true;
 				}
 
-				if (isDoubleRegex.IsMatch(scalar.Value))
+				if (isDoubleRegex.IsMatch(value))
 				{
 					currentType = typeof(double);
 					return true;
