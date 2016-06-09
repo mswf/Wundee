@@ -95,12 +95,19 @@ namespace Wundee
 					// TODO: lookup string in dictionary of defined constants
 
 					var expression = new Expression(value.ToString());
+					// TODO: exception handling
+					// http://ncalc.codeplex.com/
 					return (double) expression.Evaluate();
 				}
 
 			}
 
 			return defaultValue;
+		}
+
+		public static float ParseFloat(JsonData jsonData, string key, float defaultValue)
+		{
+			return (float) ParseDouble(jsonData, key, defaultValue);
 		}
 
 		public static int ParseInt(JsonData jsonData, string key, int defaultValue)
@@ -118,13 +125,32 @@ namespace Wundee
 				else
 				{
 					// TODO: lookup string in dictionary of defined constants
-
+						
 					var expression = new Expression(value.ToString());
+					// TODO: exception handling
+					// http://ncalc.codeplex.com/
 					return (int)expression.Evaluate();
 				}
 
 			}
 
+			return defaultValue;
+		}
+
+		public static bool ParseBool(JsonData jsonData, string key, bool defaultValue)
+		{
+			if (jsonData.Keys.Contains(key))
+			{
+				var value = jsonData[key];
+				if (value.IsBoolean)
+					return (bool) value;
+				else
+				{
+					Logger.Error("Tried parsing invalid bool with key " + key + " and defaultvalue " + defaultValue);
+					
+					return defaultValue;
+				}
+			}
 			return defaultValue;
 		}
 
