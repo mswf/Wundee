@@ -20,21 +20,74 @@ namespace Wundee
 		
 		public void InitializeFromData(JsonData gameParamData)
 		{
-			worldWidth = ContentHelper.ParseFloat(gameParamData, "worldWidth", this.worldWidth);
-			worldHeight = ContentHelper.ParseFloat(gameParamData, "worldHeight", this.worldHeight);
+			worldWidth = ContentHelper.ParseFloat(gameParamData, P.WORLD_WIDTH, this.worldWidth);
+			worldHeight = ContentHelper.ParseFloat(gameParamData, P.WORLD_HEIGHT, this.worldHeight);
 
 			Logger.Log(gameParamData.ToJson());
 
-			generateWorld		= ContentHelper.ParseBool(gameParamData, "generateWorld", this.generateWorld);
-			generateSettlements = ContentHelper.ParseBool(gameParamData, "generateSettlements", this.generateSettlements);
-			generatePlayer		= ContentHelper.ParseBool(gameParamData, "generatePlayer", this.generatePlayer);
+			generateWorld		= ContentHelper.ParseBool(gameParamData, P.GENERATE_WORLD, this.generateWorld);
+			generateSettlements = ContentHelper.ParseBool(gameParamData, P.GENERATE_SETTLEMENTS, this.generateSettlements);
+			generatePlayer		= ContentHelper.ParseBool(gameParamData, P.GENERATE_PLAYER, this.generatePlayer);
 
+			if (gameParamData.Keys.Contains(P.NEED_PARAMS))
+			{
+				var needParamData = gameParamData[P.NEED_PARAMS];
+
+				if (needParamData.Keys.Contains(P.NEEDS))
+				{
+					var needsData = needParamData[P.NEEDS];
+
+					if (needsData.IsArray)
+					{
+						var count = needsData.Count;
+						needParams.needs = new string[count];
+
+						for (int i = 0; i < count; i++)
+						{
+							needParams.needs[i] = needsData[i].ToString();
+						}
+					}
+				}
+			}
+
+		}
+
+		public bool IsValidNeed(string potentialNeed)
+		{
+			for (int i = 0; i < needParams.needs.Length; i++)
+			{
+				if (needParams.needs[i] == potentialNeed)
+					return true;
+			}
+
+			return false;
 		}
 	}
 
 	public class NeedParams
 	{
-		
+		public string[] needs = new string[]
+		{
+			"Population",
+			"Goods",
+			"Defense",
+			"Satisfaction",
+		};
+	}
+
+	public static class P
+	{
+		public const string WORLD_WIDTH = "worldWidth";
+		public const string WORLD_HEIGHT = "worldHeight";
+
+		public const string GENERATE_WORLD = "generateWorld";
+		public const string GENERATE_SETTLEMENTS = "generateSettlements";
+		public const string GENERATE_PLAYER = "generatePlayer";
+
+
+		public const string NEED_PARAMS = "needParams";
+		public const string NEEDS = "needs";
+
 	}
 
 	// Definition keys, for lookup in Json files

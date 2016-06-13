@@ -30,13 +30,15 @@ namespace Wundee
 
 			this.habitat = habitat;
 
-			this.needs = new Need[GameData.Needs.BaseNeeds.Length];
-			this.needsDictionary = new Dictionary<string, Need>(GameData.Needs.BaseNeeds.Length);
+			var needParams = Game.instance.@params.needParams;
 
-			for (int i = 0; i < GameData.Needs.BaseNeeds.Length; i++)
+			this.needs = new Need[needParams.needs.Length];
+			this.needsDictionary = new Dictionary<string, Need>(needParams.needs.Length);
+
+			for (int i = 0; i < needParams.needs.Length; i++)
 			{
-				needs[i] = new Need(this, GameData.Needs.BaseNeeds[i]);
-				needsDictionary[GameData.Needs.BaseNeeds[i]] = needs[i];
+				needs[i] = new Need(this, needParams.needs[i]);
+				needsDictionary[needParams.needs[i]] = needs[i];
 
 			}
 		}

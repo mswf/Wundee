@@ -160,9 +160,9 @@ namespace Wundee
 			{
 				var need = jsonData[key].ToString();
 
-				for (int i = 0; i < GameData.Needs.BaseNeeds.Length; i++)
+				for (int i = 0; i < Game.instance.@params.needParams.needs.Length; i++)
 				{
-					if (GameData.Needs.BaseNeeds[i] == need)
+					if (Game.instance.@params.needParams.needs[i] == need)
 						return i;
 				}
 			}
