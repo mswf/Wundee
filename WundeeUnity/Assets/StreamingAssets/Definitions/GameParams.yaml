@@ -1,5 +1,19 @@
 ---
   "default":
+
+    # By convention, use ALL_CAPS for constants    
+    constants:
+        WORLD_SCALE: 0.7
+
+        WORLD_WIDTH: 1600/WORLD_SCALE
+        
+        WORLD_HEIGHT: 900/WORLD_SCALE
+
+        HALF_WORLD_WIDTH: "[WORLD_WIDTH] * 0.5"
+
+        HABITAT_MIN_DISTANCE: 220
+
+
     worldWidth: "WORLD_WIDTH"
     worldHeight: "WORLD_HEIGHT"
 
@@ -31,15 +45,6 @@
         # - S_Prosperity
         # - S_History
 
-    # By convention, use ALL_CAPS for constants
-    constants:
-        WORLD_WIDTH: 1600/0.7
-        
-        WORLD_HEIGHT: 900/0.7
-
-        HALF_WORLD_WIDTH: "[WORLD_WIDTH] / 2"
-
-        HABITAT_MIN_DISTANCE: 220
 
         
 

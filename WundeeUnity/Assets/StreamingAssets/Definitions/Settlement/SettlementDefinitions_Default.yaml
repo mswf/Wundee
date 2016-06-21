@@ -16,7 +16,7 @@
 
         exhausted: 10
         low: 30
-      "Wealth":
+      "Wealth": 
         priority: 2
         start: 50
         
