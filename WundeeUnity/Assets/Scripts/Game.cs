@@ -38,12 +38,12 @@ namespace Wundee
 			this.definitions = new DataLoader();
 
 			var gameParams = new GameParams();
+			this.@params = gameParams;
 
 			var gameParamsData = definitions.GetJsonDataFromYamlFile(DataLoader.GetContentFilePath() + "GameParams.yaml");
 			ContentHelper.VerifyKey(gameParamsData, gameParamsKey, "PARAMS_READER");
 			gameParams.InitializeFromData(gameParamsData[gameParamsKey]);
 
-			this.@params = gameParams;
 			this._mainMonoBehaviour = mainMonoBehaviour;
 
 			Time.gameTime = 0d;

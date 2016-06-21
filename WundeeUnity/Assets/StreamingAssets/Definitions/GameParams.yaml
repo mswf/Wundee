@@ -1,9 +1,9 @@
 ---
   "default":
-    worldWidth: 1600/0.7
-    worldHeight: 900/0.7
+    worldWidth: "WORLD_WIDTH"
+    worldHeight: "WORLD_HEIGHT"
 
-    habitatMinDistance: 220.0
+    habitatMinDistance: "HABITAT_MIN_DISTANCE"
 
     generateWorld: true
     generateSettlements: true
@@ -31,8 +31,16 @@
         # - S_Prosperity
         # - S_History
 
+    # By convention, use ALL_CAPS for constants
+    constants:
+        WORLD_WIDTH: 1600/0.7
+        
+        WORLD_HEIGHT: 900/0.7
 
-    contants:
+        HALF_WORLD_WIDTH: "[WORLD_WIDTH] / 2"
+
+        HABITAT_MIN_DISTANCE: 220
+
         
 
       

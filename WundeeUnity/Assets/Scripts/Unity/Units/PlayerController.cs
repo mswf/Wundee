@@ -42,11 +42,7 @@ namespace WundeeUnity
 
 		private void FixedUpdate()
 		{
-			if (Input.GetKeyDown(KeyCode.R))
-			{
-				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-				return;
-			}
+
 
 			var dt = Time.fixedDeltaTime;
 

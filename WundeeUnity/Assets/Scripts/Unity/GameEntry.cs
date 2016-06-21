@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using Wundee;
 using Random = UnityEngine.Random;
 
@@ -70,6 +71,12 @@ namespace WundeeUnity
 		protected void FixedUpdate()
 		{
 			game.FixedUpdate(UnityEngine.Time.fixedDeltaTime);
+
+			if (Input.GetKeyUp(KeyCode.R))
+			{
+				SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+				return;
+			}
 		}
 	}
 

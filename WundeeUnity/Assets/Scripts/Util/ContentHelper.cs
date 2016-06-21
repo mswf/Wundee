@@ -92,9 +92,9 @@ namespace Wundee
 					return (int) value;
 				else
 				{
-					// TODO: lookup string in dictionary of defined constants
-
 					var expression = new Expression(value.ToString());
+
+					expression.Parameters = Game.instance.@params.constants ;
 					// TODO: exception handling
 					// http://ncalc.codeplex.com/
 					return (double) expression.Evaluate();
@@ -124,9 +124,9 @@ namespace Wundee
 				}
 				else
 				{
-					// TODO: lookup string in dictionary of defined constants
-						
 					var expression = new Expression(value.ToString());
+
+					expression.Parameters = Game.instance.@params.constants;
 					// TODO: exception handling
 					// http://ncalc.codeplex.com/
 					return (int)expression.Evaluate();
