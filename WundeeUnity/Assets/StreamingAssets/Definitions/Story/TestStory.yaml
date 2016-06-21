@@ -13,6 +13,44 @@
           params: "OnStart"
 
       onCompleteRewards:
+        - type: "PrintEffect"
+          params: "OnComplete"
+      effects:
+        - type: "NeedRateEffect"
+          params: 
+           - need: "Population"
+             rate: 0.1
+        -
+          type: "ConditionalEffect"
+          params:
+            effects:
+              - { type: "MoveEffect2", params: { speed: 10.0 } }
+            conditions:
+              - type: "NotCondition"
+                params:
+                  conditions:
+                    - { type: "KeyHeldCondition", params: {} }
+
+      storyTriggers:
+        - conditions:
+            - type: "NeedCondition"
+              params:
+                need: "Population"
+                operator: "Greater"
+                amount: 60
+          rewards:
+            - "REWARD_TEST_1"
+
+  "STORY_TEST_3":
+    storyName: "The epic story"
+    startNode:
+      property: "STORYNODE_TEST_2_PROP"
+      onStartRewards:
+        -
+          type: "PrintEffect" 
+          params: "OnStart"
+
+      onCompleteRewards:
         -
           { type: "PrintEffect", params: "OnComplete" }
 
@@ -21,7 +59,7 @@
          { 
           type: "NeedRateEffect", params: 
            { need: 
-            "Population", rate: 0.1
+            "Population", rate: 0.05
            }
          }
         -
@@ -29,7 +67,7 @@
           params:
             effects:
               - 
-                { type: "MoveEffect2", params: { speed: 10.0 } }
+                { type: "MoveEffect2", params: { speed: -20.0 } }
             conditions:
               -
                 type: "NotCondition"

@@ -1,14 +1,19 @@
 ---
   "SETTLEMENT_DEFAULT_01":
     onStartRewards:
-      -
-        {type: "AddStoryEffect", params: {storyKey: "STORY_TEST_2"}}
-
+    - type: "RandomEffect"
+      params: 
+        effects:
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_2"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_3"}
+ 
     needs:
       "Population":
         priority: 1
         start: 50
-        
+
         exhausted: 10
         low: 30
       "Wealth":
