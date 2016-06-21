@@ -17,9 +17,9 @@
           params: "OnComplete"
       effects:
         - type: "NeedRateEffect"
-          params: 
-           - need: "Population"
-             rate: 0.1
+          params:
+            need: "Population"
+            rate: 1
         -
           type: "ConditionalEffect"
           params:
@@ -59,7 +59,7 @@
          { 
           type: "NeedRateEffect", params: 
            { need: 
-            "Population", rate: 0.05
+            "Population", rate: 0.5
            }
          }
         -
