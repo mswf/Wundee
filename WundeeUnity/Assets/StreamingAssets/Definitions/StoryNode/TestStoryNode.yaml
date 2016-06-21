@@ -1,5 +1,5 @@
 ---
-  STORYNODE_TEST_1:
+  "STORYNODE_TEST_1":
     property: "STORYNODE_TEST_1_PROP"
     onStartRewards: []
     onCompleteRewards: []
