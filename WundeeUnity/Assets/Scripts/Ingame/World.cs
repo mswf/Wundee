@@ -76,19 +76,16 @@ namespace Wundee
 
 		public void GenerateSettlements()
 		{
+			var settlementDefinition = Game.instance.definitions.settlementDefinitions["SETTLEMENT_DEFAULT_01"];
+
 			var random = new System.Random();
 
 			foreach (var habitat in _habitats)
 			{
 				if (random.Next(0, 100) > 50 || true)
 				{
-					var newSettlement = new Settlement(habitat);
-
-					// TESTCODE
-					newSettlement.storyHolder.AddStory("STORY_TEST_2");
-
-					//
-
+					var newSettlement = settlementDefinition.GetConcreteType(habitat);
+					
 					_settlements.Add(newSettlement);
 				}
 			}

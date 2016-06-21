@@ -9,11 +9,24 @@ namespace Wundee.Stories
 	{
 		private Settlement owner;
 
-		private Story[] activeStories; 
+		private Story[] activeStories;
+
+		public readonly Story lifeStory;
+		public readonly StoryNode lifeStoryNode;
+
 
 		public StoryHolder(Settlement owner)
 		{
 			this.owner = owner;
+
+			lifeStory = new Story();
+			lifeStoryNode = new StoryNode();
+
+			lifeStory.currentNode = lifeStoryNode;
+			lifeStory.parentSettlement = owner;
+			lifeStoryNode.parentStory = lifeStory;
+
+
 			activeStories = new Story[0];
 		}
 

@@ -18,6 +18,8 @@ namespace Wundee
 {
 	public class DataLoader
 	{
+		public DefinitionLoader<SettlementDefinition, Settlement> settlementDefinitions; 
+
 		public DefinitionLoader<StoryDefinition, Story> storyDefinitions;
 		public DefinitionLoader<StoryNodeDefinition, StoryNode> storyNodeDefinitions;
 		public DefinitionLoader<StoryTriggerDefinition, StoryTrigger> storyTriggerDefinitions;
@@ -33,6 +35,8 @@ namespace Wundee
 
 		public DataLoader()
 		{
+			settlementDefinitions = new DefinitionLoader<SettlementDefinition, Settlement>(this);
+
 			storyDefinitions = new DefinitionLoader<StoryDefinition, Story>(this);
 			storyNodeDefinitions = new DefinitionLoader<StoryNodeDefinition, StoryNode>(this);
 			storyTriggerDefinitions = new DefinitionLoader<StoryTriggerDefinition, StoryTrigger>(this);
@@ -41,6 +45,8 @@ namespace Wundee
 			conditionDefinitions = new DefinitionLoader<ConditionDefinition, BaseCondition>(this);
 			
 			this.definitionLoaderMapper = new Dictionary<Type, object>();
+
+			definitionLoaderMapper[typeof(SettlementDefinition)] = settlementDefinitions;
 
 			definitionLoaderMapper[typeof (StoryDefinition)] = storyDefinitions;
 			definitionLoaderMapper[typeof (StoryNodeDefinition)] = storyNodeDefinitions;
@@ -58,6 +64,8 @@ namespace Wundee
 
 		public void ParseDefinitions()
 		{
+			settlementDefinitions.AddFolder("Settlement");
+
 			storyDefinitions.AddFolder("Story");
 			storyNodeDefinitions.AddFolder("StoryNode");
 			storyTriggerDefinitions.AddFolder("StoryTrigger");

@@ -1,5 +1,9 @@
 ---
   "SETTLEMENT_DEFAULT_01":
+    onStartRewards:
+      -
+        {type: "AddStoryEffect", params: {storyKey: "STORY_TEST_2"}}
+
     needs:
       "Population":
         priority: 1
@@ -26,8 +30,5 @@
         exhausted: 10
         low: 30
     
-    
 
 
-    params: 
-      conditions: []

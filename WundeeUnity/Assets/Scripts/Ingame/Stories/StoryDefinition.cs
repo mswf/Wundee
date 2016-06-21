@@ -12,9 +12,9 @@ namespace Wundee.Stories
 		{
 			this.definitionKey = definitionKey;
 
-			this._startNode = ContentHelper.GetDefinition<StoryNodeDefinition, StoryNode>(jsonData[D.START_NODE], 
-				definitionKey, KEYS.STORYNODE);
-		}
+				this._startNode = ContentHelper.GetDefinition<StoryNodeDefinition, StoryNode>(jsonData[D.START_NODE],
+					definitionKey, KEYS.STORYNODE);
+			}
 
 		public override Story GetConcreteType(System.Object parent = null)
 		{

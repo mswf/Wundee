@@ -8,6 +8,6 @@ namespace Wundee
 		public string definitionKey;
 
 		public abstract void ParseDefinition(string definitionKey, JsonData jsonData);
-		public abstract TConcrete GetConcreteType(System.Object parent = null);
+		public abstract TConcrete GetConcreteType(System.Object parent = null); 
 	}
 }
