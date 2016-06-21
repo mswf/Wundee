@@ -42,28 +42,34 @@ namespace Wundee
 
 		public void GenerateHabitats()
 		{
-			/*
-			var distributedPoints = UniformPoissonDiskSampler
-				.SampleRectangle(new Vector2(-GameParams.WORLD_WIDHT/2f, -GameParams.WORLD_HEIGHT/2f), 
-								new Vector2(GameParams.WORLD_WIDHT/2f, GameParams.WORLD_HEIGHT/2f), 
-								220f)
-				.ToArray();
-			*/
+			var gameParams = Game.instance.@params;
 
+			///*
+
+			var distributedPoints = UniformPoissonDiskSampler
+				.SampleRectangle(new Vector2(-gameParams.worldWidth / 2f, -gameParams.worldHeight / 2f), 
+								 new Vector2( gameParams.worldWidth / 2f,  gameParams.worldHeight / 2f), 
+								 gameParams.habitatMinDistance)
+				.ToArray();
+			//*/
+
+			/*
 			var distributedPoints = new Vector2[]
 			{
 				new Vector2(0, 0)	
 			};
+			*/
 
 			// Cap the number of points we use in case something explodes
-			var numberOfSettlements = MathHelper.Min(distributedPoints.Length, 500);
+			var numberOfSettlements = MathHelper.Min(distributedPoints.Length, gameParams.habitatCap);
 
 			for (int i = 0; i < numberOfSettlements; i++)
 			{
-				var newHabitat = new Habitat();
-
-				newHabitat.position = distributedPoints[i];
-
+				var newHabitat = new Habitat
+				{
+					position = distributedPoints[i]
+				};
+				
 				_habitats.Add(newHabitat);
 			}
 		}
@@ -85,12 +91,6 @@ namespace Wundee
 
 					_settlements.Add(newSettlement);
 				}
-			}
-
-
-			//foreach (var settlement in _settlements)
-			{
-				
 			}
 		}
 	}

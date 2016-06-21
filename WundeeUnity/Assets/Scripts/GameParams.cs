@@ -16,14 +16,18 @@ namespace Wundee
 		public float worldWidth = 1600f/0.7f;
 		public float worldHeight = 900f/0.7f;
 
+		public float habitatMinDistance = 220f;
+		public int habitatCap = 500;
+
 		public NeedParams needParams = new NeedParams();
 		
 		public void InitializeFromData(JsonData gameParamData)
 		{
 			worldWidth = ContentHelper.ParseFloat(gameParamData, P.WORLD_WIDTH, this.worldWidth);
 			worldHeight = ContentHelper.ParseFloat(gameParamData, P.WORLD_HEIGHT, this.worldHeight);
-
-			Logger.Log(gameParamData.ToJson());
+			habitatMinDistance = ContentHelper.ParseFloat(gameParamData, P.HABITAT_MIN_DISTANCE,
+				this.habitatMinDistance);
+			habitatCap = ContentHelper.ParseInt(gameParamData, P.HABITAT_CAP, this.habitatCap);
 
 			generateWorld		= ContentHelper.ParseBool(gameParamData, P.GENERATE_WORLD, this.generateWorld);
 			generateSettlements = ContentHelper.ParseBool(gameParamData, P.GENERATE_SETTLEMENTS, this.generateSettlements);
@@ -79,6 +83,10 @@ namespace Wundee
 	{
 		public const string WORLD_WIDTH = "worldWidth";
 		public const string WORLD_HEIGHT = "worldHeight";
+		public const string HABITAT_MIN_DISTANCE = "habitatMinDistance";
+
+		public const string HABITAT_CAP = "habitatCap";
+
 
 		public const string GENERATE_WORLD = "generateWorld";
 		public const string GENERATE_SETTLEMENTS = "generateSettlements";

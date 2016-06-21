@@ -39,6 +39,18 @@ namespace Wundee
 			return returnValue;
 		}
 
+		public static T[] GetConcreteTypes<T>(this Definition<T>[] definitions, Object parent)
+		{
+			var concreteTypes = new T[definitions.Length];
+
+			for (int i = 0; i < definitions.Length; i++)
+			{
+				concreteTypes[i] = definitions[i].GetConcreteType(parent);
+			}
+
+			return concreteTypes;
+		}
+
 		public static void ExecuteEffects<T>(this T[] effects) where T : BaseEffect
 		{
 			for (int i = 0; i < effects.Length; i++)
@@ -67,18 +79,6 @@ namespace Wundee
 			}
 
 			return false;
-		}
-
-		public static T[] GetConcreteTypes<T>(this Definition<T>[] definitions, Object parent)
-		{
-			var concreteTypes = new T[definitions.Length];
-
-			for (int i = 0; i < definitions.Length; i++)
-			{
-				concreteTypes[i] = definitions[i].GetConcreteType(parent);
-			}
-
-			return concreteTypes;
 		}
 
 		public static double ParseDouble(JsonData jsonData, string key, double defaultValue)

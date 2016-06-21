@@ -56,6 +56,18 @@ namespace Wundee
 			yamlDeserializer.TypeResolvers.Add(new ScalarYamlNodeTypeResolver());
 		}
 
+		public void ParseDefinitions()
+		{
+			storyDefinitions.AddFolder("Story");
+			storyNodeDefinitions.AddFolder("StoryNode");
+			storyTriggerDefinitions.AddFolder("StoryTrigger");
+
+			effectDefinitions.AddFolder("Effect");
+			effectDefinitions.AddFolder("Reward");
+
+			conditionDefinitions.AddFolder("Condition");
+		}
+
 		public JsonData GetJsonDataFromFile(string filePath)
 		{
 			var jsonString = File.ReadAllText(filePath);

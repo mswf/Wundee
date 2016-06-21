@@ -1,7 +1,33 @@
 ---
   "SETTLEMENT_DEFAULT_01":
+    needs:
+      "Population":
+        priority: 1
+        start: 50
+        
+        exhausted: 10
+        low: 30
+      "Wealth":
+        priority: 2
+        start: 50
+        
+        exhausted: 10
+        low: 30
+      "Strength":
+        priority: 2
+        start: 50
+        
+        exhausted: 10
+        low: 30
+      "Satisfaction":
+        priority: 3
+        start: 50
+        
+        exhausted: 10
+        low: 30
+    
     
 
-    type: "AndCondition"
+
     params: 
       conditions: []

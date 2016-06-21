@@ -1,7 +1,4 @@
 ﻿
-
-using UnityEngine;
-
 namespace Wundee
 {
 	public class Game
@@ -60,14 +57,7 @@ namespace Wundee
 		{
 			if (@params.parseDefinitions)
 			{
-				definitions.storyDefinitions.AddFolder("Story");
-				definitions.storyNodeDefinitions.AddFolder("StoryNode");
-				definitions.storyTriggerDefinitions.AddFolder("StoryTrigger");
-
-				definitions.effectDefinitions.AddFolder("Effect");
-				definitions.effectDefinitions.AddFolder("Reward");
-
-				definitions.conditionDefinitions.AddFolder("Condition");
+				definitions.ParseDefinitions();
 			}
 
 			if (@params.generateWorld)

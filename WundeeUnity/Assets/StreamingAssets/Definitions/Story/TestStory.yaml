@@ -21,7 +21,7 @@
          { 
           type: "NeedRateEffect", params: 
            { need: 
-            "P_Craftsmen", rate: 0.1
+            "Population", rate: 0.1
            }
          }
         -
@@ -42,7 +42,7 @@
         - conditions:
             - type: "NeedCondition"
               params:
-                need: "P_Craftsmen"
+                need: "Population"
                 operator: "Greater"
                 amount: 60
           rewards:
