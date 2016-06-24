@@ -1,4 +1,5 @@
 ﻿using LitJson;
+using Microsoft.Xna.Framework;
 
 namespace Wundee.Stories
 {
@@ -112,8 +113,9 @@ namespace Wundee.Stories
 
 		public override void ExecuteEffect()
 		{
-			parentStoryNode.parentStory.parentSettlement
-				.habitat.position.X += 0.075f*movementSpeed;
+			var body = parentStoryNode.parentStory.parentSettlement.habitat.body;
+			body.SetTransform(body.Position + new Vector2(0.075f * movementSpeed), 0f);
+			
 		}
 	}
 
@@ -129,8 +131,8 @@ namespace Wundee.Stories
 
 		public override void ExecuteEffect()
 		{
-			parentStoryNode.parentStory.parentSettlement
-				.habitat.position.X += 0.075f * movementSpeed;
+			var body = parentStoryNode.parentStory.parentSettlement.habitat.body;
+			body.SetTransform(body.Position + new Vector2(0.075f * movementSpeed), 0f);
 		}
 	}
 }

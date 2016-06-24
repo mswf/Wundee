@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using LitJson;
+using Microsoft.Xna.Framework;
 
 public class WeakReferenceT<T> where T : class
 {
@@ -117,23 +118,23 @@ namespace Wundee
 			const float PiOverFour = MathHelper.Pi / 4f;
 
 			// Determine the theta angle
-			var angle = MathHelper.Atan2(point.Y, point.X) + Pi;
+			var angle = MathExtension.Atan2(point.Y, point.X) + Pi;
 
 			Vector2 squared;
 
 			// Scale according to which wall we're clamping to
 			// X+ wall
 			if (angle <= PiOverFour || angle > 7f * PiOverFour)
-				squared = point * (1f / MathHelper.Cos(angle));
+				squared = point * (1f / MathExtension.Cos(angle));
 			// Y+ wall
 			else if (angle > PiOverFour && angle <= 3f * PiOverFour)
-				squared = point * (1f / MathHelper.Sin(angle));
+				squared = point * (1f / MathExtension.Sin(angle));
 			// X- wall
 			else if (angle > 3f * PiOverFour && angle <= 5f * PiOverFour)
-				squared = point * (-1f / MathHelper.Cos(angle));
+				squared = point * (-1f / MathExtension.Cos(angle));
 			// Y- wall
 			else if (angle > 5f * PiOverFour && angle <= 7f * PiOverFour)
-				squared = point * (-1f / MathHelper.Sin(angle));
+				squared = point * (-1f / MathExtension.Sin(angle));
 			else throw new System.InvalidOperationException("Invalid angle...?");
 
 			// Early-out for a perfect square output
@@ -142,7 +143,7 @@ namespace Wundee
 
 			// Find the inner-roundness scaling factor and LERP
 			var length = point.Length();
-			var factor = MathHelper.Pow(length, innerRoundness);
+			var factor = MathExtension.Pow(length, innerRoundness);
 			return Vector2.Lerp(point, squared, factor);
 		}
 	}

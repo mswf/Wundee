@@ -3,13 +3,14 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using System;
+using Microsoft.Xna.Framework;
 
 namespace Wundee
 {
 	/// <summary>
 	/// Contains commonly used precalculated values and mathematical operations.
 	/// </summary>
-	public static class MathHelper
+	public static class MathExtension
     {
     	/// <summary>
         /// Represents the mathematical constant e(2.71828175).

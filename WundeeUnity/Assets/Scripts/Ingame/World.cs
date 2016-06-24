@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using Microsoft.Xna.Framework;
 using Wundee.Generation;
 
 namespace Wundee
@@ -8,6 +8,8 @@ namespace Wundee
 	{
 		private List<Habitat> _habitats;
 		private List<Settlement> _settlements;
+
+		public FarseerPhysics.Dynamics.World physicsWorld;
 
 		public List<Habitat> habitats 
 		{
@@ -21,6 +23,8 @@ namespace Wundee
 
 		public World()
 		{
+			physicsWorld = new FarseerPhysics.Dynamics.World(new Vector2(0,0));
+
 			this._habitats = new List<Habitat>();
 			this._settlements = new List<Settlement>();
 		}
@@ -33,6 +37,8 @@ namespace Wundee
 			{
 				settlements[i].Tick();
 			}
+
+			physicsWorld.Step(Time.fixedDT);
 		}
 		
 		public void GenerateMap()
@@ -65,10 +71,7 @@ namespace Wundee
 
 			for (int i = 0; i < numberOfSettlements; i++)
 			{
-				var newHabitat = new Habitat
-				{
-					position = distributedPoints[i]
-				};
+				var newHabitat = new Habitat(this, distributedPoints[i]);
 				
 				_habitats.Add(newHabitat);
 			}
