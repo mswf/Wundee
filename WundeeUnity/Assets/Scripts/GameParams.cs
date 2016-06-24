@@ -15,8 +15,8 @@ namespace Wundee
 		public bool generateSettlements = true;
 		public bool generatePlayer = true;
 
-		public float worldWidth = 1600f/0.7f;
-		public float worldHeight = 900f/0.7f;
+		public int worldWidth = 1600;
+		public int worldHeight = 900;
 
 		public float habitatMinDistance = 220f;
 		public int habitatCap = 500;
@@ -35,8 +35,8 @@ namespace Wundee
 				constants[constantKey] = ContentHelper.ParseDouble(constantsData, constantKey, 0d);
 			}
 			
-			worldWidth = ContentHelper.ParseFloat(gameParamData, P.WORLD_WIDTH, this.worldWidth);
-			worldHeight = ContentHelper.ParseFloat(gameParamData, P.WORLD_HEIGHT, this.worldHeight);
+			worldWidth = ContentHelper.ParseInt(gameParamData, P.WORLD_WIDTH, this.worldWidth);
+			worldHeight = ContentHelper.ParseInt(gameParamData, P.WORLD_HEIGHT, this.worldHeight);
 			habitatMinDistance = ContentHelper.ParseFloat(gameParamData, P.HABITAT_MIN_DISTANCE,
 				this.habitatMinDistance);
 			habitatCap = ContentHelper.ParseInt(gameParamData, P.HABITAT_CAP, this.habitatCap);

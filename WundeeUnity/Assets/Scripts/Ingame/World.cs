@@ -6,6 +6,10 @@ namespace Wundee
 {
 	public class World
 	{
+		public readonly Rectangle worldBounds;
+
+		private List<Entity> _entities; 
+
 		private List<Habitat> _habitats;
 		private List<Settlement> _settlements;
 
@@ -25,8 +29,15 @@ namespace Wundee
 		{
 			physicsWorld = new FarseerPhysics.Dynamics.World(new Vector2(0,0));
 
+			this._entities = new List<Entity>();
 			this._habitats = new List<Habitat>();
 			this._settlements = new List<Settlement>();
+
+
+			var gameParams = Game.instance.@params;
+
+			worldBounds = new Rectangle(-gameParams.worldWidth / 2, -gameParams.worldHeight / 2,
+										 gameParams.worldWidth    ,  gameParams.worldHeight);
 		}
 
 		public void Tick()
@@ -39,6 +50,12 @@ namespace Wundee
 			}
 
 			physicsWorld.Step(Time.fixedDT);
+
+			var numEntities = _entities.Count;
+			for (int i = 0; i < numEntities; i++)
+			{
+				_entities[i].LateUpdate();
+			}
 		}
 		
 		public void GenerateMap()
@@ -53,8 +70,8 @@ namespace Wundee
 			///*
 
 			var distributedPoints = UniformPoissonDiskSampler
-				.SampleRectangle(new Vector2(-gameParams.worldWidth / 2f, -gameParams.worldHeight / 2f), 
-								 new Vector2( gameParams.worldWidth / 2f,  gameParams.worldHeight / 2f), 
+				.SampleRectangle(new Vector2(worldBounds.X, worldBounds.Y), 
+								 new Vector2(worldBounds.Width,  worldBounds.Height), 
 								 gameParams.habitatMinDistance)
 				.ToArray();
 			//*/
@@ -74,6 +91,7 @@ namespace Wundee
 				var newHabitat = new Habitat(this, distributedPoints[i]);
 				
 				_habitats.Add(newHabitat);
+				_entities.Add(newHabitat);
 			}
 		}
 

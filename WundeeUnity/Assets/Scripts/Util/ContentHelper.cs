@@ -149,7 +149,7 @@ namespace Wundee
 					};
 					// TODO: exception handling
 					// http://ncalc.codeplex.com/
-					return (int)expression.Evaluate();
+					return (int)(double)expression.Evaluate();
 				}
 
 			}

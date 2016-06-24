@@ -22,7 +22,7 @@
         - type: "ConditionalEffect"
           params:
             effects:
-              - { type: "MoveEffect2", params: { speed: 10.0*RANDOM } }
+              - { type: "MoveEffect2", params: { speed: 10.0 } }
             conditions:
               - type: "NotCondition"
                 params:

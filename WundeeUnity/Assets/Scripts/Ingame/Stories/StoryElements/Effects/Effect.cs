@@ -114,7 +114,9 @@ namespace Wundee.Stories
 		public override void ExecuteEffect()
 		{
 			var body = parentStoryNode.parentStory.parentSettlement.habitat.body;
-			body.SetTransform(body.Position + new Vector2(0.075f * movementSpeed), 0f);
+			body.LinearVelocity += new Vector2(0.075f * movementSpeed);
+
+			//body.SetTransform(body.Position + new Vector2(0.075f * movementSpeed), 0f);
 			
 		}
 	}
@@ -131,8 +133,11 @@ namespace Wundee.Stories
 
 		public override void ExecuteEffect()
 		{
+			
+
 			var body = parentStoryNode.parentStory.parentSettlement.habitat.body;
-			body.SetTransform(body.Position + new Vector2(0.075f * movementSpeed), 0f);
+			body.LinearVelocity += new Vector2(0.075f*movementSpeed);
+			//body.SetTransform(body.Position + new Vector2(0.075f * movementSpeed), 0f);
 		}
 	}
 }
