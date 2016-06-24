@@ -34,7 +34,7 @@ namespace Wundee
 			{
 				constants[constantKey] = ContentHelper.ParseDouble(constantsData, constantKey, 0d);
 			}
-
+			
 			worldWidth = ContentHelper.ParseFloat(gameParamData, P.WORLD_WIDTH, this.worldWidth);
 			worldHeight = ContentHelper.ParseFloat(gameParamData, P.WORLD_HEIGHT, this.worldHeight);
 			habitatMinDistance = ContentHelper.ParseFloat(gameParamData, P.HABITAT_MIN_DISTANCE,
@@ -94,6 +94,8 @@ namespace Wundee
 	public static class P
 	{
 		public const string CONSTANTS = "constants";
+
+		public const string RANDOM = "RANDOM";
 
 		public const string WORLD_WIDTH = "worldWidth";
 		public const string WORLD_HEIGHT = "worldHeight";

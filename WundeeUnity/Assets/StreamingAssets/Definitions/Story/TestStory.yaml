@@ -8,8 +8,7 @@
     startNode:
       property: "STORYNODE_TEST_2_PROP"
       onStartRewards:
-        -
-          type: "PrintEffect" 
+        - type: "PrintEffect" 
           params: "OnStart"
 
       onCompleteRewards:
@@ -20,11 +19,10 @@
           params:
             need: "Population"
             rate: 1
-        -
-          type: "ConditionalEffect"
+        - type: "ConditionalEffect"
           params:
             effects:
-              - { type: "MoveEffect2", params: { speed: 10.0 } }
+              - { type: "MoveEffect2", params: { speed: 10.0*RANDOM } }
             conditions:
               - type: "NotCondition"
                 params:
@@ -46,35 +44,26 @@
     startNode:
       property: "STORYNODE_TEST_2_PROP"
       onStartRewards:
-        -
-          type: "PrintEffect" 
+        - type: "PrintEffect" 
           params: "OnStart"
 
       onCompleteRewards:
-        -
-          { type: "PrintEffect", params: "OnComplete" }
+        - type: "PrintEffect"
+          params: "OnComplete"
 
       effects:
-        - 
-         { 
-          type: "NeedRateEffect", params: 
-           { need: 
-            "Population", rate: 0.5
-           }
-         }
-        -
-          type: "ConditionalEffect"
+        - type: "NeedRateEffect"
+          params: 
+           { need: "Population", rate: 0.5 }
+        - type: "ConditionalEffect"
           params:
             effects:
-              - 
-                { type: "MoveEffect2", params: { speed: -20.0 } }
+              - { type: "MoveEffect2", params: { speed: -20.0 } }
             conditions:
-              -
-                type: "NotCondition"
+              - type: "NotCondition"
                 params:
                   conditions:
-                    -
-                      { type: "KeyHeldCondition", params: {} }
+                    - { type: "KeyHeldCondition", params: {} }
 
       storyTriggers:
         - conditions:

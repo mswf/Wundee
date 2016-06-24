@@ -51,7 +51,7 @@ namespace Wundee
 			return concreteTypes;
 		}
 
-		public static void ExecuteEffects<T>(this T[] effects) where T : BaseEffect
+		public static void ExecuteEffects<T>(this T[] effects) where T : Effect
 		{
 			for (int i = 0; i < effects.Length; i++)
 			{
@@ -95,6 +95,16 @@ namespace Wundee
 					var expression = new Expression(value.ToString());
 
 					expression.Parameters = Game.instance.@params.constants ;
+					expression.EvaluateParameter += (string name, ParameterArgs args) =>
+					{
+						if (name == P.RANDOM)
+						{
+							args.Result = R.generator.NextDouble();
+							args.HasResult = true;
+							return;
+						}
+						args.HasResult = false;
+					};
 					// TODO: exception handling
 					// http://ncalc.codeplex.com/
 					return (double) expression.Evaluate();
@@ -127,6 +137,16 @@ namespace Wundee
 					var expression = new Expression(value.ToString());
 
 					expression.Parameters = Game.instance.@params.constants;
+					expression.EvaluateParameter += (string name, ParameterArgs args) =>
+					{
+						if (name == P.RANDOM)
+						{
+							args.Result = R.generator.NextDouble();
+							args.HasResult = true;
+							return;
+						}
+						args.HasResult = false;
+					};
 					// TODO: exception handling
 					// http://ncalc.codeplex.com/
 					return (int)expression.Evaluate();
