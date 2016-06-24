@@ -7,8 +7,8 @@ namespace Wundee.Stories
 {
 	public class StoryTriggerDefinition : Definition<StoryTrigger>
 	{
-		private Definition<BaseCondition>[] _conditionDefinitions;
-		private Definition<BaseEffect>[] _rewardDefinitions;
+		private Definition<Condition>[] _conditionDefinitions;
+		private Definition<Effect>[] _rewardDefinitions;
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{

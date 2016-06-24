@@ -2,18 +2,18 @@
 
 namespace Wundee.Stories
 {
-	public abstract class BaseEffect : StoryElement<BaseEffect>
+	public abstract class Effect : StoryElement<Effect>
 	{
 		public abstract void ExecuteEffect();
 	}
 
-	public abstract class CollectionEffect : BaseEffect
+	public abstract class CollectionEffect : Effect
 	{
-		protected Definition<BaseEffect>[] _effectDefinitions;
-		protected BaseEffect[] effects;
+		protected Definition<Effect>[] _effectDefinitions;
+		protected Effect[] effects;
 	}
 
-	public class TestEffect : BaseEffect
+	public class TestEffect : Effect
 	{
 		public override void ParseParams(JsonData parameters)
 		{
@@ -27,9 +27,9 @@ namespace Wundee.Stories
 
 	public class ConditionalEffect : CollectionEffect
 	{
-		protected BaseCondition[] conditions;
+		protected Condition[] conditions;
 
-		private Definition<BaseCondition>[] _conditionDefinitions;
+		private Definition<Condition>[] _conditionDefinitions;
 
 		public override void ParseParams(JsonData parameters)
 		{
@@ -37,7 +37,7 @@ namespace Wundee.Stories
 			_conditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS], definition.definitionKey);
 		}
 
-		public override BaseEffect GetClone(StoryNode parent)
+		public override Effect GetClone(StoryNode parent)
 		{
 			var retValue = base.GetClone(parent) as ConditionalEffect;
 
@@ -64,7 +64,7 @@ namespace Wundee.Stories
 
 		}
 
-		public override BaseEffect GetClone(StoryNode parent)
+		public override Effect GetClone(StoryNode parent)
 		{
 			var retValue = base.GetClone(parent) as RandomEffect;
 
@@ -80,7 +80,7 @@ namespace Wundee.Stories
 		}
 	}
 
-	public class PrintEffect : BaseEffect
+	public class PrintEffect : Effect
 	{
 		public string messageToPrint;
 
@@ -95,7 +95,7 @@ namespace Wundee.Stories
 		}
 	}
 
-	public class MoveEffect : BaseEffect
+	public class MoveEffect : Effect
 	{
 		private float movementSpeed = 1f;
 
@@ -117,7 +117,7 @@ namespace Wundee.Stories
 		}
 	}
 
-	public class MoveEffect2 : BaseEffect
+	public class MoveEffect2 : Effect
 	{
 		private float movementSpeed;
 

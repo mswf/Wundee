@@ -4,21 +4,21 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public abstract class BaseCondition : StoryElement<BaseCondition>
+	public abstract class Condition : StoryElement<Condition>
 	{
 		public abstract bool Check();
 	}
 
-	public abstract class CollectionCondition : BaseCondition
+	public abstract class CollectionCondition : Condition
 	{
-		protected Definition<BaseCondition>[] _childConditionDefinitions;
-		protected BaseCondition[] childConditions;
+		protected Definition<Condition>[] _childConditionDefinitions;
+		protected Condition[] childConditions;
 	}
 
-	public abstract class DecoratorCondition : BaseCondition
+	public abstract class DecoratorCondition : Condition
 	{
-		private Definition<BaseCondition> _childConditionDefinition;
-		protected BaseCondition childCondition;
+		private Definition<Condition> _childConditionDefinition;
+		protected Condition childCondition;
 
 		protected void _ParseChildCondition(JsonData parameters)
 		{
@@ -30,7 +30,7 @@ namespace Wundee.Stories
 				_childConditionDefinition = conditions[0];
 		}
 
-		public override BaseCondition GetClone(StoryNode parent)
+		public override Condition GetClone(StoryNode parent)
 		{
 			var retValue = base.GetClone(parent) as DecoratorCondition;
 
@@ -50,7 +50,7 @@ namespace Wundee.Stories
 			_childConditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS], definition.definitionKey);
 		}
 
-		public override BaseCondition GetClone(StoryNode parent)
+		public override Condition GetClone(StoryNode parent)
 		{
 			var retValue = base.GetClone(parent) as AndCondition;
 
@@ -72,7 +72,7 @@ namespace Wundee.Stories
 			_childConditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS], definition.definitionKey);
 		}
 
-		public override BaseCondition GetClone(StoryNode parent)
+		public override Condition GetClone(StoryNode parent)
 		{
 			var retValue = base.GetClone(parent) as OrCondition;
 
@@ -101,7 +101,7 @@ namespace Wundee.Stories
 	}
 
 
-	public class TrueCondition : BaseCondition
+	public class TrueCondition : Condition
 	{
 		public override void ParseParams(JsonData parameters)
 		{}
@@ -112,7 +112,7 @@ namespace Wundee.Stories
 		}
 	}
 
-	public class KeyHeldCondition : BaseCondition
+	public class KeyHeldCondition : Condition
 	{
 		public override void ParseParams(JsonData parameters)
 		{}

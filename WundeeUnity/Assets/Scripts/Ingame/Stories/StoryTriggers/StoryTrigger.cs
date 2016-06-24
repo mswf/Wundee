@@ -5,9 +5,9 @@ namespace Wundee.Stories
 	{
 		public StoryTriggerDefinition definition;
 
-		public BaseCondition[] conditions;
+		public Condition[] conditions;
 		public StoryNode parentStoryNode;
-		public BaseEffect[] rewards;
+		public Effect[] rewards;
 
 		private bool _hasBeenTriggeredBefore = false;
 

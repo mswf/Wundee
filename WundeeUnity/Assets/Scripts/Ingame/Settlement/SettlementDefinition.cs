@@ -7,7 +7,7 @@ namespace Wundee
 {
 	public class SettlementDefinition : Definition<Settlement>
 	{
-		private Definition<BaseEffect>[] _onStartRewardDefinitions; 
+		private Definition<Effect>[] _onStartRewardDefinitions; 
 
 		public override void ParseDefinition(string definitionKey, JsonData jsonData)
 		{
@@ -18,7 +18,7 @@ namespace Wundee
 			if (keys.Contains(D.REWARDS_ON_START))
 				this._onStartRewardDefinitions = EffectDefinition.ParseDefinitions(jsonData[D.REWARDS_ON_START], definitionKey);
 			else
-				this._onStartRewardDefinitions = new Definition<BaseEffect>[0];
+				this._onStartRewardDefinitions = new Definition<Effect>[0];
 
 		}
 

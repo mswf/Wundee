@@ -13,10 +13,10 @@ namespace Wundee.Stories
 		public StoryNodeDefinition definition;
 		public Story parentStory;
 		
-		public BaseEffect[] effects;
+		public Effect[] effects;
 
-		public BaseEffect[] onStartRewards;
-		public BaseEffect[] onCompleteRewards;
+		public Effect[] onStartRewards;
+		public Effect[] onCompleteRewards;
 
 		public StoryTrigger[] storyTriggers;
 

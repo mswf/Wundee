@@ -59,7 +59,7 @@ namespace Wundee
 			}
 		}
 
-		public static bool CheckConditions<T>(this T[] conditions) where T : BaseCondition
+		public static bool CheckConditions<T>(this T[] conditions) where T : Condition
 		{
 			for (int i = 0; i < conditions.Length; i++)
 			{
@@ -70,7 +70,7 @@ namespace Wundee
 			return true;
 		}
 
-		public static bool CheckOrConditions<T>(this T[] conditions) where T : BaseCondition
+		public static bool CheckOrConditions<T>(this T[] conditions) where T : Condition
 		{
 			for (int i = 0; i < conditions.Length; i++)
 			{

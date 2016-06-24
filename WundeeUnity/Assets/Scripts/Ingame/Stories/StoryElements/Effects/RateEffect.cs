@@ -12,7 +12,7 @@ namespace Wundee.Stories
 	}
 
 
-	public class NeedRateEffect : BaseEffect, IRateEffect
+	public class NeedRateEffect : Effect, IRateEffect
 	{
 		private double _rate;
 		private int _needIndex;
@@ -29,7 +29,7 @@ namespace Wundee.Stories
 		}
 	}
 
-	public class NeedAmountEffect : BaseEffect, IRateEffect
+	public class NeedAmountEffect : Effect, IRateEffect
 	{
 		private double _amount;
 		private int _needIndex;

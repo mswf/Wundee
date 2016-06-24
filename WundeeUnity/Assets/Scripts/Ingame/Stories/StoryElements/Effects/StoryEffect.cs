@@ -10,7 +10,7 @@ namespace Wundee.Stories
 
 	}
 
-	public class AddStoryEffect : BaseEffect, IStoryEffect
+	public class AddStoryEffect : Effect, IStoryEffect
 	{
 		private string _storyKey;
 
@@ -26,7 +26,7 @@ namespace Wundee.Stories
 		}
 	}
 
-	public class RemoveStoryEffect : BaseEffect, IStoryEffect
+	public class RemoveStoryEffect : Effect, IStoryEffect
 	{
 		private string _storyKey;
 
@@ -42,7 +42,7 @@ namespace Wundee.Stories
 		}
 	}
 
-	public class StartStoryNode : BaseEffect, IStoryEffect
+	public class StartStoryNode : Effect, IStoryEffect
 	{
 		private string _storyNode;
 
@@ -60,7 +60,7 @@ namespace Wundee.Stories
 	}
 
 
-	public class CompleteStoryNode : BaseEffect, IStoryEffect
+	public class CompleteStoryNode : Effect, IStoryEffect
 	{
 		public override void ParseParams(JsonData parameters)
 		{

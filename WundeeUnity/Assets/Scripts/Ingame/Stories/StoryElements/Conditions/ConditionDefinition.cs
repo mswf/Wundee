@@ -4,11 +4,11 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public class ConditionDefinition : StoryElementDefinition<BaseCondition>
+	public class ConditionDefinition : StoryElementDefinition<Condition>
 	{
-		public static Definition<BaseCondition>[] ParseDefinitions(JsonData conditionData, string definitionKey)
+		public static Definition<Condition>[] ParseDefinitions(JsonData conditionData, string definitionKey)
 		{
-			return ContentHelper.GetDefinitions<ConditionDefinition, BaseCondition>
+			return ContentHelper.GetDefinitions<ConditionDefinition, Condition>
 				(conditionData, definitionKey, KEYS.CONDITION);
 		}
 	}

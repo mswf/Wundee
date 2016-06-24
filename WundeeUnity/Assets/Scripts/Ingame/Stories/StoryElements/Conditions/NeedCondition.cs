@@ -3,7 +3,7 @@ using LitJson;
 
 namespace Wundee.Stories
 {
-	public class NeedCondition : BaseCondition
+	public class NeedCondition : Condition
 	{
 		private double _amount;
 		private int _needIndex;
