@@ -52,9 +52,16 @@ namespace Wundee.Stories
 
 					var effectTypes = Helper.ReflectiveEnumerator.GetEnumerableOfType<TConcrete>();
 
+					// get the str-length of the base type name (Effect) to add an alternate entry 
+					// for its derived classes without the suffix (PrintEffect + Print become valid)
+					var postFixLength = typeof (TConcrete).Name.Length;
+
 					foreach (var effectType in effectTypes)
 					{
-						_stringToType[effectType.GetType().Name] = effectType.GetType();
+						var name = effectType.GetType().Name;
+						_stringToType[name] = effectType.GetType();
+						_stringToType[name.Remove(name.Length - postFixLength)] = effectType.GetType();
+
 					}
 
 				}
