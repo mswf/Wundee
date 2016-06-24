@@ -49,29 +49,28 @@ namespace Wundee.Stories
 			{
 				if (_stringToType == null)
 				{
+					var storyElementTypes = Helper.ReflectiveEnumerator.GetEnumerableOfType<TConcrete>();
 
-					var effectTypes = Helper.ReflectiveEnumerator.GetEnumerableOfType<TConcrete>();
-
-					var enumerable = effectTypes as IList<TConcrete> ?? effectTypes.ToList();
+					var enumerable = storyElementTypes as IList<TConcrete> ?? storyElementTypes.ToList();
 					_stringToType = new Dictionary<string, Type>(enumerable.Count*2);
 					
 					// get the name of the base type (Effect) to add an alternate entry 
 					// for its derived classes without the suffix (PrintEffect + Print become valid)
 					var postFix = typeof (TConcrete).Name;
 
-					foreach (var effectInfo in enumerable)
+					foreach (var elementInfo in enumerable)
 					{
-						var effectType = effectInfo.GetType();
-						var name = effectType.Name;
+						var elementType = elementInfo.GetType();
+						var name = elementType.Name;
 						
 						try
 						{
-							_stringToType.Add(name, effectType);
-							_stringToType.Add(name.Replace(postFix, ""), effectType);
+							_stringToType.Add(name, elementType);
+							_stringToType.Add(name.Replace(postFix, ""), elementType);
 						}
 						catch (ArgumentException)
 						{
-							Logger.Warning("Duplicate StoryElement with named "+ name);
+							Logger.Warning("Duplicate StoryElement, named "+ name +", derived from "+elementType);
 						}
 					}
 				}
