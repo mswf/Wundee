@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LitJson;
 
 
@@ -48,22 +49,31 @@ namespace Wundee.Stories
 			{
 				if (_stringToType == null)
 				{
-					_stringToType = new Dictionary<string, Type>();
 
 					var effectTypes = Helper.ReflectiveEnumerator.GetEnumerableOfType<TConcrete>();
 
-					// get the str-length of the base type name (Effect) to add an alternate entry 
+					var enumerable = effectTypes as IList<TConcrete> ?? effectTypes.ToList();
+					_stringToType = new Dictionary<string, Type>(enumerable.Count*2);
+					
+					// get the name of the base type (Effect) to add an alternate entry 
 					// for its derived classes without the suffix (PrintEffect + Print become valid)
-					var postFixLength = typeof (TConcrete).Name.Length;
+					var postFix = typeof (TConcrete).Name;
 
-					foreach (var effectType in effectTypes)
+					foreach (var effectInfo in enumerable)
 					{
-						var name = effectType.GetType().Name;
-						_stringToType[name] = effectType.GetType();
-						_stringToType[name.Remove(name.Length - postFixLength)] = effectType.GetType();
-
+						var effectType = effectInfo.GetType();
+						var name = effectType.Name;
+						
+						try
+						{
+							_stringToType.Add(name, effectType);
+							_stringToType.Add(name.Replace(postFix, ""), effectType);
+						}
+						catch (ArgumentException)
+						{
+							Logger.Warning("Duplicate StoryElement with named "+ name);
+						}
 					}
-
 				}
 
 				return _stringToType;
