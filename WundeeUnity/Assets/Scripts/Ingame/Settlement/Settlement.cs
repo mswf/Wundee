@@ -65,13 +65,18 @@ namespace Wundee
 
 			_timeOfPreviousUpdate = Time.fixedGameTime;
 		}
-		
 
+		public void ExecuteEffectFromDefinition(ref Definition<Effect>[] effectDefinitions)
+		{
+			var effects = effectDefinitions.GetConcreteTypes(storyHolder.lifeStoryNode);
+			effects.ExecuteEffects();
+		}
 
-
-
-
-
+		public bool CheckConditionFromDefinition(ref Definition<Condition>[] conditionDefinitions)
+		{
+			var conditions = conditionDefinitions.GetConcreteTypes(storyHolder.lifeStoryNode);
+			return conditions.CheckConditions();
+		}
 	}
 
 }

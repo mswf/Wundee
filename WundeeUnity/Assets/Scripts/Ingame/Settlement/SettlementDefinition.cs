@@ -28,9 +28,7 @@ namespace Wundee
 			var habitat = parent as Habitat;
 
 			var newSettlement = new Settlement(habitat);
-
-			var startRewards = _onStartRewardDefinitions.GetConcreteTypes(newSettlement.storyHolder.lifeStoryNode);
-			startRewards.ExecuteEffects();
+			newSettlement.ExecuteEffectFromDefinition(ref _onStartRewardDefinitions);
 			
 			return newSettlement;
 		}

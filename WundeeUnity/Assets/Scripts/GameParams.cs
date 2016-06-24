@@ -142,6 +142,9 @@ namespace Wundee
 
 		public const string NEED = "need";
 
+		public const string RANGE = "range";
+
+
 		// StoryEffects
 		public const string STORY_KEY = "storyKey";
 	}
