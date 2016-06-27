@@ -14,7 +14,7 @@ namespace Wundee.Stories
 		protected Effect[] effects;
 	}
 
-	public class TestEffect : Effect
+	public class NullEffect : Effect
 	{
 		public override void ParseParams(JsonData parameters)
 		{
@@ -22,7 +22,7 @@ namespace Wundee.Stories
 
 		public override void ExecuteEffect()
 		{
-			//Logger.Print("running TestEffect");
+
 		}
 	}
 

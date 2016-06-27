@@ -4,7 +4,7 @@
     params: {}
 
   "REWARD_TEST_1": 
-    type: "TestEffect"
+    type: "NullEffect"
     params: {}
 
   "REWARD_PRINT_1":

@@ -52,19 +52,14 @@ namespace WundeeUnity
 
 			game.Update(dt);
 
-			var habitatColor = UnityEngine.Color.black;
-
-			foreach (var habitat in game.world.habitats)
-			{
-				DebugExtension.DebugPoint(new UnityEngine.Vector3(habitat.position.X, 0, habitat.position.Y), habitatColor, 5f, dt);
-			}
-
-
 			var settlementColor = UnityEngine.Color.yellow;
 
-			foreach (var settlement in game.world.settlements)
+			var habitats = game.world.habitats;
+			var numHabitats = habitats.Count;
+			for (var i = 0; i < numHabitats; i++)
 			{
-				DebugExtension.DebugCircle(new UnityEngine.Vector3(settlement.habitat.position.X, 0, settlement.habitat.position.Y), settlementColor, 14f, dt);
+				var habitatPos = habitats[i].position;
+				DebugExtension.DebugCircle(new UnityEngine.Vector3(habitatPos.X, 0, habitatPos.Y), settlementColor, 30f, dt);
 			}
 		}
 
