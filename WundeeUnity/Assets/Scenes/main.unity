@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -66,7 +66,8 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000001, guid: 50041a62c31a0e342b553c9720f8f6a0,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
@@ -868,7 +869,7 @@ Transform:
   m_GameObject: {fileID: 269629162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 236, y: 1, z: 152}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1231290493}
@@ -2611,7 +2612,7 @@ Transform:
   m_GameObject: {fileID: 917726525}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 236, y: 1, z: 152}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1231290493}
@@ -3099,7 +3100,7 @@ Transform:
   m_GameObject: {fileID: 1049600636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -12.4, z: 0}
-  m_LocalScale: {x: 236, y: 1, z: 152}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1231290493}
@@ -3790,6 +3791,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1231290493}
+  - 114: {fileID: 1231290494}
   m_Layer: 0
   m_Name: Ocean
   m_TagString: Untagged
@@ -3814,6 +3816,22 @@ Transform:
   - {fileID: 1255127584}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &1231290494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1231290492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b94f2cd757b4f47b4a6f4ab13f7254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oceanEntities:
+  - {fileID: 269629163}
+  - {fileID: 917726526}
+  - {fileID: 1049600637}
+  - {fileID: 1255127584}
 --- !u!1 &1240458925
 GameObject:
   m_ObjectHideFlags: 0
@@ -3935,7 +3953,7 @@ Transform:
   m_GameObject: {fileID: 1255127581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -56.5, z: 0}
-  m_LocalScale: {x: 236, y: 1, z: 152}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1231290493}

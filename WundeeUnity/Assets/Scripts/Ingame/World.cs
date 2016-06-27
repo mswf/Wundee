@@ -71,7 +71,7 @@ namespace Wundee
 
 			var distributedPoints = UniformPoissonDiskSampler
 				.SampleRectangle(new Vector2(worldBounds.X, worldBounds.Y), 
-								 new Vector2(worldBounds.Width,  worldBounds.Height), 
+								 new Vector2(worldBounds.Right,  worldBounds.Bottom), 
 								 gameParams.habitatMinDistance)
 				.ToArray();
 			//*/

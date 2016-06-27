@@ -12,6 +12,7 @@ namespace Wundee
 
 		public static float dt;
 		public static float fixedDT;
+		public static double multiplier;
 	}
 }
 

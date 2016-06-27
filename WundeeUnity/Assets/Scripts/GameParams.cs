@@ -24,7 +24,8 @@ namespace Wundee
 		public Dictionary<string, System.Object> constants = new Dictionary<string, System.Object>(); 
 
 		public NeedParams needParams = new NeedParams();
-		
+		public double timeMultiplier = 1d;
+
 		public void InitializeFromData(JsonData gameParamData)
 		{
 			var constantsData = gameParamData[P.CONSTANTS];
@@ -44,6 +45,8 @@ namespace Wundee
 			generateWorld		= ContentHelper.ParseBool(gameParamData, P.GENERATE_WORLD, this.generateWorld);
 			generateSettlements = ContentHelper.ParseBool(gameParamData, P.GENERATE_SETTLEMENTS, this.generateSettlements);
 			generatePlayer		= ContentHelper.ParseBool(gameParamData, P.GENERATE_PLAYER, this.generatePlayer);
+
+			timeMultiplier = ContentHelper.ParseDouble(gameParamData, P.TIME_MULTIPLIER, this.timeMultiplier);
 
 			if (gameParamData.Keys.Contains(P.NEED_PARAMS))
 			{
@@ -93,6 +96,7 @@ namespace Wundee
 
 	public static class P
 	{
+		public const string TIME_MULTIPLIER = "timeMultiplier";
 		public const string CONSTANTS = "constants";
 
 		public const string RANDOM = "RANDOM";

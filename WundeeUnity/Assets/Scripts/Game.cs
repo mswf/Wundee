@@ -49,6 +49,8 @@ namespace Wundee
 			Time.gameTime = 0d;
 			Time.realTime = 0d;
 
+			Time.multiplier = gameParams.timeMultiplier;
+
 			this.world = new World();
 
 		}
@@ -81,28 +83,28 @@ namespace Wundee
 
 		public void Update(float dt)
 		{
-			Time.dt = dt;
+			Time.dt = (float)(dt * Time.multiplier);
 
 			if (_isPlaying)
 			{
-				Time.gameTime += dt;
+				Time.gameTime += Time.dt;
 			}
 
-			Time.realTime += dt;
+			Time.realTime += Time.dt;
 		}
 
 		public void FixedUpdate(float fixedDT)
 		{
-			Time.fixedDT = fixedDT;
+			Time.fixedDT = (float)(fixedDT * Time.multiplier);
 
 			if (_isPlaying)
 			{
-				Time.fixedGameTime += fixedDT;
+				Time.fixedGameTime += Time.fixedDT;
 
 				world.Tick();
 			}
 
-			Time.fixedRealTime += fixedDT;
+			Time.fixedRealTime += Time.fixedDT;
 		}
 	}
 }
