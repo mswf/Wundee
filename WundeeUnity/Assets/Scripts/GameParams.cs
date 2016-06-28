@@ -141,6 +141,9 @@ namespace Wundee
 		public const string RATE = "rate";
 
 		// Effects
+
+		public const string STATEMENTS = "statements";
+
 		public const string SPEED = "speed";
 
 		public const string NEED = "need";

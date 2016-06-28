@@ -1,4 +1,5 @@
-﻿using LitJson;
+﻿using System.Collections.Generic;
+using LitJson;
 using Microsoft.Xna.Framework;
 
 namespace Wundee.Stories
@@ -28,32 +29,95 @@ namespace Wundee.Stories
 
 	public class ConditionalEffect : CollectionEffect
 	{
-		protected Condition[] conditions;
+		private enum ConditionalType
+		{
+			SinglePair,
+			MultiplePairs
+		}
 
+		private ConditionalType _type;
+		
+		protected Condition[] conditions;
 		private Definition<Condition>[] _conditionDefinitions;
+
+		private KeyValuePair<Definition<Condition>[], Definition<Effect>[]>[] _conditionEffectPairsDefinition;
+		private KeyValuePair<Condition[], Effect[]>[] _conditionEffectPairs;
 
 		public override void ParseParams(JsonData parameters)
 		{
-			_effectDefinitions = EffectDefinition.ParseDefinitions(parameters[D.EFFECTS], definition.definitionKey);
-			_conditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS], definition.definitionKey);
+			var keys = parameters.Keys;
+
+			if (!keys.Contains(D.STATEMENTS))
+			{
+				_type = ConditionalType.SinglePair;
+
+				_effectDefinitions = EffectDefinition.ParseDefinitions(parameters[D.EFFECTS], definition.definitionKey);
+				_conditionDefinitions = ConditionDefinition.ParseDefinitions(parameters[D.CONDITIONS], definition.definitionKey);
+			}
+			else
+			{
+				_type = ConditionalType.MultiplePairs;
+
+				var conditionEffectData = parameters[D.STATEMENTS];
+				var numConditionEffects = conditionEffectData.Count;
+				_conditionEffectPairsDefinition =
+					new KeyValuePair<Definition<Condition>[], Definition<Effect>[]>[numConditionEffects];
+
+				for (int i = 0; i < numConditionEffects; i++)
+				{
+					_conditionEffectPairsDefinition[i] = new KeyValuePair<Definition<Condition>[], Definition<Effect>[]>(
+						ConditionDefinition.ParseDefinitions(conditionEffectData[i][D.CONDITIONS], definition.definitionKey),
+						EffectDefinition.ParseDefinitions(conditionEffectData[i][D.EFFECTS], definition.definitionKey)
+					);
+				}
+			}
 		}
 
 		public override Effect GetClone(StoryNode parent)
 		{
 			var retValue = base.GetClone(parent) as ConditionalEffect;
 
-			retValue.conditions = _conditionDefinitions.GetConcreteTypes(parent);
-			retValue.effects = _effectDefinitions.GetConcreteTypes(parent);
-
+			if (_type == ConditionalType.SinglePair)
+			{
+				retValue.conditions = _conditionDefinitions.GetConcreteTypes(parent);
+				retValue.effects = _effectDefinitions.GetConcreteTypes(parent);
+			}
+			else if (_type == ConditionalType.MultiplePairs)
+			{
+				retValue._conditionEffectPairs = new KeyValuePair<Condition[], Effect[]>[_conditionEffectPairsDefinition.Length];
+				
+				for (int i = 0; i < _conditionEffectPairsDefinition.Length; i++)
+				{
+					retValue._conditionEffectPairs[i] = new KeyValuePair<Condition[], Effect[]>(
+						_conditionEffectPairsDefinition[i].Key.GetConcreteTypes(parent),
+						_conditionEffectPairsDefinition[i].Value.GetConcreteTypes(parent)
+					);
+				}
+			}
 			return retValue;
 		}
 
 		public override void ExecuteEffect()
 		{
-			if (conditions.CheckConditions())
+			if (_type == ConditionalType.SinglePair)
 			{
-				effects.ExecuteEffects();
+				if (conditions.CheckConditions())
+				{
+					effects.ExecuteEffects();
+				}
 			}
+			else
+			{
+				for (int i = 0; i < _conditionEffectPairs.Length; i++)
+				{
+					if (_conditionEffectPairs[i].Key.CheckConditions())
+					{
+						_conditionEffectPairs[i].Value.ExecuteEffects();
+						break;
+					}
+				}
+			}
+
 		}
 	}
 

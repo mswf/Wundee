@@ -19,6 +19,7 @@ namespace WundeeUnity
 		void Update()
 		{
 			transform.position = new Vector3(settlement.habitat.position.X, 0, settlement.habitat.position.Y);
+			transform.rotation = Quaternion.AngleAxis(settlement.habitat.body.Rotation, Vector3.up);
 		}
 	}
 

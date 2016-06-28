@@ -36,10 +36,6 @@ namespace WundeeUnity
 
 				var settlementComponent = newDocks.AddComponent<WundeeUnity.Settlement>();
 				settlementComponent.settlement = settlement;
-
-				var rotation = Mathf.Round(Random.value*4f);
-
-				newDocks.transform.Rotate(UnityEngine.Vector3.up, rotation*90f);
 			}
 		}
 
@@ -82,7 +78,7 @@ namespace WundeeUnity
 
 			if (Input.GetKeyUp(KeyCode.R))
 			{
-				SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+				Game.instance.reloadGame = true;
 				return;
 			}
 

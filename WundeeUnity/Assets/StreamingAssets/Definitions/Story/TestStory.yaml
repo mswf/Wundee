@@ -82,7 +82,7 @@
           - { type: "AddSettlementFlag", params: { flag: "HAS_SPEED_BOOST" } }
 
         effects:
-          - { type: "MoveEffect", params: { speed: -20.0 } }
+          - { type: "MoveEffect", params: { speed: 20.0 } }
           - type: NearbySettlementEffect
             params: 
               range: 200
@@ -95,7 +95,7 @@
   "STORY_TEST_MOVE_ALOT":
       startNode:
         effects:
-          - { type: "MoveEffect", params: { speed: 2000.0 } }
+          - { type: "MoveEffect", params: { speed: -2000.0 } }
 
 
   "STORY_TEST_NOTHING":

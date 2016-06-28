@@ -1,37 +1,28 @@
 ---
   "SETTLEMENT_DEFAULT_01":
     onStartRewards:
-    - type: "RandomEffect"
-      params: 
-        effects:
-        # - type: "AddStoryEffect"
-        #   params: {storyKey: "STORY_TEST_2"}
-        # - type: "AddStoryEffect"
-        #   params: {storyKey: "STORY_TEST_3"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_NOTHING"}
-        - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_AFFECT_NEIGHBOURS"}
+      - type: "ConditionalEffect"
+        params: 
+          statements:
+            - conditions:
+                - type: "WorldFlagCondition"
+                  params: {flag: "DoesRuckusMakerExist", operator: "NotEquals"}
+              effects:
+                - type: "AddWorldFlagEffect"
+                  params: {flag: "DoesRuckusMakerExist"}
+                - type: "AddStoryEffect"
+                  params: {storyKey: "STORY_TEST_AFFECT_NEIGHBOURS"}
+            - conditions: []
+              effects: 
+                - type: "RandomEffect"
+                  params: 
+                    effects:
+                    # - type: "AddStoryEffect"
+                    #   params: {storyKey: "STORY_TEST_2"}
+                    # - type: "AddStoryEffect"
+                    #   params: {storyKey: "STORY_TEST_3"}
+                    - type: "AddStoryEffect"
+                      params: {storyKey: "STORY_TEST_NOTHING"}
 
  
     needs:
