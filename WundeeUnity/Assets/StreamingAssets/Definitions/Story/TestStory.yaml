@@ -74,3 +74,30 @@
                 amount: 60
           rewards:
             - "REWARD_TEST_1"
+
+
+  "STORY_TEST_AFFECT_NEIGHBOURS":
+      startNode:
+        onStartRewards:
+          - { type: "AddSettlementFlag", params: { flag: "HAS_SPEED_BOOST" } }
+
+        effects:
+          - { type: "MoveEffect", params: { speed: -20.0 } }
+          - type: NearbySettlementEffect
+            params: 
+              range: 200
+              conditions: 
+                - { type: "SettlementFlagCondition", params: { flag: "HAS_SPEED_BOOST", operator: "NotEquals"}}
+              effects:
+                - { type: "AddSettlementFlag", params: { flag: "HAS_SPEED_BOOST" } }
+                - { type: "AddStoryEffect", params: { storyKey: "STORY_TEST_MOVE_ALOT" } }
+
+  "STORY_TEST_MOVE_ALOT":
+      startNode:
+        effects:
+          - { type: "MoveEffect", params: { speed: 2000.0 } }
+
+
+  "STORY_TEST_NOTHING":
+    startNode:
+      effects: []

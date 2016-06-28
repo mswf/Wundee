@@ -15,6 +15,9 @@ namespace Wundee
 
 		public FarseerPhysics.Dynamics.World physicsWorld;
 
+		private HashSet<short> _worldFlags = new HashSet<short>();
+
+
 		public List<Habitat> habitats 
 		{
 			get { return _habitats; }
@@ -106,10 +109,32 @@ namespace Wundee
 				if (random.Next(0, 100) > 50 || true)
 				{
 					var newSettlement = settlementDefinition.GetConcreteType(habitat);
-					
+					habitat.occupant = newSettlement;
+
 					_settlements.Add(newSettlement);
 				}
 			}
+		}
+
+		public void AddFlag(short flag)
+		{
+			_worldFlags.Add(flag);
+		}
+
+		public void RemoveFlag(short flag)
+		{
+			_worldFlags.RemoveWhere((short flagToTest) =>
+			{
+				if (flagToTest == flag)
+					return true;
+
+				return false;
+			});
+		}
+
+		public bool HasFlag(short flag)
+		{
+			return _worldFlags.Contains(flag);
 		}
 	}
 }

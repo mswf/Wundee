@@ -1,4 +1,5 @@
 ﻿
+using System;
 using LitJson;
 
 
@@ -122,6 +123,60 @@ namespace Wundee.Stories
 			if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.Q))
 				return true;
 			return false;
+		}
+	}
+
+	public class SettlementFlagCondition : Condition
+	{
+		private short _settlementFlag;
+		private Operator @operator;
+
+		public override void ParseParams(JsonData parameters)
+		{
+			_settlementFlag = ContentHelper.ParseSettlementFlag(parameters);
+			@operator = ContentHelper.ParseOperator(parameters, Operator.Equals);
+		}
+
+		public override bool Check()
+		{
+			var hasFlag = parentStoryNode.parentStory.parentSettlement.HasFlag(_settlementFlag);
+
+			switch (@operator)
+			{
+				case Operator.Equals:
+					return hasFlag;
+				case Operator.NotEquals:
+					return !hasFlag;
+				default:
+					return hasFlag;
+			}
+		}
+	}
+
+	public class WorldFlagCondition : Condition
+	{
+		private short _worldFlag;
+		private Operator @operator;
+
+		public override void ParseParams(JsonData parameters)
+		{
+			_worldFlag = ContentHelper.ParseSettlementFlag(parameters);
+			@operator = ContentHelper.ParseOperator(parameters, Operator.Equals);
+		}
+
+		public override bool Check()
+		{
+			var hasFlag = Game.instance.world.HasFlag(_worldFlag);
+
+			switch (@operator)
+			{
+				case Operator.Equals:
+					return hasFlag;
+				case Operator.NotEquals:
+					return !hasFlag;
+				default:
+					return hasFlag;
+			}
 		}
 	}
 }

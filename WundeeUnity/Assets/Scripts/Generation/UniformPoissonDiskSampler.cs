@@ -75,7 +75,7 @@ namespace Wundee.Generation
 
             while (state.ActivePoints.Count != 0)
 		    {
-                var listIndex = RandomHelper.Random.Next(state.ActivePoints.Count);
+                var listIndex = R.Generation.Next(state.ActivePoints.Count);
 
                 var point = state.ActivePoints[listIndex];
 			    var found = false;
@@ -95,10 +95,10 @@ namespace Wundee.Generation
             var added = false;
             while (!added)
             {
-                var d = RandomHelper.Random.NextDouble();
+                var d = R.Generation.NextDouble();
                 var xr = settings.TopLeft.X + settings.Dimensions.X * d;
 
-                d = RandomHelper.Random.NextDouble();
+                d = R.Generation.NextDouble();
                 var yr = settings.TopLeft.Y + settings.Dimensions.Y * d;
 
                 var p = new Vector2((float) xr, (float) yr);
@@ -145,10 +145,10 @@ namespace Wundee.Generation
 
         static Vector2 GenerateRandomAround(Vector2 center, float minimumDistance)
         {
-            var d = RandomHelper.Random.NextDouble();
+            var d = R.Generation.NextDouble();
             var radius = minimumDistance + minimumDistance * d;
 
-            d = RandomHelper.Random.NextDouble();
+            d = R.Generation.NextDouble();
             var angle = MathHelper.TwoPi * d;
 
             var newX = radius * Math.Sin(angle);
@@ -162,11 +162,6 @@ namespace Wundee.Generation
             return new Vector2((int) ((point.X - origin.X) / cellSize), (int) ((point.Y - origin.Y) / cellSize));
         }
     }
-    
-    public static class RandomHelper
-    {
-        public static readonly System.Random Random = new System.Random();
-	}
 	
 	/*
     public static class MathHelper

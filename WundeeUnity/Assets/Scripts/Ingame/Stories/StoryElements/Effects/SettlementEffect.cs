@@ -1,6 +1,10 @@
-﻿using UnityEngine;
+﻿
 using System.Collections.Generic;
 using LitJson;
+using FarseerPhysics.Collision;
+using FarseerPhysics.Collision.Shapes;
+using FarseerPhysics.Common;
+using FarseerPhysics.Dynamics;
 
 namespace Wundee.Stories
 {
@@ -8,11 +12,11 @@ namespace Wundee.Stories
 	{
 		
 	}
-
+	
 	public abstract class SettlementEffect : Effect, ISettlementEffect
 	{
-		private Definition<Condition>[] _conditionDefinitions;
-		private Definition<Effect>[] _effectDefinitions;  
+		protected Definition<Condition>[] _conditionDefinitions;
+		protected Definition<Effect>[] _effectDefinitions;  
 
 		public override void ParseParams(JsonData parameters)
 		{
@@ -37,6 +41,11 @@ namespace Wundee.Stories
 					settlements[i].ExecuteEffectFromDefinition(ref _effectDefinitions);
 			}
 		}
+		protected void ExecuteOnSettlement(Settlement settlement)
+		{
+			if (settlement.CheckConditionFromDefinition(ref _conditionDefinitions))
+				settlement.ExecuteEffectFromDefinition(ref _effectDefinitions);
+		}
 	}
 
 	public class NearbySettlementEffect : SettlementEffect
@@ -52,8 +61,51 @@ namespace Wundee.Stories
 
 		public override void ExecuteEffect()
 		{
-			
+			var physicsWorld = Game.instance.world.physicsWorld;
 
+			var testSettlement = parentStoryNode.parentStory.parentSettlement;
+			var testPosition = testSettlement.habitat.position;
+
+			var testSphere = new CircleShape(_effectRange, 1f);
+			Transform testTransform;
+			testSettlement.habitat.body.GetTransform(out testTransform);
+
+			// Used to check for duplicates, if an entity has multiple physicsShapes,
+			// multiple fixtures from the same body may be returned by the AABB query
+			var fixturesTested = new List<Fixture>(8);
+
+			var aaBBQuery = new AABB(testPosition, _effectRange*3f, _effectRange*3f);
+			physicsWorld.QueryAABB((Fixture fixture) =>
+			{
+				var userData = fixture.Body.UserData;
+				var habitat = userData as Habitat;
+
+				if (habitat == null || fixturesTested.Contains(fixture))
+					return true;
+
+				var settlement = habitat.occupant as Settlement;
+				if (settlement == null || settlement == testSettlement)
+					return true;
+
+				Transform bodyTransform;
+				fixture.Body.GetTransform(out bodyTransform);
+
+				var bodyFixtures = fixture.Body.FixtureList;
+				var numFixtures = bodyFixtures.Count;
+
+				for (int i = 0; i < numFixtures; i++)
+				{
+					if (Collision.TestOverlap(bodyFixtures[i].Shape, 0, 
+                                              testSphere, 0, 
+											  ref bodyTransform, ref testTransform))
+					{
+						ExecuteOnSettlement(settlement);
+						fixturesTested.Add(fixture);
+					}
+				}
+
+				return true;
+			}, ref aaBBQuery);
 		}
 	}
 

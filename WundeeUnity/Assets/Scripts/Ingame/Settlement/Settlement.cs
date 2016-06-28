@@ -5,7 +5,7 @@ using Wundee.Stories;
 
 namespace Wundee
 {
-	public class Settlement
+	public class Settlement : IHabitatOccupant
 	{
 		public ActiveSettlement activeSettlement
 		{
@@ -28,6 +28,8 @@ namespace Wundee
 		public Dictionary<string, Need> needsDictionary;
 
 		private double _timeOfPreviousUpdate;
+
+		private HashSet<short> _settlementFlags = new HashSet<short>();  
 
 		public Settlement(Habitat habitat)
 		{
@@ -76,6 +78,27 @@ namespace Wundee
 		{
 			var conditions = conditionDefinitions.GetConcreteTypes(storyHolder.lifeStoryNode);
 			return conditions.CheckConditions();
+		}
+
+		public void AddFlag(short flag)
+		{
+			_settlementFlags.Add(flag);
+		}
+
+		public void RemoveFlag(short flag)
+		{
+			_settlementFlags.RemoveWhere((short flagToTest) =>
+			{
+				if (flagToTest == flag)
+					return true;
+
+				return false;
+			});
+		}
+
+		public bool HasFlag(short flag)
+		{
+			return _settlementFlags.Contains(flag);
 		}
 	}
 

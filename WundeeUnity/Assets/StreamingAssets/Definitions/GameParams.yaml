@@ -11,9 +11,10 @@
 
         HALF_WORLD_WIDTH: "[WORLD_WIDTH] * 0.5"
 
-        HABITAT_MIN_DISTANCE: 220
-
-    timeMultiplier: 1.0
+        HABITAT_MIN_DISTANCE: 150*WORLD_SCALE 
+    #    HABITAT_MIN_DISTANCE: 220 
+   
+    timeMultiplier: 1.0  
 
     worldWidth: "WORLD_WIDTH"
     worldHeight: "WORLD_HEIGHT"

@@ -99,7 +99,7 @@ namespace Wundee
 					{
 						if (name == P.RANDOM)
 						{
-							args.Result = R.generator.NextDouble();
+							args.Result = R.Content.NextDouble();
 							args.HasResult = true;
 							return;
 						}
@@ -141,7 +141,7 @@ namespace Wundee
 					{
 						if (name == P.RANDOM)
 						{
-							args.Result = R.generator.NextDouble();
+							args.Result = R.Content.NextDouble();
 							args.HasResult = true;
 							return;
 						}
@@ -176,15 +176,15 @@ namespace Wundee
 
 		public static int ParseNeedIndex(JsonData jsonData, string key)
 		{
-			if (jsonData.Keys.Contains(key))
-			{
-				var need = jsonData[key].ToString();
+			if (!jsonData.Keys.Contains(key)) 
+				return -1;
 
-				for (int i = 0; i < Game.instance.@params.needParams.needs.Length; i++)
-				{
-					if (Game.instance.@params.needParams.needs[i] == need)
-						return i;
-				}
+			var need = jsonData[key].ToString();
+
+			for (int i = 0; i < Game.instance.@params.needParams.needs.Length; i++)
+			{
+				if (Game.instance.@params.needParams.needs[i] == need)
+					return i;
 			}
 
 			return -1;
@@ -194,6 +194,55 @@ namespace Wundee
 		{
 			return OperatorExtensions.stringToOperator[jsonData[key].ToString()];
 		}
+
+		public static Operator ParseOperator(JsonData jsonData, Operator defaultValue, string key = D.OPERATOR)
+		{
+			if (! jsonData.Keys.Contains(key))
+				return defaultValue;
+			
+			return OperatorExtensions.stringToOperator[jsonData[key].ToString()];
+		}
+
+		private static Dictionary<string, short> _settlementFlags = new Dictionary<string, short>(100); 
+		public static short ParseSettlementFlag(JsonData jsonData, string key = D.FLAG)
+		{
+			if (!jsonData.Keys.Contains(key))
+			{
+				Logger.Warning("Couldn't parse flag with key " + key);
+				return short.MaxValue;
+			}
+			var flag = jsonData[key];
+
+			if (_settlementFlags.ContainsKey(key) )
+				return _settlementFlags[key];
+
+			var newFlagShort = (short)_settlementFlags.Count;
+
+			_settlementFlags[key] = newFlagShort;
+
+			return newFlagShort;
+		}
+
+		private static Dictionary<string, short> _worldFlags = new Dictionary<string, short>(100);
+		public static short ParseWorldFlag(JsonData jsonData, string key = D.FLAG)
+		{
+			if (!jsonData.Keys.Contains(key))
+			{
+				Logger.Warning("Couldn't parse flag with key " + key);
+				return short.MaxValue;
+			}
+			var flag = jsonData[key];
+
+			if (_worldFlags.ContainsKey(key))
+				return _settlementFlags[key];
+
+			var newFlagShort = (short)_worldFlags.Count;
+
+			_worldFlags[key] = newFlagShort;
+
+			return newFlagShort;
+		}
+
 
 		[Conditional("DEBUG_CONTENT")]
 		public static void VerifyKey(JsonData jsonData, string key, string ownerKey)

@@ -1,7 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
 
-using System;
 using System.Collections.Generic;
 using LitJson;
 
@@ -151,6 +150,10 @@ namespace Wundee
 
 		// StoryEffects
 		public const string STORY_KEY = "storyKey";
+
+		// Conditions
+		public const string FLAG = "flag";
+
 	}
 
 	// Strings that are used to extend the definitionKey for definitions that are declared within its parent

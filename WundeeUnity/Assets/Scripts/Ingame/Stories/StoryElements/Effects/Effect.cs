@@ -76,7 +76,7 @@ namespace Wundee.Stories
 
 		public override void ExecuteEffect()
 		{
-			var randomNumber = R.generator.Next(effects.Length);
+			var randomNumber = R.Content.Next(effects.Length);
 			effects[randomNumber].ExecuteEffect();
 		}
 	}
@@ -98,17 +98,13 @@ namespace Wundee.Stories
 
 	public class MoveEffect : Effect
 	{
-		private float movementSpeed = 1f;
+		private float movementSpeed;
 
 
 		public override void ParseParams(JsonData parameters)
 		{
-			var speed = parameters[D.SPEED];
-
-			if (speed != null)
-			{
-				movementSpeed = (float) (double) speed;
-			}
+			ContentHelper.VerifyKey(parameters, D.SPEED, definition.definitionKey);
+			movementSpeed = (float) ContentHelper.ParseDouble(parameters, D.SPEED, 1f);
 		}
 
 		public override void ExecuteEffect()

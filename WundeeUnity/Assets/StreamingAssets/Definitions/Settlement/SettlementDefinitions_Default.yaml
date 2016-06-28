@@ -4,14 +4,39 @@
     - type: "RandomEffect"
       params: 
         effects:
+        # - type: "AddStoryEffect"
+        #   params: {storyKey: "STORY_TEST_2"}
+        # - type: "AddStoryEffect"
+        #   params: {storyKey: "STORY_TEST_3"}
         - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_2"}
+          params: {storyKey: "STORY_TEST_NOTHING"}
         - type: "AddStoryEffect"
-          params: {storyKey: "STORY_TEST_3"}
+          params: {storyKey: "STORY_TEST_NOTHING"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_NOTHING"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_NOTHING"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_NOTHING"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_NOTHING"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_NOTHING"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_NOTHING"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_NOTHING"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_NOTHING"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_NOTHING"}
+        - type: "AddStoryEffect"
+          params: {storyKey: "STORY_TEST_AFFECT_NEIGHBOURS"}
+
  
     needs:
       "Population":
-        priority: 1
+        priority: 1 
         start: 50
 
         exhausted: 10

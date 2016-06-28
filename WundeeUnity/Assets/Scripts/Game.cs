@@ -29,6 +29,8 @@ namespace Wundee
 			get { return _isPlaying; }
 		}
 
+		public bool reloadGame = false;
+
 		#endregion
 
 		public Game(string gameParamsKey, WundeeUnity.GameEntry mainMonoBehaviour)
@@ -95,6 +97,14 @@ namespace Wundee
 
 		public void FixedUpdate(float fixedDT)
 		{
+			if (reloadGame == true)
+			{
+				reloadGame = false;
+
+
+				ReloadGame();
+			}
+
 			Time.fixedDT = (float)(fixedDT * Time.multiplier);
 
 			if (_isPlaying)
@@ -105,6 +115,14 @@ namespace Wundee
 			}
 
 			Time.fixedRealTime += Time.fixedDT;
+		}
+
+		private static void ReloadGame()
+		{
+			R.Reset();
+
+			UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, UnityEngine.SceneManagement.LoadSceneMode.Single);
+
 		}
 	}
 }

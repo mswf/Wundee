@@ -33,6 +33,8 @@ namespace Wundee
 		private Serializer jsonSerializer;
 		private Deserializer yamlDeserializer;
 
+		private FileSystemWatcher _fileSystemWatcher;
+
 		public DataLoader()
 		{
 			settlementDefinitions = new DefinitionLoader<SettlementDefinition, Settlement>(this);
@@ -60,6 +62,20 @@ namespace Wundee
 			yamlDeserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
 
 			yamlDeserializer.TypeResolvers.Add(new ScalarYamlNodeTypeResolver());
+
+			_fileSystemWatcher = new FileSystemWatcher(GetContentFilePath());
+			_fileSystemWatcher.IncludeSubdirectories = true;
+			_fileSystemWatcher.Changed += (object sender, FileSystemEventArgs e) =>
+			{
+				Logger.Log("File changed " + e.FullPath);
+				Game.instance.reloadGame = true;
+			};
+
+			_fileSystemWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
+				| NotifyFilters.FileName | NotifyFilters.DirectoryName;
+			_fileSystemWatcher.Filter = "*.yaml";
+
+			_fileSystemWatcher.EnableRaisingEvents = true;
 		}
 
 		public void ParseDefinitions()
