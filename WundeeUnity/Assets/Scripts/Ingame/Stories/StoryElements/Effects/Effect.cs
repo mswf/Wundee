@@ -180,24 +180,4 @@ namespace Wundee.Stories
 			
 		}
 	}
-
-	public class MoveEffect2 : Effect
-	{
-		private float movementSpeed;
-
-		public override void ParseParams(JsonData parameters)
-		{
-			ContentHelper.VerifyKey(parameters, D.SPEED, definition.definitionKey);
-			movementSpeed = (float)ContentHelper.ParseDouble(parameters, D.SPEED, 1f);
-		}
-
-		public override void ExecuteEffect()
-		{
-			
-
-			var body = parentStoryNode.parentStory.parentSettlement.habitat.body;
-			body.LinearVelocity += new Vector2(0.075f*movementSpeed);
-			//body.SetTransform(body.Position + new Vector2(0.075f * movementSpeed), 0f);
-		}
-	}
 }
