@@ -26,6 +26,7 @@ namespace WundeeUnity
 		{
 			game.Initialize();
 
+			/*
 			foreach (var settlement in game.world.settlements)
 			{
 				var habitat = settlement.habitat;
@@ -37,6 +38,7 @@ namespace WundeeUnity
 				var settlementComponent = newDocks.AddComponent<WundeeUnity.Settlement>();
 				settlementComponent.settlement = settlement;
 			}
+			*/
 		}
 
 
@@ -56,6 +58,35 @@ namespace WundeeUnity
 			{
 				var habitatPos = habitats[i].position;
 				DebugExtension.DebugCircle(new UnityEngine.Vector3(habitatPos.X, 0, habitatPos.Y), settlementColor, 30f, dt);
+			}
+
+			var isRedColor = UnityEngine.Color.red;
+			var settlements = game.world.settlements;
+			var numSettlements = settlements.Count;
+
+			var hasSpeedBoostFlag = ContentHelper.ParseSettlementFlag("HAS_SPEED_BOOST");
+			const string affectNeighboursStoryKey = "STORY_TEST_AFFECT_NEIGHBOURS";
+
+			for (int i = 0; i < numSettlements; i++)
+			{
+				var settlement = settlements[i];
+
+				var lineairVelocity = settlement.habitat.body.LinearVelocity;
+				var habitatPos = settlement.habitat.position;
+
+				DebugExtension.DebugArrow(new UnityEngine.Vector3(habitatPos.X, 0, habitatPos.Y),
+					new UnityEngine.Vector3(lineairVelocity.X, 0, lineairVelocity.Y), isRedColor, dt);
+
+				if (settlement.HasFlag(hasSpeedBoostFlag))
+				{
+					if (settlement.storyHolder.IsStoryActive(affectNeighboursStoryKey))
+					{
+						DebugExtension.DebugCircle(new UnityEngine.Vector3(habitatPos.X, 0, habitatPos.Y), isRedColor, 18f, dt);
+						DebugExtension.DebugPoint(new UnityEngine.Vector3(habitatPos.X, 0, habitatPos.Y), isRedColor, 22f, dt);
+					}
+					else
+						DebugExtension.DebugCircle(new UnityEngine.Vector3(habitatPos.X, 0, habitatPos.Y), isRedColor, 20f, dt);
+				}
 			}
 		}
 

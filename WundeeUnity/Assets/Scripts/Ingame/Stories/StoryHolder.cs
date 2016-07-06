@@ -1,6 +1,7 @@
 ﻿
 
 using System.Collections.Generic;
+using System.Text;
 
 namespace Wundee.Stories
 {
@@ -66,6 +67,19 @@ namespace Wundee.Stories
 		public void RemoveStory(int index)
 		{
 			activeStories = activeStories.RemoveAt(index);
+		}
+
+		public bool IsStoryActive(string storyDefinitionKey)
+		{
+			for (int i = 0; i < activeStories.Length; i++)
+			{
+				if (activeStories[i].definition.definitionKey == storyDefinitionKey)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 	}
 

@@ -22,7 +22,7 @@
         - type: "ConditionalEffect"
           params:
             effects:
-              - { type: "MoveEffect", params: { speed: 10.0 } }
+              - { type: "MoveEffect", params: { speed: 10.0, targetLocation: {xDir: 1, yDir: 0} } }
             conditions:
               - type: "NotCondition"
                 params:
@@ -58,7 +58,7 @@
         - type: "ConditionalEffect"
           params:
             effects:
-              - { type: "MoveEffect", params: { speed: -20.0 } }
+              - { type: "MoveEffect", params: { speed: -20.0, targetLocation: {xDir: 1, yDir: 0} } }
             conditions:
               - type: "NotCondition"
                 params:
@@ -77,25 +77,35 @@
 
 
   "STORY_TEST_AFFECT_NEIGHBOURS":
-      startNode:
-        onStartRewards:
-          - { type: "AddSettlementFlag", params: { flag: "HAS_SPEED_BOOST" } }
+    startNode:
+      onStartRewards:
+        - { type: "AddSettlementFlag", params: { flag: "HAS_SPEED_BOOST" } }
+        - { type: "AddSettlementFlag", params: { flag: "AFFECT_NEIGHBOURS" } }
 
-        effects:
-          - { type: "MoveEffect", params: { speed: 20.0 } }
-          - type: NearbySettlementEffect
-            params: 
-              range: 200
-              conditions: 
-                - { type: "SettlementFlagCondition", params: { flag: "HAS_SPEED_BOOST", operator: "NotEquals"}}
-              effects:
-                - { type: "AddSettlementFlag", params: { flag: "HAS_SPEED_BOOST" } }
-                - { type: "AddStoryEffect", params: { storyKey: "STORY_TEST_MOVE_ALOT" } }
+
+      effects:
+        - { type: "MoveEffect", params: { speed: 2000.0, targetLocation: {xDir: -1, yDir: -1}} }
+        - type: NearbySettlementEffect
+          params: 
+            range: 200
+            conditions: 
+              - { type: "SettlementFlagCondition", params: { flag: "HAS_SPEED_BOOST", operator: "NotEquals"}}
+            effects:
+              - { type: "AddSettlementFlag", params: { flag: "HAS_SPEED_BOOST" } }
+              - { type: "AddStoryEffect", params: { storyKey: "STORY_TEST_MOVE_ALOT" } }
+
+
+      storyTriggers:
+      - conditions:
+          - type: "KeyHeldCondition"
+            params: {}
+        rewards:
+          - "REWARD_TEST_1"
 
   "STORY_TEST_MOVE_ALOT":
       startNode:
         effects:
-          - { type: "MoveEffect", params: { speed: -2000.0 } }
+          - { type: "MoveEffect", params: { speed: 1000.0, targetLocation: { hasFlag: "AFFECT_NEIGHBOURS" }  } }
 
 
   "STORY_TEST_NOTHING":

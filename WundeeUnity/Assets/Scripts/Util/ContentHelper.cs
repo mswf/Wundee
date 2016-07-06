@@ -211,14 +211,20 @@ namespace Wundee
 				Logger.Warning("Couldn't parse flag with key " + key);
 				return short.MaxValue;
 			}
-			var flag = jsonData[key];
+			var flag = jsonData[key].ToString();
 
-			if (_settlementFlags.ContainsKey(key) )
-				return _settlementFlags[key];
+			return ParseSettlementFlag(flag);
+
+		}
+
+		public static short ParseSettlementFlag(string flag)
+		{
+			if (_settlementFlags.ContainsKey(flag))
+				return _settlementFlags[flag];
 
 			var newFlagShort = (short)_settlementFlags.Count;
 
-			_settlementFlags[key] = newFlagShort;
+			_settlementFlags[flag] = newFlagShort;
 
 			return newFlagShort;
 		}
@@ -231,14 +237,14 @@ namespace Wundee
 				Logger.Warning("Couldn't parse flag with key " + key);
 				return short.MaxValue;
 			}
-			var flag = jsonData[key];
+			var flag = jsonData[key].ToString();
 
-			if (_worldFlags.ContainsKey(key))
-				return _settlementFlags[key];
+			if (_worldFlags.ContainsKey(flag))
+				return _settlementFlags[flag];
 
 			var newFlagShort = (short)_worldFlags.Count;
 
-			_worldFlags[key] = newFlagShort;
+			_worldFlags[flag] = newFlagShort;
 
 			return newFlagShort;
 		}

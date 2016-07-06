@@ -157,6 +157,19 @@ namespace Wundee
 		// Conditions
 		public const string FLAG = "flag";
 
+
+		// Location
+		public const string TARGET_LOCATION = "targetLocation";
+
+		public const string X = "x";
+		public const string Y = "y";
+
+		public const string X_DIR = "xDir";
+		public const string Y_DIR = "yDir";
+
+		public const string HAS_FLAG = "hasFlag";
+
+
 	}
 
 	// Strings that are used to extend the definitionKey for definitions that are declared within its parent

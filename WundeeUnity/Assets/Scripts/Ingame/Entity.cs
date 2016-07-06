@@ -27,6 +27,8 @@ namespace Wundee
 				BodyType = BodyType.Dynamic
 			};
 
+			body.LinearDamping = 0.5f;
+
 			collisionShape = new CircleShape(30f, 100f);
 			var fixture = body.CreateFixture(collisionShape);
 			

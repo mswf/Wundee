@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using LitJson;
 using Microsoft.Xna.Framework;
+using Wundee.Locations;
 
 namespace Wundee.Stories
 {
@@ -163,18 +164,35 @@ namespace Wundee.Stories
 	public class MoveEffect : Effect
 	{
 		private float movementSpeed;
+		private ILocation targetLocation;
 
+		private JsonData targetData;
 
 		public override void ParseParams(JsonData parameters)
 		{
 			ContentHelper.VerifyKey(parameters, D.SPEED, definition.definitionKey);
 			movementSpeed = (float) ContentHelper.ParseDouble(parameters, D.SPEED, 1f);
+
+			ContentHelper.VerifyKey(parameters, D.TARGET_LOCATION, definition.definitionKey);
+			targetData = parameters[D.TARGET_LOCATION];
+		}
+
+		public override Effect GetClone(StoryNode parent)
+		{
+			var retValue = base.GetClone(parent) as MoveEffect;
+
+			retValue.targetLocation = LocationHelper.ParseLocation(targetData);
+
+			return retValue;
 		}
 
 		public override void ExecuteEffect()
 		{
 			var body = parentStoryNode.parentStory.parentSettlement.habitat.body;
-			body.LinearVelocity += new Vector2(0.075f * movementSpeed);
+			var direction = targetLocation.GetDirection(body.Position);
+			direction.Normalize();
+
+			body.LinearVelocity += direction * movementSpeed * Time.fixedDT;
 
 			//body.SetTransform(body.Position + new Vector2(0.075f * movementSpeed), 0f);
 			

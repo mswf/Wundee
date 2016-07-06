@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Wundee.Generation;
 
@@ -39,7 +40,7 @@ namespace Wundee
 
 			var gameParams = Game.instance.@params;
 
-			worldBounds = new Rectangle(-gameParams.worldWidth / 2, -gameParams.worldHeight / 2,
+			worldBounds = new Rectangle(0,0,
 										 gameParams.worldWidth    ,  gameParams.worldHeight);
 		}
 
@@ -60,7 +61,7 @@ namespace Wundee
 				_entities[i].LateUpdate();
 			}
 		}
-		
+
 		public void GenerateMap()
 		{
 			//throw new System.NotImplementedException();
@@ -114,6 +115,58 @@ namespace Wundee
 					_settlements.Add(newSettlement);
 				}
 			}
+		}
+
+		public Vector2 GetShortestLineTo(Vector2 originPos, Vector2 targetPos)
+		{
+			float xDir;
+			float yDir;
+
+			var originToTargetX = targetPos.X - originPos.X;
+			if (originPos.X < targetPos.X)
+			{
+				var originToLeft = Math.Abs(originPos.X - worldBounds.Left);
+				var targetToRight = Math.Abs(targetPos.X - worldBounds.Right);
+
+				if (originToLeft + targetToRight > Math.Abs(originToTargetX))
+					xDir = originToTargetX;
+				else
+					xDir = (originToLeft + targetToRight)*Math.Sign(originToTargetX)*-1f;
+			}
+			else
+			{
+				var targetToLeft = Math.Abs(targetPos.X - worldBounds.Left);
+				var originToRight = Math.Abs(originPos.X - worldBounds.Right);
+
+				if (targetToLeft + originToRight > Math.Abs(originToTargetX))
+					xDir = originToTargetX;
+				else
+					xDir = (targetToLeft + originToRight) * Math.Sign(originToTargetX)*-1f;
+			}
+
+			var originToTargetY = targetPos.Y - originPos.Y;
+			if (originPos.Y < targetPos.Y)
+			{
+				var originToTop = Math.Abs(originPos.Y - worldBounds.Top);
+				var targetToBottom = Math.Abs(targetPos.Y - worldBounds.Bottom);
+
+				if (originToTop + targetToBottom > Math.Abs(originToTargetY))
+					yDir = originToTargetY;
+				else
+					yDir = (originToTop + targetToBottom) * Math.Sign(originToTargetY)*-1f;
+			}
+			else
+			{
+				var targetToTop = Math.Abs(targetPos.Y - worldBounds.Top);
+				var originToBottom = Math.Abs(originPos.Y - worldBounds.Bottom);
+
+				if (targetToTop + originToBottom > Math.Abs(originToTargetY))
+					yDir = originToTargetY;
+				else
+					yDir = (targetToTop + originToBottom) * Math.Sign(originToTargetY)*-1f;
+			}
+
+			return new Vector2(xDir, yDir);
 		}
 
 		public void AddFlag(short flag)
