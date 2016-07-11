@@ -16,7 +16,7 @@ namespace Wundee
 
 		public FarseerPhysics.Dynamics.World physicsWorld;
 
-		private HashSet<short> _worldFlags = new HashSet<short>();
+		private HashSet<ushort> _worldFlags = new HashSet<ushort>();
 
 
 		public List<Habitat> habitats 
@@ -169,14 +169,14 @@ namespace Wundee
 			return new Vector2(xDir, yDir);
 		}
 
-		public void AddFlag(short flag)
+		public void AddFlag(ushort flag)
 		{
 			_worldFlags.Add(flag);
 		}
 
-		public void RemoveFlag(short flag)
+		public void RemoveFlag(ushort flag)
 		{
-			_worldFlags.RemoveWhere((short flagToTest) =>
+			_worldFlags.RemoveWhere((ushort flagToTest) =>
 			{
 				if (flagToTest == flag)
 					return true;
@@ -185,7 +185,7 @@ namespace Wundee
 			});
 		}
 
-		public bool HasFlag(short flag)
+		public bool HasFlag(ushort flag)
 		{
 			return _worldFlags.Contains(flag);
 		}

@@ -29,7 +29,7 @@ namespace Wundee
 
 		private double _timeOfPreviousUpdate;
 
-		private HashSet<short> _settlementFlags = new HashSet<short>();  
+		private HashSet<ushort> _settlementFlags = new HashSet<ushort>();  
 
 		public Settlement(Habitat habitat)
 		{
@@ -80,14 +80,14 @@ namespace Wundee
 			return conditions.CheckConditions();
 		}
 
-		public void AddFlag(short flag)
+		public void AddFlag(ushort flag)
 		{
 			_settlementFlags.Add(flag);
 		}
 
-		public void RemoveFlag(short flag)
+		public void RemoveFlag(ushort flag)
 		{
-			_settlementFlags.RemoveWhere((short flagToTest) =>
+			_settlementFlags.RemoveWhere((ushort flagToTest) =>
 			{
 				if (flagToTest == flag)
 					return true;
@@ -96,7 +96,7 @@ namespace Wundee
 			});
 		}
 
-		public bool HasFlag(short flag)
+		public bool HasFlag(ushort flag)
 		{
 			return _settlementFlags.Contains(flag);
 		}

@@ -128,7 +128,7 @@ namespace Wundee.Stories
 
 	public class SettlementFlagCondition : Condition
 	{
-		private short _settlementFlag;
+		private ushort _settlementFlag;
 		private Operator @operator;
 
 		public override void ParseParams(JsonData parameters)
@@ -155,7 +155,7 @@ namespace Wundee.Stories
 
 	public class WorldFlagCondition : Condition
 	{
-		private short _worldFlag;
+		private ushort _worldFlag;
 		private Operator @operator;
 
 		public override void ParseParams(JsonData parameters)

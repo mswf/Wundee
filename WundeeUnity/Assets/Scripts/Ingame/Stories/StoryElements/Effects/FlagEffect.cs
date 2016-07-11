@@ -5,7 +5,7 @@ namespace Wundee.Stories
 {
 	public class AddSettlementFlagEffect : Effect
 	{
-		private short _settlementFlag;
+		private ushort _settlementFlag;
 
 		public override void ParseParams(JsonData parameters)
 		{
@@ -20,7 +20,7 @@ namespace Wundee.Stories
 
 	public class RemoveSettlementFlagEffect : Effect
 	{
-		private short _settlementFlag;
+		private ushort _settlementFlag;
 
 		public override void ParseParams(JsonData parameters)
 		{
@@ -35,7 +35,7 @@ namespace Wundee.Stories
 
 	public class AddWorldFlagEffect : Effect
 	{
-		private short _worldFlag;
+		private ushort _worldFlag;
 
 		public override void ParseParams(JsonData parameters)
 		{
@@ -50,7 +50,7 @@ namespace Wundee.Stories
 
 	public class RemoveWorldFlagEffect : Effect
 	{
-		private short _worldFlag;
+		private ushort _worldFlag;
 
 		public override void ParseParams(JsonData parameters)
 		{

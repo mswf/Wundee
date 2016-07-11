@@ -203,13 +203,13 @@ namespace Wundee
 			return OperatorExtensions.stringToOperator[jsonData[key].ToString()];
 		}
 
-		private static Dictionary<string, short> _settlementFlags = new Dictionary<string, short>(100); 
-		public static short ParseSettlementFlag(JsonData jsonData, string key = D.FLAG)
+		private static Dictionary<string, ushort> _settlementFlags = new Dictionary<string, ushort>(100); 
+		public static ushort ParseSettlementFlag(JsonData jsonData, string key = D.FLAG)
 		{
 			if (!jsonData.Keys.Contains(key))
 			{
 				Logger.Warning("Couldn't parse flag with key " + key);
-				return short.MaxValue;
+				return ushort.MaxValue;
 			}
 			var flag = jsonData[key].ToString();
 
@@ -217,32 +217,32 @@ namespace Wundee
 
 		}
 
-		public static short ParseSettlementFlag(string flag)
+		public static ushort ParseSettlementFlag(string flag)
 		{
 			if (_settlementFlags.ContainsKey(flag))
 				return _settlementFlags[flag];
 
-			var newFlagShort = (short)_settlementFlags.Count;
+			var newFlagShort = (ushort)_settlementFlags.Count;
 
 			_settlementFlags[flag] = newFlagShort;
 
 			return newFlagShort;
 		}
 
-		private static Dictionary<string, short> _worldFlags = new Dictionary<string, short>(100);
-		public static short ParseWorldFlag(JsonData jsonData, string key = D.FLAG)
+		private static Dictionary<string, ushort> _worldFlags = new Dictionary<string, ushort>(100);
+		public static ushort ParseWorldFlag(JsonData jsonData, string key = D.FLAG)
 		{
 			if (!jsonData.Keys.Contains(key))
 			{
 				Logger.Warning("Couldn't parse flag with key " + key);
-				return short.MaxValue;
+				return ushort.MaxValue;
 			}
 			var flag = jsonData[key].ToString();
 
 			if (_worldFlags.ContainsKey(flag))
 				return _settlementFlags[flag];
 
-			var newFlagShort = (short)_worldFlags.Count;
+			var newFlagShort = (ushort)_worldFlags.Count;
 
 			_worldFlags[flag] = newFlagShort;
 
