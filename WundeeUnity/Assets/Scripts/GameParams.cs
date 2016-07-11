@@ -20,7 +20,7 @@ namespace Wundee
 		public float habitatMinDistance = 220f;
 		public int habitatCap = 500;
 
-		public Dictionary<string, System.Object> constants = new Dictionary<string, System.Object>(); 
+		public Dictionary<string, System.Object> constants = new Dictionary<string, System.Object>(100); 
 
 		public NeedParams needParams = new NeedParams();
 		public double timeMultiplier = 1d;

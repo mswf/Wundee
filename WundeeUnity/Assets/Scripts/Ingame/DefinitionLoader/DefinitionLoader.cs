@@ -11,7 +11,7 @@ namespace Wundee
 		public DefinitionLoader(DataLoader loader)
 		{
 			this._loader = loader;
-			this._definitions = new Dictionary<string, TDefinition>();
+			this._definitions = new Dictionary<string, TDefinition>(100);
 		}
 
 		public void AddFolder(string relativePath)

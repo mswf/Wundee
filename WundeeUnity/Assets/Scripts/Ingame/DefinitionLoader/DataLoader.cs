@@ -46,7 +46,7 @@ namespace Wundee
 			effectDefinitions = new DefinitionLoader<EffectDefinition, Effect>(this);
 			conditionDefinitions = new DefinitionLoader<ConditionDefinition, Condition>(this);
 			
-			this.definitionLoaderMapper = new Dictionary<Type, object>();
+			this.definitionLoaderMapper = new Dictionary<Type, object>(10);
 
 			definitionLoaderMapper[typeof(SettlementDefinition)] = settlementDefinitions;
 
